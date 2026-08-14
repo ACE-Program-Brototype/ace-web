@@ -2,7 +2,7 @@ import adarshImg from '../../assets/candidates/adarsh.webp';
 import ajexImg from '../../assets/candidates/ajex.webp';
 import alAmeenImg from '../../assets/candidates/al ameen.webp';
 import aswinImg from '../../assets/candidates/aswin.webp';
-import athiraImg from '../../assets/candidates/athira.webp';
+import athiraImg from '../../assets/candidates/athira.jpeg';
 import navaneethImg from '../../assets/candidates/navaneeth.webp';
 import sreehari from '../../assets/candidates/sreehari.png';
 import naveenImg from '../../assets/candidates/naveen.webp';
@@ -46,10 +46,6 @@ export const STUDENTS = [
     linkedin: 'https://www.linkedin.com/in/alameens07/',
   },
   {
-    name: 'Athira Suresh', batch: 'BCR314', stack: 'AI /ML',
-    img: athiraImg,
-  },
-  {
     name: 'Navaneeth Sankar', batch: 'BCR313', stack: 'MERN Stack',
     img: navaneethImg,
   },
@@ -64,6 +60,10 @@ export const STUDENTS = [
   {
     name: 'Fathima Shifana', batch: 'BCR313', stack: 'AI /ML',
     img: shifanaImg,
+  },
+  {
+    name: 'Athira Suresh', batch: 'BCR314', stack: 'AI /ML',
+    img: athiraImg,
   },
   {
     name: 'Sreehari Sunil', batch: 'BCR313', stack: 'MERN Stack',
