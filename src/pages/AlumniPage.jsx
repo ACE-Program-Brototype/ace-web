@@ -11,6 +11,8 @@ import { ALUMNI_STORIES, ALUMNI_STATS } from '../constants/alumniDatas';
 
 
 export default function AlumniPage() {
+  const recentAlumni = ALUMNI_STORIES.find(a => a.recent) || ALUMNI_STORIES[0];
+
   return (
     <div className="bg-surface text-on-surface antialiased font-body-md">
       <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
@@ -49,7 +51,7 @@ export default function AlumniPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-24"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
         >
-          {ALUMNI_STORIES.map(a => (
+          {ALUMNI_STORIES.filter(a => !a.recent).map(a => (
             <motion.article key={a.name} variants={revealVariant}
               className="border border-outline-variant p-6 flex flex-col justify-between hover:bg-surface-container-low transition-colors h-full group"
             >
@@ -83,22 +85,18 @@ export default function AlumniPage() {
             <motion.div variants={revealVariant} className="relative h-[500px] w-full overflow-hidden">
               <img
                 className="absolute inset-0 w-full h-full object-cover"
-                alt="Abdul Basith"
-                src="https://media.licdn.com/dms/image/v2/D5603AQGmUbk5PjsWsw/profile-displayphoto-shrink_400_400/B56ZboZa9FGgAg-/0/1747655701772?e=1788393600&v=beta&t=fMeiBT5KOpLUVl1NHj2hpLJwWKmJaPKOetI2vxfv5zw"
+                alt={recentAlumni.name}
+                src={recentAlumni.img}
               />
             </motion.div>
             <motion.div variants={revealVariant}>
               <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-4 block">Spotlight Series</span>
-              <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Abdul Basith</h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">AI Engineer @ AccuMateAi</p>
+              <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">{recentAlumni.name}</h2>
+              <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{recentAlumni.role}</p>
               <div className="space-y-8">
                 <div>
-                  <h4 className="font-label-sm text-label-sm text-primary font-bold uppercase mb-2">Q: How did ACE shape your trajectory?</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">"The curriculum forced a level of intellectual honesty I hadn't encountered before. You couldn't just make code work; you had to understand why it worked at the lowest level."</p>
-                </div>
-                <div>
-                  <h4 className="font-label-sm text-label-sm text-primary font-bold uppercase mb-2">Q: Advice for current cohorts?</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">"Embrace the struggle during the systems design modules. That discomfort is where the actual growth happens. Also, lean on your peers — they will be your professional network for life."</p>
+                  <h4 className="font-label-sm text-label-sm text-primary font-bold uppercase mb-2">Featured Quote</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant italic">"{recentAlumni.quote}"</p>
                 </div>
               </div>
             </motion.div>
