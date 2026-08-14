@@ -46,6 +46,7 @@ export default function Navbar() {
               </a>
             ) : (
               <Link
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 key={link.label}
                 to={link.to}
                 className={`font-medium pb-1 transition-colors ${location.pathname === link.to
