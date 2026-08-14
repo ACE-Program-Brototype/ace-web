@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const revealVariant = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
@@ -50,7 +50,7 @@ export default function TeamPage() {
                   <span className="font-mono text-mono text-on-surface-variant uppercase tracking-wider mb-2 text-xs">{f.role}</span>
                   <h3 className="font-headline-md text-headline-md text-primary mb-4">{f.name}</h3>
                   <p className="font-body-md text-body-md text-on-surface-variant italic mb-6 leading-relaxed">{f.quote}</p>
-                  <a aria-label="LinkedIn Profile" className="mt-auto text-on-surface-variant hover:text-primary transition-colors" href="#">
+                  <a aria-label="LinkedIn Profile" className="mt-auto text-on-surface-variant hover:text-primary transition-colors" href={f.linkedin} target="_blank" rel="noopener noreferrer">
                     <span className="material-symbols-outlined">open_in_new</span>
                   </a>
                 </div>
@@ -81,7 +81,7 @@ export default function TeamPage() {
                   <h4 className="font-headline-md text-headline-md text-primary mb-1">{h.name}</h4>
                   <p className="font-mono text-mono text-on-surface-variant uppercase tracking-wider text-xs mb-4">{h.role}</p>
                   <p className="font-body-md text-body-md text-on-surface-variant italic leading-snug mb-6">{h.quote}</p>
-                  <a aria-label="LinkedIn Profile" className="text-on-surface-variant hover:text-primary transition-colors" href="#">
+                  <a aria-label="LinkedIn Profile" className="text-on-surface-variant hover:text-primary transition-colors" href={h.linkedin} target="_blank" rel="noopener noreferrer">
                     <span className="material-symbols-outlined">open_in_new</span>
                   </a>
                 </div>
