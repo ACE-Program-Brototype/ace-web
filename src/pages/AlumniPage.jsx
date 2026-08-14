@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const revealVariant = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
@@ -37,7 +37,7 @@ export default function AlumniPage() {
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
         >
           {ALUMNI_STATS.map(s => (
-            <motion.div key={s.label} variants={revealVariant} className="py-10 pr-8 border-r border-outline-variant last:border-r-0">
+            <motion.div key={s.label} variants={revealVariant} className="py-10 px-4 text-center flex flex-col items-center justify-center border-r border-outline-variant last:border-r-0">
               <div className="font-headline-lg text-headline-lg text-primary mb-2">{s.value}</div>
               <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">{s.label}</div>
             </motion.div>
