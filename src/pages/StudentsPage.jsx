@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const revealVariant = {
@@ -50,42 +51,69 @@ export default function StudentsPage() {
         </section>
 
         {/* Directory Grid */}
-        <motion.section
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-24"
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-        >
-          {filtered.map(s => (
-            <motion.article
-              key={s.name}
-              variants={revealVariant}
-              className="border border-outline-variant bg-surface-container-lowest p-6 transition-colors duration-300 hover:border-primary group"
+        {filtered.length > 0 ? (
+          <motion.section
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-24"
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+          >
+            {filtered.map(s => (
+              <motion.article
+                key={s.name}
+                variants={revealVariant}
+                className="border border-outline-variant bg-surface-container-lowest p-6 transition-colors duration-300 hover:border-primary group"
+              >
+                <div className="aspect-square mb-6 overflow-hidden bg-surface-container-low">
+                  <img
+                    alt={s.name}
+                    src={s.img}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
+                <div className="space-y-1 mb-4">
+                  <h3 className="font-body-md font-bold text-primary">{s.name}</h3>
+                  <p className="font-mono text-mono text-on-surface-variant uppercase tracking-widest text-[11px]">{s.batch}</p>
+                </div>
+                <p className="font-label-sm text-label-sm text-on-surface-variant mb-6 line-clamp-2">{s.stack}</p>
+                <div className="flex items-center space-x-3 pt-4 border-t border-outline-variant">
+                  {s.linkedin && (
+                    <a href={s.linkedin} target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary transition-colors">
+                      <FaLinkedin className="text-[20px]" />
+                    </a>
+                  )}
+                  {s.github && (
+                    <a href={s.github} target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary transition-colors">
+                      <FaGithub className="text-[20px]" />
+                    </a>
+                  )}
+                  {s.portfolio && (
+                    <a href={s.portfolio} target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary transition-colors">
+                      <FaGlobe className="text-[20px]" />
+                    </a>
+                  )}
+                </div>
+              </motion.article>
+            ))}
+          </motion.section>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center py-24 px-6 text-center border border-dashed border-outline-variant bg-surface-container-lowest mb-24"
+          >
+            <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-4">search_off</span>
+            <h3 className="font-headline-md text-headline-md text-primary mb-2">No Matches Found</h3>
+            <p className="font-body-md text-body-md text-on-surface-variant max-w-md">
+              We couldn't find any students matching "<span className="text-primary font-bold">{query}</span>". Try adjusting your search terms or checking for typos.
+            </p>
+            <button 
+              onClick={() => setQuery('')}
+              className="mt-6 px-6 py-3 border border-outline-variant hover:border-primary text-primary font-label-sm text-label-sm uppercase tracking-wider transition-colors bg-surface-container-low hover:bg-surface-container-lowest"
             >
-              <div className="aspect-square mb-6 overflow-hidden bg-surface-container-low">
-                <img
-                  alt={s.name}
-                  src={s.img}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="space-y-1 mb-4">
-                <h3 className="font-body-md font-bold text-primary">{s.name}</h3>
-                <p className="font-mono text-mono text-on-surface-variant uppercase tracking-widest text-[11px]">{s.batch}</p>
-              </div>
-              <p className="font-label-sm text-label-sm text-on-surface-variant mb-6 line-clamp-2">{s.stack}</p>
-              <div className="flex items-center space-x-3 pt-4 border-t border-outline-variant">
-                <a href="#" className="text-on-surface-variant hover:text-primary transition-colors">
-                  <span className="material-symbols-outlined text-[20px]">link</span>
-                </a>
-                <a href="#" className="text-on-surface-variant hover:text-primary transition-colors">
-                  <span className="material-symbols-outlined text-[20px]">code</span>
-                </a>
-                <a href="#" className="text-on-surface-variant hover:text-primary transition-colors">
-                  <span className="material-symbols-outlined text-[20px]">terminal</span>
-                </a>
-              </div>
-            </motion.article>
-          ))}
-        </motion.section>
+              Clear Search
+            </button>
+          </motion.div>
+        )}
       </main>
     </div>
   );
