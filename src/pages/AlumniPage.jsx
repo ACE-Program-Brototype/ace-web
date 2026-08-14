@@ -62,7 +62,7 @@ export default function AlumniPage() {
                   </div>
                 </div>
                 <span className="inline-block px-2 py-1 bg-surface-container-low text-on-surface-variant font-label-sm text-[11px] uppercase tracking-wider mb-4">
-                  Batch {a.batch}
+                  {a.domain}
                 </span>
                 <p className="font-body-md text-body-md text-on-surface italic leading-relaxed">{a.quote}</p>
               </div>
@@ -83,14 +83,14 @@ export default function AlumniPage() {
             <motion.div variants={revealVariant} className="relative h-[500px] w-full overflow-hidden">
               <img
                 className="absolute inset-0 w-full h-full object-cover"
-                alt="David Osei, Principal Engineer at Google DeepMind"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCOZeMSC1jBp3Wpv_BOciC5XBz5ZGjs3S6VQ4Nd4A_hpBCQapR8B_7dNGwM_I8oGI8_HlMSyC22WovinCZVUo4_RyBeGYPDxOcmKhxSeAMabjoFvl-cu62QEUSWN3KsvOzHJj6r2wqV4qwitq3UHBMVKYyOPnzA5KTQy7hvCi_Ihb4iY06aBbP3iOxKf6y0cXbmf4cTkMlsmjL2DwBgzWG3f1ykHXu6Aj4cr6dI7iIOC8a6OY1FOyu"
+                alt="Abdul Basith"
+                src="https://media.licdn.com/dms/image/v2/D5603AQGmUbk5PjsWsw/profile-displayphoto-shrink_400_400/B56ZboZa9FGgAg-/0/1747655701772?e=1788393600&v=beta&t=fMeiBT5KOpLUVl1NHj2hpLJwWKmJaPKOetI2vxfv5zw"
               />
             </motion.div>
             <motion.div variants={revealVariant}>
               <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-4 block">Spotlight Series</span>
-              <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">David Osei</h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">Principal Engineer @ Google DeepMind</p>
+              <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Abdul Basith</h2>
+              <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">AI Engineer @ AccuMateAi</p>
               <div className="space-y-8">
                 <div>
                   <h4 className="font-label-sm text-label-sm text-primary font-bold uppercase mb-2">Q: How did ACE shape your trajectory?</h4>
