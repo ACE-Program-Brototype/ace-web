@@ -4,4 +4,6 @@ export const NAV_LINKS = [
   { to: '/outcomes', label: 'OUTCOMES' },
   { to: '/handlers', label: 'HANDLERS' },
   { to: '/alumni', label: 'ALUMNI' },
+  { to: '/events', label: 'EVENTS' },
 ];
+

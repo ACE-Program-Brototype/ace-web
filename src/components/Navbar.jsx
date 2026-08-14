@@ -19,6 +19,7 @@ export default function Navbar() {
     { to: '/directory', label: 'DIRECTORY', isHash: false },
     { to: '/outcomes', label: 'OUTCOMES', isHash: false },
     // { to: '/journal', label: 'JOURNAL', isHash: false },
+    { to: '/events', label: 'EVENTS', isHash: false },
     { to: '/handlers', label: 'HANDLERS', isHash: false },
     { to: '/alumni', label: 'ALUMNI', isHash: false },
   ];

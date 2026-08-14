@@ -12,6 +12,7 @@ import JournalPage from './pages/JournalPage';
 import TeamPage from './pages/TeamPage';
 import ContactPage from './pages/ContactPage';
 import AdminDashboard from './pages/AdminDashboard';
+import EventsPage from './pages/EventsPage';
 
 import { motion } from 'framer-motion';
 
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/handlers" element={<PageWrapper><TeamPage /></PageWrapper>} />
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
           <Route path="/admin" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
+          <Route path="/events" element={<PageWrapper><EventsPage /></PageWrapper>} />
         </Routes>
       </AnimatePresence>
 
