@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const revealVariant = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
@@ -111,9 +111,9 @@ export default function ContactPage() {
             ) : (
               <motion.form variants={revealVariant} onSubmit={handleSubmit} className="space-y-8">
                 {[
-                  { id: 'name',    label: 'Full Name',               type: 'text',  ph: 'John Doe'          },
-                  { id: 'email',   label: 'Email Address',            type: 'email', ph: 'john@example.com'  },
-                  { id: 'phone',   label: 'Phone Number (Optional)',   type: 'tel',   ph: '+91 98765 43210'   },
+                  { id: 'name', label: 'Full Name', type: 'text', ph: 'John Doe' },
+                  { id: 'email', label: 'Email Address', type: 'email', ph: 'john@example.com' },
+                  { id: 'phone', label: 'Phone Number (Optional)', type: 'tel', ph: '+91 98765 43210' },
                 ].map(f => (
                   <div key={f.id}>
                     <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor={f.id}>{f.label}</label>
@@ -166,35 +166,6 @@ export default function ContactPage() {
             </div>
           </motion.div>
         </section>
-
-        {/* Direct Departments */}
-        <motion.section
-          className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-section-gap"
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-        >
-          <div className="border-t border-outline-variant pt-16">
-            <motion.h3 variants={revealVariant} className="font-label-sm text-label-sm uppercase text-on-surface-variant mb-8 tracking-widest">
-              Direct Departments
-            </motion.h3>
-            <motion.div variants={revealVariant} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                { title: 'General Inquiries', email: 'hello@ace.brototype.com' },
-                { title: 'Partnerships',      email: 'partners@ace.brototype.com' },
-              ].map(d => (
-                <div key={d.title} className="p-8 border border-outline-variant bg-surface hover:bg-surface-container-low transition-colors">
-                  <h4 className="font-headline-md text-headline-md text-primary mb-2">{d.title}</h4>
-                  <a
-                    className="font-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
-                    href={`mailto:${d.email}`}
-                  >
-                    {d.email}
-                    <span className="material-symbols-outlined text-sm">arrow_outward</span>
-                  </a>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </motion.section>
       </main>
     </div>
   );

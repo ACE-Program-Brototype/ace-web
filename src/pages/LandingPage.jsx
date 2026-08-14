@@ -364,7 +364,7 @@ export default function LandingPage() {
       </motion.section>
 
       {/* ══════════════════════════════════════════════════════════
-          8. THE OUTPUT — Featured Projects
+          8. THE PROJECT SHOWCASE
       ══════════════════════════════════════════════════════════ */}
       <motion.section
         className="py-section-gap border-b border-outline-variant bg-surface"
@@ -375,15 +375,15 @@ export default function LandingPage() {
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <motion.div variants={revealVariant} className="flex justify-between items-end mb-16">
-            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">The Output.</h2>
-            <Link
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">The Project Showcase.</h2>
+            {/* <Link
               onClick={handleScrollToTop}
-              to="/students"
+              to="/directory"
               className="hidden md:inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary hover:text-on-surface-variant transition-colors"
             >
               View full directory
               <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </Link>
+            </Link> */}
           </motion.div>
 
           <motion.div variants={revealVariant} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
