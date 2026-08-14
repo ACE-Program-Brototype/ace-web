@@ -11,6 +11,7 @@ import venkiteshImg from '../../assets/candidates/venkitesh.webp';
 import faizalR from '../../assets/candidates/faizalR.jpeg';
 import fuvad from '../../assets/candidates/fuvad.jpeg';
 import kenneth from '../../assets/candidates/kenneth.jpeg';
+import bennet from '../../assets/candidates/bennet.jpeg'
 import anonymous from '../../assets/candidates/anonymous.jpeg';
 
 export const STUDENTS = [
@@ -64,7 +65,7 @@ export const STUDENTS = [
   },
   {
     name: 'Bennet Sharwin', batch: 'BCR63', stack: 'MERN',
-    img: anonymous,
+    img: bennet,
   },
   {
     name: 'Kenneth Roger Nelson', batch: 'BCR66', stack: 'MERN',
