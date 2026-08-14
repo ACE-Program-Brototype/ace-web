@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Footer from '../components/Footer';
 import { STUDENTS } from '../constants/studentsDatas';
+import { ALUMNI_STORIES } from '../constants/alumniDatas';
+
+const recentAlumni = ALUMNI_STORIES.find(a => a.recent) || ALUMNI_STORIES[0];
+const otherAlumni = ALUMNI_STORIES.filter(a => a !== recentAlumni).slice(0, 2);
 
 
 /* ─── Reveal animation ─────────────────────────────────────────── */
@@ -254,15 +258,17 @@ export default function LandingPage() {
           <motion.div variants={revealVariant} className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Spotlight Feature Card */}
             <div className="md:col-span-2 md:row-span-2 flex flex-col overflow-hidden border border-outline-variant bg-surface-container-lowest">
-              <img
-                src="https://lh3.googleusercontent.com/aida/AP1WRLv7xdE91E31_n7DMH06j6eUyeS4DWRjQ_cePh5NjpZhswvg1j-rMdjEOYwoVyEPKgSUrJjfTl1JWIkwN1U_HwlG0O-KLphS5yQAv_DWoZJ2Pc9RqYrLWjrHCTM9a6VWOg6W6EssnJ0K0l0kbkeXXGI8KConAEdq0PcFVKeoQh5bzOijkOcLH9-O8uhThahLiI9bV2_PzkfSa5JgjYduAW9HYsWtIBlTmZuTupXpzPMXTpsVUdBGTVhfUCg"
-                alt="Arjun Mehta — SDE II at Google"
-                className="w-full h-[65%] object-cover"
-              />
-              <div className="p-6 flex flex-col justify-start gap-4 h-[35%]">
+              <div className="relative flex-1 min-h-0">
+                <img
+                  src={recentAlumni.img}
+                  alt={`${recentAlumni.name} — ${recentAlumni.role}`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6 shrink-0">
                 <div>
-                  <div className="font-headline-md text-headline-md text-primary">Arjun Mehta</div>
-                  <div className="font-body-md text-sm text-on-surface-variant">SDE II @ Google</div>
+                  <div className="font-headline-md text-headline-md text-primary">{recentAlumni.name}</div>
+                  <div className="font-body-md text-sm text-on-surface-variant">{recentAlumni.role}</div>
                 </div>
               </div>
             </div>
@@ -274,29 +280,24 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Photo Tile — Priya Nair */}
-            <div className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant">
-              <img
-                src="https://lh3.googleusercontent.com/aida/AP1WRLu91gPeJLb7LYkO42G7qN7NLW9A35tAN6Y81iwCA-j3EjRlLt0-slUT9p_UKsWBKhzfNqwEI_cmw4YqXBD3Z7Xj39MdQwmKRAKkdqLNpxT6I3mJeKhctESLEUWIea3MF5qvDcF2NB9RxZI3J8AkKtF-WcwTWesL6aaN9yI5VucLOe63EXveHmGPj9-rACIqo1gIuLUinYHszlduEIH5yUoSwJ0y8a3BbkDNs3gh8ivKAOOoZyyYyTXIBpU"
-                alt="Priya Nair"
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                <div className="text-white font-bold text-sm">Priya Nair</div>
+            {/* Photo Tiles dynamically generated from otherAlumni */}
+            {otherAlumni.map(a => (
+              <div key={a.name} className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant">
+                <img
+                  src={a.img}
+                  alt={a.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                  <div className="text-white font-bold text-sm mb-1">{a.name}</div>
+                  <div className="text-white/90 text-xs mb-3 line-clamp-1">{a.role}</div>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-[10px] uppercase tracking-wider bg-white/20 text-white px-2 py-1 rounded-sm">{a.domain}</span>
+                    {a.pkg && <span className="text-[10px] font-mono bg-primary text-on-primary px-2 py-1 rounded-sm">{a.pkg}</span>}
+                  </div>
+                </div>
               </div>
-            </div>
-
-            {/* Photo Tile — Rohan Das */}
-            <div className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant">
-              <img
-                src="https://lh3.googleusercontent.com/aida/AP1WRLtxpzAYqXlo2HkvLZ3DPPGAzmA7K-45yYybIMItv_RmqgxoY6VvYMV6XtMtGzddHL1O7qZ_B0EpatNt7wjL3Q6wwaJgCyeI_rMsJCEMv_7eZeFX_C1cKT_eiM8d9DiQ0OMPvdi4ENnanRNzoBpl6KU1d-WYSfMG26SFvnWe3opz0alJEpWM451U_kZGenzy5j5a9kMXaPNJcHg4djEHtOhwmZSfT4Tvw7c8sHrELGd_ynn1iB4aQncOs1g"
-                alt="Rohan Das"
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                <div className="text-white font-bold text-sm">Rohan Das</div>
-              </div>
-            </div>
+            ))}
 
             {/* Surface Tile */}
             <div className="col-span-1 row-span-1 aspect-square bg-surface-container-high p-8 flex items-center justify-center text-center border border-outline-variant">
