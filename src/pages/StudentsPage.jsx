@@ -2,61 +2,20 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const revealVariant = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
-const STUDENTS = [
-  {
-    name: 'Alex Mercer', batch: 'BCR313', stack: 'Golang · Next.js · PostgreSQL · Docker',
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Samantha Chen', batch: 'BCR313', stack: 'React · TypeScript · Node.js · GraphQL',
-    img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Marcus Johnson', batch: 'BCR312', stack: 'Python · Django · AWS · Kubernetes',
-    img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Elena Rodriguez', batch: 'BCR314', stack: 'Vue.js · Laravel · MySQL · Redis',
-    img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Rahul Verma', batch: 'BCR314', stack: 'Rust · WebAssembly · Systems',
-    img: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Ayasha Singh', batch: 'BCR313', stack: 'Java · Spring Boot · Kafka · Redis',
-    img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Chris Park', batch: 'BCR312', stack: 'React Native · Node.js · MongoDB',
-    img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    name: 'Priya Nair', batch: 'BCR315', stack: 'Go · gRPC · PostgreSQL · Docker',
-    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800',
-  },
-];
+import { STUDENTS } from '../constants/studentsDatas';
 
-const FILTERS = ['All', 'Web Dev', 'Golang', 'React', 'Batch BCR313'];
 
 export default function StudentsPage() {
-  const [query, setQuery]     = useState('');
-  const [active, setActive]   = useState('All');
+  const [query, setQuery] = useState('');
 
   const filtered = STUDENTS.filter(s => {
     const q = query.toLowerCase();
-    const matchQ = !q || s.name.toLowerCase().includes(q) || s.stack.toLowerCase().includes(q) || s.batch.toLowerCase().includes(q);
-    const matchF = active === 'All' ||
-      (active === 'Golang' && s.stack.includes('Golang')) ||
-      (active === 'React' && s.stack.includes('React')) ||
-      (active === 'Web Dev' && (s.stack.includes('React') || s.stack.includes('Vue') || s.stack.includes('Next'))) ||
-      (active === 'Batch BCR313' && s.batch === 'BCR313');
-    return matchQ && matchF;
+    return !q || s.name.toLowerCase().includes(q) || s.stack.toLowerCase().includes(q) || s.batch.toLowerCase().includes(q);
   });
 
   return (
@@ -87,21 +46,6 @@ export default function StudentsPage() {
               placeholder="Search by name, tech stack, or batch..."
               type="text"
             />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {FILTERS.map(f => (
-              <button
-                key={f}
-                onClick={() => setActive(f)}
-                className={`px-4 py-1.5 rounded-full font-label-sm text-label-sm transition-colors ${
-                  active === f
-                    ? 'bg-surface-container-low text-primary border border-transparent'
-                    : 'bg-surface-container-lowest text-on-surface-variant border border-outline-variant hover:bg-surface-container-low'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
           </div>
         </section>
 
@@ -142,13 +86,6 @@ export default function StudentsPage() {
             </motion.article>
           ))}
         </motion.section>
-
-        {/* Load More */}
-        <div className="flex justify-center pb-section-gap border-b border-outline-variant">
-          <button className="px-8 py-3 border border-outline-variant bg-surface-container-lowest text-primary font-label-sm text-label-sm uppercase tracking-wider hover:bg-surface-container-low transition-colors duration-300">
-            Load More
-          </button>
-        </div>
       </main>
     </div>
   );
