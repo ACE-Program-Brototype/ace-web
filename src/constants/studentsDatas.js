@@ -18,14 +18,23 @@ export const STUDENTS = [
   {
     name: 'Venkitesh NS', batch: 'BCE319', stack: 'MERN Stack',
     img: venkiteshImg,
+    linkedin: 'https://www.linkedin.com/in/venkitesh-n-s-53195132b/',
+    github: 'https://github.com',
+    portfolio: 'https://example.com',
   },
   {
     name: 'Aswin Sreeraj', batch: 'BCR314', stack: 'Golang',
     img: aswinImg,
+    linkedin: 'https://www.linkedin.com/in/aswinsreeraj/',
+    github: 'https://github.com',
+    portfolio: 'https://example.com',
   },
   {
     name: 'Adarsh M', batch: 'BCR313', stack: 'Java SpringBoot',
     img: adarshImg,
+    linkedin: 'https://linkedin.com',
+    github: 'https://github.com',
+    portfolio: 'https://example.com',
   },
   {
     name: 'Ajex Joshy', batch: 'BCR313', stack: 'MERN Stack',
@@ -34,13 +43,14 @@ export const STUDENTS = [
   {
     name: 'Al Ameen S', batch: 'BCR312', stack: 'MERN Stack',
     img: alAmeenImg,
+    linkedin: 'https://www.linkedin.com/in/alameens07/',
   },
   {
     name: 'Athira Suresh', batch: 'BCR314', stack: 'AI /ML',
     img: athiraImg,
   },
   {
-    name: 'Navaneeth Sankar', batch: 'BCR313', stack: 'Mern Stack',
+    name: 'Navaneeth Sankar', batch: 'BCR313', stack: 'MERN Stack',
     img: navaneethImg,
   },
   {
@@ -56,7 +66,7 @@ export const STUDENTS = [
     img: shifanaImg,
   },
   {
-    name: 'Sreehari Sunil', batch: 'BCR313', stack: 'Mern Stack',
+    name: 'Sreehari Sunil', batch: 'BCR313', stack: 'MERN Stack',
     img: sreehari,
   },
   {
@@ -64,11 +74,11 @@ export const STUDENTS = [
     img: faizalR,
   },
   {
-    name: 'Bennet Sharwin', batch: 'BCR63', stack: 'MERN',
+    name: 'Bennet Sharwin', batch: 'BCR63', stack: 'MERN Stack',
     img: bennet,
   },
   {
-    name: 'Kenneth Roger Nelson', batch: 'BCR66', stack: 'MERN',
+    name: 'Kenneth Roger Nelson', batch: 'BCR66', stack: 'MERN Stack',
     img: kenneth,
   },
 
