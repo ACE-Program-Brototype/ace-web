@@ -9,7 +9,7 @@ export const FOUNDERS = [
     name: 'Shahid Noushad',
     quote: '"Architecting the pedagogical frameworks that turn ambitious coders into world-class engineers."',
     img: shahid,
-    linkedin: 'https://www.linkedin.com/in/shahidnoushad/',
+    linkedin: 'https://www.linkedin.com/in/shahid-noushad/',
   },
 ];
 
