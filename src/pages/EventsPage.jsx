@@ -95,21 +95,70 @@ function CarouselModal({ event, onClose }) {
             </h2>
             <div className="flex flex-col space-y-2 mb-6 border-b border-outline-variant pb-6">
               <div className="flex items-center text-secondary">
-                <span className="material-symbols-outlined mr-3" style={{ fontSize: '20px' }}>calendar_today</span>
+                <span className="material-symbols-outlined mr-3 text-on-surface-variant" style={{ fontSize: '20px' }}>calendar_today</span>
                 <span className="font-body-md text-body-md">{event.date}</span>
               </div>
-              <div className="flex items-center text-secondary">
-                <span className="material-symbols-outlined mr-3" style={{ fontSize: '20px' }}>location_on</span>
-                <span className="font-body-md text-body-md font-medium text-primary">ACE HQ</span>
-              </div>
+              {event.time && (
+                <div className="flex items-center text-secondary">
+                  <span className="material-symbols-outlined mr-3 text-on-surface-variant" style={{ fontSize: '20px' }}>schedule</span>
+                  <span className="font-body-md text-body-md">{event.time}</span>
+                </div>
+              )}
+              {event.venue && (
+                <div className="flex items-center text-secondary">
+                  <span className="material-symbols-outlined mr-3 text-on-surface-variant" style={{ fontSize: '20px' }}>location_on</span>
+                  <span className="font-body-md text-body-md font-medium text-primary">{event.venue}</span>
+                </div>
+              )}
             </div>
           </div>
-          <div className="prose max-w-none mb-8">
+
+          {/* About this session */}
+          <div className="mb-8">
             <h3 className="font-headline-md text-headline-md text-primary mb-3">About this session</h3>
-            <p className="font-body-md text-body-md text-secondary mb-4 leading-relaxed">
+            <p className="font-body-md text-body-md text-secondary leading-relaxed">
               {event.description}
             </p>
           </div>
+
+          {/* Agenda */}
+          {event.agenda && event.agenda.length > 0 && (
+            <div className="mb-10">
+              <h3 className="font-headline-md text-headline-md text-primary mb-4">Agenda</h3>
+              <div className="flex flex-col">
+                {event.agenda.map((item, idx) => (
+                  <div key={idx} className="border-t border-outline-variant py-4">
+                    <p className="font-body-md font-bold text-primary mb-1">{item.time}</p>
+                    <p className="font-body-md text-secondary">{item.topic}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Lead Handler */}
+          {event.handler && (
+            <div className="border border-outline-variant rounded-md p-6 bg-surface-container-lowest">
+              <span className="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-medium mb-4 block">
+                LEAD HANDLER
+              </span>
+              <div className="flex items-center">
+                <img 
+                  src={event.handler.image} 
+                  alt={event.handler.name} 
+                  className="w-12 h-12 rounded object-cover mr-4"
+                />
+                <div>
+                  <h4 className="font-headline-md text-headline-md text-primary leading-snug">
+                    {event.handler.name}
+                  </h4>
+                  <p className="font-body-md text-body-md text-secondary">
+                    {event.handler.role}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>,
@@ -158,11 +207,16 @@ export default function EventsPage() {
               </div>
               <div className="p-6 flex flex-col flex-grow">
                 <div className="mb-4">
-                  <h3 className="font-headline-md text-headline-md text-primary leading-tight mb-2">
+                  <h3 className="font-headline-md text-headline-md text-primary leading-tight mb-1">
                     {event.title}
                   </h3>
+                  {event.venue && (
+                    <p className="font-body-md text-body-md text-primary font-normal mb-2">
+                      {event.venue}
+                    </p>
+                  )}
                   <p className="font-label-sm text-label-sm text-secondary uppercase tracking-wider mt-1">
-                    {event.date}
+                    {event.date.toUpperCase()}{event.time ? ` • ${event.time}` : ''}
                   </p>
                 </div>
                 <p className="font-body-md text-body-md text-secondary line-clamp-2 mb-6">
