@@ -87,26 +87,26 @@ function CarouselModal({ event, onClose }) {
         {/* Details Section */}
         <div className="w-full p-8 md:p-12 flex flex-col md:px-margin-desktop mt-6 sm:p-10 mt-8">
           <div className="mb-8">
-            <span className="inline-block px-3 py-1 bg-surface-container text-primary font-label-sm uppercase tracking-wider rounded-sm mb-4">
+            <span className="inline-block px-3 py-1 bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider rounded-sm mb-4">
               {event.category || 'Event'}
             </span>
-            <h2 className="text-headline-lg-mobile md:text-headline-lg font-headline text-primary leading-tight mb-4 tracking-tight">
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary leading-tight mb-4 tracking-tight">
               {event.title}
             </h2>
             <div className="flex flex-col space-y-2 mb-6 border-b border-outline-variant pb-6">
               <div className="flex items-center text-secondary">
                 <span className="material-symbols-outlined mr-3" style={{ fontSize: '20px' }}>calendar_today</span>
-                <span className="text-body-md">{event.date}</span>
+                <span className="font-body-md text-body-md">{event.date}</span>
               </div>
               <div className="flex items-center text-secondary">
                 <span className="material-symbols-outlined mr-3" style={{ fontSize: '20px' }}>location_on</span>
-                <span className="text-body-md font-medium text-primary">ACE HQ</span>
+                <span className="font-body-md text-body-md font-medium text-primary">ACE HQ</span>
               </div>
             </div>
           </div>
           <div className="prose max-w-none mb-8">
-            <h3 className="text-headline-md font-headline text-primary mb-3">About this session</h3>
-            <p className="text-body-md text-secondary mb-4 leading-relaxed">
+            <h3 className="font-headline-md text-headline-md text-primary mb-3">About this session</h3>
+            <p className="font-body-md text-body-md text-secondary mb-4 leading-relaxed">
               {event.description}
             </p>
           </div>
@@ -133,12 +133,12 @@ export default function EventsPage() {
   }, [selectedEvent]);
 
   return (
-    <div className="bg-surface text-on-surface antialiased pt-16 min-h-screen">
+    <div className="bg-surface text-on-surface antialiased font-body-md pt-16 min-h-screen">
       <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
         {/* Header Section */}
         <div className="mb-section-gap max-w-3xl">
-          <h1 className="text-headline-lg-mobile md:text-display-lg font-headline text-primary mb-6 tracking-tight">Events & Workshops</h1>
-          <p className="text-body-lg text-secondary">Cultivating technical mastery through shared experiences. Join our community for deep dives into architecture, design systems, and engineering excellence.</p>
+          <h1 className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-6 tracking-tighter">Events & Workshops</h1>
+          <p className="font-body-lg text-body-lg text-secondary">Cultivating technical mastery through shared experiences. Join our community for deep dives into architecture, design systems, and engineering excellence.</p>
         </div>
 
         {/* Grid Layout */}
@@ -158,18 +158,18 @@ export default function EventsPage() {
               </div>
               <div className="p-6 flex flex-col flex-grow">
                 <div className="mb-4">
-                  <h3 className="text-headline-md font-headline text-primary leading-tight mb-2">
+                  <h3 className="font-headline-md text-headline-md text-primary leading-tight mb-2">
                     {event.title}
                   </h3>
-                  <p className="font-label text-label-sm text-secondary uppercase tracking-wider mt-1">
+                  <p className="font-label-sm text-label-sm text-secondary uppercase tracking-wider mt-1">
                     {event.date}
                   </p>
                 </div>
-                <p className="text-body-md text-secondary line-clamp-2 mb-6">
+                <p className="font-body-md text-body-md text-secondary line-clamp-2 mb-6">
                   {event.description}
                 </p>
                 <div className="mt-auto pt-4 border-t border-outline-variant">
-                  <span className="text-label-sm font-label uppercase tracking-wider text-primary group-hover:text-secondary transition-colors inline-flex items-center">
+                  <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary group-hover:text-secondary transition-colors inline-flex items-center">
                     View Details <span className="material-symbols-outlined ml-1" style={{ fontSize: '16px' }}>arrow_forward</span>
                   </span>
                 </div>
