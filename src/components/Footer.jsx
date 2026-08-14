@@ -5,9 +5,9 @@ const FOOTER_COLS = [
   {
     heading: 'Navigation',
     links: [
-      { to: '/',          label: 'Home'            },
+      { to: '/', label: 'Home' },
       ...NAV_LINKS.map(l => ({
-        to:    l.to,
+        to: l.to,
         label: l.label.charAt(0) + l.label.slice(1).toLowerCase(),
       })),
     ],
@@ -21,7 +21,7 @@ export default function Footer() {
 
         {/* Main Footer Content: 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 pb-16">
-          
+
           {/* Column 1: Brand + Tagline */}
           <div className="flex flex-col">
             <Link to="/" className="font-headline-lg text-headline-lg text-white font-bold tracking-tighter uppercase">
@@ -54,12 +54,13 @@ export default function Footer() {
           {/* Column 3: Connect & Contact */}
           <div className="flex flex-col gap-4 items-start">
             <span className="font-label-sm text-label-sm uppercase tracking-widest text-white/40 mb-2">Connect</span>
-            <a href="mailto:hello@ace.brototype.com" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">
-              hello@ace.brototype.com
+            <a href={`mailto:${import.meta.env.VITE_ORGANIZATION_EMAIL}`} className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">
+              {import.meta.env.VITE_ORGANIZATION_EMAIL}
             </a>
             <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">LinkedIn</a>
             <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors mb-4">Twitter / X</a>
             <Link
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               to="/contact"
               className="border border-white/30 text-white font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-neutral-950 transition-colors"
             >

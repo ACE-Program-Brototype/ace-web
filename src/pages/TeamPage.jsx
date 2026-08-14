@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FaLinkedin } from 'react-icons/fa';
 
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -47,11 +48,11 @@ export default function TeamPage() {
                   <img alt={f.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={f.img} />
                 </div>
                 <div className="md:w-1/2 p-8 flex flex-col justify-center bg-surface-bright">
-                  <span className="font-mono text-mono text-on-surface-variant uppercase tracking-wider mb-2 text-xs">{f.role}</span>
+                  <span className="font-mono text-mono text-on-surface-variant uppercase tracking-wider mb-4 text-xs">{f.role}</span>
                   <h3 className="font-headline-md text-headline-md text-primary mb-4">{f.name}</h3>
                   <p className="font-body-md text-body-md text-on-surface-variant italic mb-6 leading-relaxed">{f.quote}</p>
-                  <a aria-label="LinkedIn Profile" className="mt-auto text-on-surface-variant hover:text-primary transition-colors" href={f.linkedin} target="_blank" rel="noopener noreferrer">
-                    <span className="material-symbols-outlined">open_in_new</span>
+                  <a aria-label="LinkedIn Profile" className="mt-auto inline-flex text-on-surface-variant hover:text-[#0A66C2] transition-colors duration-300" href={f.linkedin} target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin className="text-2xl" />
                   </a>
                 </div>
               </motion.div>
@@ -81,8 +82,8 @@ export default function TeamPage() {
                   <h4 className="font-headline-md text-headline-md text-primary mb-1">{h.name}</h4>
                   <p className="font-mono text-mono text-on-surface-variant uppercase tracking-wider text-xs mb-4">{h.role}</p>
                   <p className="font-body-md text-body-md text-on-surface-variant italic leading-snug mb-6">{h.quote}</p>
-                  <a aria-label="LinkedIn Profile" className="text-on-surface-variant hover:text-primary transition-colors" href={h.linkedin} target="_blank" rel="noopener noreferrer">
-                    <span className="material-symbols-outlined">open_in_new</span>
+                  <a aria-label="LinkedIn Profile" className="inline-flex text-on-surface-variant hover:text-[#0A66C2] transition-colors duration-300" href={h.linkedin} target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin className="text-2xl" />
                   </a>
                 </div>
               </motion.div>
@@ -93,7 +94,9 @@ export default function TeamPage() {
         {/* CTA */}
         <section className="py-section-gap flex flex-col items-center justify-center text-center">
           <p className="font-body-lg text-body-lg text-on-surface-variant mb-6">Have a question for the team?</p>
-          <Link
+          <Link onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
             to="/contact"
             className="inline-flex items-center gap-2 font-headline-md text-headline-md text-primary hover:text-on-surface-variant transition-colors duration-200 border-b border-primary pb-1 hover:border-outline-variant"
           >

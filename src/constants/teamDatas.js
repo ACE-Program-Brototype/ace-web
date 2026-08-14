@@ -5,9 +5,8 @@ import alAmeenImg from '../../assets/candidates/al ameen.webp';
 
 export const FOUNDERS = [
   {
-    role: 'ACE Handler & Mentor',
-    name: 'Shahid Noushad',
-    quote: '"Architecting the pedagogical frameworks that turn ambitious coders into world-class engineers."',
+    role: 'ACE Handler & Mentor', name: 'Shahid Noushad',
+    quote: '"Shaping the pedagogical frameworks that elevate our collective discourse."',
     img: shahid,
     linkedin: 'https://www.linkedin.com/in/shahid-noushad/',
   },
@@ -15,9 +14,8 @@ export const FOUNDERS = [
 
 export const HANDLERS = [
   {
-    role: 'ACE Community Manager',
-    name: 'Aswin Sreeraj',
-    quote: '"Fostering an ecosystem where relentless curiosity drives innovation and collaboration turns ambition into impact."',
+    role: 'ACE Community Manager', name: 'Aswin Sreeraj',
+    quote: '"Safeguarding the integrity and philosophical rigor of community engagements."',
     img: aswin,
     linkedin: 'https://www.linkedin.com/in/aswinsreeraj/',
   },
