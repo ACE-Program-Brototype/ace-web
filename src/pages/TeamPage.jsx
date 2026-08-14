@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FaLinkedin } from 'react-icons/fa';
 
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -49,9 +50,9 @@ export default function TeamPage() {
                 <div className="md:w-1/2 p-8 flex flex-col justify-center bg-surface-bright">
                   <span className="font-mono text-mono text-on-surface-variant uppercase tracking-wider mb-4 text-xs">{f.role}</span>
                   <h3 className="font-headline-md text-headline-md text-primary mb-4">{f.name}</h3>
-                  <p className="font-body-sm text-xs text-on-surface-variant italic mb-4 leading-relaxed">{f.quote}</p>
-                  <a aria-label="LinkedIn Profile" className="mt-auto text-on-surface-variant hover:text-primary transition-colors" href="#">
-                    <span className="material-symbols-outlined">open_in_new</span>
+                  <p className="font-body-md text-body-md text-on-surface-variant italic mb-6 leading-relaxed">{f.quote}</p>
+                  <a aria-label="LinkedIn Profile" className="mt-auto inline-flex text-on-surface-variant hover:text-[#0A66C2] transition-colors duration-300" href={f.linkedin} target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin className="text-2xl" />
                   </a>
                 </div>
               </motion.div>
@@ -80,9 +81,9 @@ export default function TeamPage() {
                 <div className="px-2 pb-4">
                   <h4 className="font-headline-md text-headline-md text-primary mb-1">{h.name}</h4>
                   <p className="font-mono text-mono text-on-surface-variant uppercase tracking-wider text-xs mb-4">{h.role}</p>
-                  <p className="font-body-sm text-xs text-on-surface-variant italic mb-4 leading-relaxed">{h.quote}</p>
-                  <a aria-label="LinkedIn Profile" className="text-on-surface-variant hover:text-primary transition-colors" href="#">
-                    <span className="material-symbols-outlined">open_in_new</span>
+                  <p className="font-body-md text-body-md text-on-surface-variant italic leading-snug mb-6">{h.quote}</p>
+                  <a aria-label="LinkedIn Profile" className="inline-flex text-on-surface-variant hover:text-[#0A66C2] transition-colors duration-300" href={h.linkedin} target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin className="text-2xl" />
                   </a>
                 </div>
               </motion.div>

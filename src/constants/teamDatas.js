@@ -6,25 +6,31 @@ import alAmeenImg from '../../assets/candidates/al ameen.webp';
 export const FOUNDERS = [
   {
     role: 'ACE Handler & Mentor', name: 'Shahid Noushad',
-    quote: "Shaping the pedagogical frameworks that elevate our collective discourse.",
+    quote: '"Shaping the pedagogical frameworks that elevate our collective discourse."',
     img: shahid,
+    linkedin: 'https://www.linkedin.com/in/shahid-noushad/',
   },
 ];
 
 export const HANDLERS = [
   {
     role: 'ACE Community Manager', name: 'Aswin Sreeraj',
-    quote: "Safeguarding the integrity and philosophical rigor of community engagements.",
+    quote: '"Safeguarding the integrity and philosophical rigor of community engagements."',
     img: aswin,
+    linkedin: 'https://www.linkedin.com/in/aswinsreeraj/',
   },
   {
-    role: 'Interim Assistant Community Manager', name: 'Venkitesh NS',
-    quote: 'Bridging past achievements with future endeavors.',
+    role: 'Assistant Community Manager',
+    name: 'Venkitesh NS',
+    quote: '"Connecting foundational learning with real-world engineering impact, one milestone at a time."',
     img: venkiteshImg,
+    linkedin: 'https://www.linkedin.com/in/venkitesh-n-s-53195132b/',
   },
   {
-    role: 'Program Coordinator', name: 'Al Ameen S',
-    quote: 'Curating insights from the vanguard of our community.',
+    role: 'Program Coordinator',
+    name: 'Al Ameen S',
+    quote: '"Orchestrating high-impact technical programs that transform everyday learning into pivotal career moments."',
     img: alAmeenImg,
+    linkedin: 'https://www.linkedin.com/in/alameens07/',
   },
 ];
