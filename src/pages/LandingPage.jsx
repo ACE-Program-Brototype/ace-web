@@ -1,7 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Footer from '../components/Footer';
+import { STUDENTS } from '../constants/studentsDatas';
+
 
 /* ─── Reveal animation ─────────────────────────────────────────── */
 const revealVariant = {
@@ -18,6 +20,40 @@ export default function LandingPage() {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+
+  const rosterRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const scrollContainer = rosterRef.current;
+    if (!scrollContainer) return;
+
+    let intervalId;
+
+    if (!isHovered) {
+      intervalId = setInterval(() => {
+        const cardWidth = 320 + 24; // min-w-[320px] + gap-6 (24px)
+        const singleSetWidth = STUDENTS.length * cardWidth;
+
+        // Smoothly scroll to next card
+        scrollContainer.scrollBy({ left: cardWidth, behavior: 'smooth' });
+
+        // Check if we've scrolled past the first set of items
+        setTimeout(() => {
+          if (scrollContainer.scrollLeft >= singleSetWidth) {
+            // Instantly reset scroll position to loop seamlessly
+            scrollContainer.scrollTo({ left: scrollContainer.scrollLeft - singleSetWidth, behavior: 'instant' });
+          }
+        }, 600); // Wait for the smooth scroll animation to finish
+      }, 1800); // 3-second pause between each scroll
+    }
+
+    return () => clearInterval(intervalId);
+  }, [isHovered]);
 
   return (
     <div className="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary font-body-md">
@@ -125,6 +161,7 @@ export default function LandingPage() {
 
           <motion.div variants={revealVariant} className="mt-12">
             <Link
+              onClick={handleScrollToTop}
               to="/outcomes"
               className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary hover:underline underline-offset-4"
             >
@@ -155,7 +192,8 @@ export default function LandingPage() {
               <p className="font-body-md text-on-surface-variant">A curated look at the current generation of ACE engineers.</p>
             </div>
             <Link
-              to="/students"
+              onClick={handleScrollToTop}
+              to="/directory"
               className="hidden md:block bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/80 transition-colors"
             >
               EXPLORE THE DIRECTORY
@@ -163,38 +201,23 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Scroll container */}
-          <motion.div variants={revealVariant} className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide">
-            {[
-              {
-                name: 'Aswin Sreeraj', batch: 'Batch BCR313',
-                img: 'https://lh3.googleusercontent.com/aida/AP1WRLsPcvJjhF-QmjGhUh3QrgtsMC97suxSMXbGkxbDh379tYLytUX8amPlrwvkmlCDsOs9LuE9unwn16VGVmwGdZ3iWonwaMcXbjQI36_jnii3y9N7jKbtzUG40tHzE_4dXONeAkYluzOYVRCJJcXH8S8CHCp9XuU40rdqv_1DbuEc25c98zEg0j7xZHXibYO32AFE6-mIG9FXfCZsjVESrGNUvv7ScQvpAI3gtDrPl-244w2NyYi9ke46Ajs',
-                skills: ['GOLANG', 'GIN', 'POSTGRESQL'],
-              },
-              {
-                name: 'Karthik R.', batch: 'Batch BCR314',
-                img: 'https://lh3.googleusercontent.com/aida/AP1WRLtL1RIg_ufvOS6LK4O500OtSPFWB0SmLHgjIaNDPZV16tnXfuO2yonc9vDizZ8MZY1kQwnvLTUIQsNCzueU6Ne89UCemg8em6fFBslZb-DaZ5sg9qag2DZlZu0Pc7y1c8sHe3xx-3YHh2Fs5A08JLCzbHCNej5-bMA2bDtbEtt8JIDjUgdNFRY2gqZHeaYGYy9dOGgTwzm6YG12pLmEvehhz2i0H3JBQBle6dZkdyCKl6ORAwpKP_ouew',
-                skills: ['REACT', 'NODE.JS'],
-              },
-              {
-                name: 'Meera J.', batch: 'Batch BCR312',
-                img: 'https://lh3.googleusercontent.com/aida/AP1WRLuePeocfE7DAd6NiSiRH5-4es6mTcZ5lJCHXsT5YzIaWA6DvaPAOKjkYdP4PCqP0APdS58RQXhLCJ_S5wnwzUnzMssiXJe330eDRlWnNF7PfguepfPw4hpzHYymkac3GaVzw0kMEaNZ0OPz8o8zI4phYphqiixSkRH-GLfzZ6-RaWnAOlcCqlLN9Te8tfMpupl8TCs2N0KzPJUD8-VOZj0oRtyy8hf14XHYweuzwotnBWblcCZ34UKkaJQ',
-                skills: ['PYTHON', 'DJANGO'],
-              },
-              {
-                name: 'Sarah Chen', batch: 'Batch BCR315',
-                img: 'https://lh3.googleusercontent.com/aida/AP1WRLtci_Ea2n03oinPNq_N3WCNYz-T16AlOPrQayddwwFwNgADeV-LzfN14jnEUAUzCiOKnCBDI96yBYA76F0k6NeojR3Oy2hDCq2Rfex5Px5tevatsAovCVxxixdOstJjGgmvyDG4yls4q7WUIQdikMZ70W45Qb_DsOEDgW9_ULg8SsPl-ZX0x5g8cvdSZdth2fssJCgUQmavRakiCGfjrJus8JkX00jJwdrGyDw_suk3dDpxbsZ_t8qetus',
-                skills: ['RUST', 'WEBASSEMBLY'],
-              },
-            ].map(s => (
-              <div key={s.name} className="min-w-[320px] w-80 border border-outline-variant bg-surface flex flex-col overflow-hidden p-4 group hover:border-primary transition-colors duration-200">
+          <motion.div
+            variants={revealVariant}
+            className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory"
+            ref={rosterRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setIsHovered(false)}
+          >
+            {[...STUDENTS, ...STUDENTS].map((s, idx) => (
+              <div key={`${s.name}-${idx}`} className="snap-start min-w-[320px] w-80 border border-outline-variant bg-surface flex flex-col overflow-hidden p-4 group hover:border-primary transition-colors duration-200">
                 <img src={s.img} alt={s.name} className="w-full h-64 object-cover mb-4 group-hover:scale-[1.02] transition-transform duration-300" />
                 <div className="flex flex-col gap-1">
                   <div className="font-bold text-primary font-headline-md text-headline-md">{s.name}</div>
                   <div className="text-sm text-on-surface-variant font-mono text-mono">{s.batch}</div>
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {s.skills.map(sk => (
-                      <span key={sk} className="px-2 py-1 bg-surface-container-high font-mono text-[10px] uppercase text-on-surface">{sk}</span>
-                    ))}
+                    <span className="px-2 py-1 bg-surface-container-high font-mono text-[10px] uppercase text-on-surface">{s.stack}</span>
                   </div>
                 </div>
               </div>
@@ -202,7 +225,7 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="mt-8 md:hidden">
-            <Link to="/students" className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 hover:bg-primary/80 transition-colors">
+            <Link onClick={handleScrollToTop} to="/students" className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 hover:bg-primary/80 transition-colors">
               Explore the Directory
             </Link>
           </div>
@@ -285,6 +308,7 @@ export default function LandingPage() {
 
           <motion.div variants={revealVariant} className="mt-12 flex justify-center">
             <Link
+              onClick={handleScrollToTop}
               to="/alumni"
               className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-12 py-4 hover:bg-primary/80 transition-colors"
             >
@@ -353,6 +377,7 @@ export default function LandingPage() {
           <motion.div variants={revealVariant} className="flex justify-between items-end mb-16">
             <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">The Output.</h2>
             <Link
+              onClick={handleScrollToTop}
               to="/students"
               className="hidden md:inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary hover:text-on-surface-variant transition-colors"
             >
@@ -411,6 +436,7 @@ export default function LandingPage() {
 
           <div className="mt-8 text-center md:hidden">
             <Link
+              onClick={handleScrollToTop}
               to="/students"
               className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary border border-outline-variant px-6 py-3 hover:bg-surface-container-low transition-colors"
             >
