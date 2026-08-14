@@ -1,0 +1,249 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>The Roster - ACE Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#f3f3f3",
+                        "primary": "#000000",
+                        "on-tertiary-container": "#838487",
+                        "on-primary-container": "#858386",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#78767b",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c8c5ca",
+                        "primary-fixed": "#e5e1e4",
+                        "on-surface-variant": "#47464a",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2f3131",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "tertiary": "#000000",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#5d5e66",
+                        "on-tertiary-fixed": "#1a1c1e",
+                        "inverse-primary": "#c8c6c8",
+                        "on-secondary-container": "#63646c",
+                        "inverse-on-surface": "#f0f1f1",
+                        "tertiary-fixed-dim": "#c6c6c9",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#46464e",
+                        "on-tertiary-fixed-variant": "#454749",
+                        "secondary-fixed-dim": "#c6c5cf",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#474649",
+                        "on-primary-fixed": "#1c1b1d",
+                        "surface-tint": "#5f5e60",
+                        "secondary-container": "#e3e1ec",
+                        "tertiary-fixed": "#e2e2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1c1b1d",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c8c6c8",
+                        "secondary-fixed": "#e3e1ec",
+                        "on-secondary-fixed": "#1a1b22",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eeeeee",
+                        "tertiary-container": "#1a1c1e",
+                        "surface": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-bright": "#f9f9f9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "section-gap": "96px",
+                        "margin-desktop": "48px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Geist", "sans-serif"],
+                        "headline-lg": ["Playfair Display", "serif"],
+                        "mono": ["Geist", "monospace"],
+                        "display-lg": ["Playfair Display", "serif"],
+                        "label-sm": ["Geist", "sans-serif"],
+                        "headline-md": ["Playfair Display", "serif"],
+                        "body-lg": ["Geist", "sans-serif"],
+                        "headline-lg-mobile": ["Playfair Display", "serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.01em", fontWeight: "500" }],
+                        "mono": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "display-lg": ["64px", { lineHeight: "72px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "label-sm": ["13px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "500" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "40px", fontWeight: "500" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-primary font-body-md antialiased selection:bg-surface-container-high selection:text-primary">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 dark:bg-surface border-b border-zinc text-primary dark:text-primary bg-surface-container-lowest">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary">ACE</div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Story</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Directory</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Outcomes</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Alumni</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Handlers</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Journal</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:block style_interactions font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search" data-weight="regular">search</span>
+</button>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-6 py-2 rounded-none uppercase tracking-wider style_interactions">CONTACT</button>
+<button class="md:hidden style_interactions">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+<!-- Page Header -->
+<header class="mb-24 text-left pt-32 max-w-full">
+<h1 class="font-display-lg text-display-lg text-primary mb-8 tracking-tighter">The Roster.</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-[60%] leading-relaxed">A curated directory of high-performance developers within the ACE ecosystem. Filter by batch, domain, or tech stack.</p>
+</header>
+<!-- Search & Filter -->
+<section class="mb-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-surface-variant pb-8">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-secondary px-2 pointer-events-none" data-icon="search">search</span>
+<input class="w-full bg-transparent border-0 border-b border-surface-variant focus:border-primary focus:ring-0 pl-10 py-2 font-body-md text-body-md text-primary placeholder:text-secondary transition-colors rounded-none" placeholder="Search by name, tech stack, or batch..." type="text">
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low text-primary font-label-sm text-label-sm transition-colors hover:bg-surface-container-high border border-transparent">All</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm transition-colors hover:bg-surface-container-low border border-surface-variant">Web Dev</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm transition-colors hover:bg-surface-container-low border border-surface-variant">Golang</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm transition-colors hover:bg-surface-container-low border border-surface-variant">React</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm transition-colors hover:bg-surface-container-low border border-surface-variant">Batch BCR313</button>
+</div>
+</section>
+<!-- Directory Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-24">
+<!-- Card 1 -->
+<article class="border border-surface-variant bg-surface-container-lowest p-6 rounded transition-colors duration-300 hover:border-primary group">
+<div class="aspect-square mb-6 overflow-hidden rounded bg-surface-container-low">
+<img alt="Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Vibrant full-color professional portrait of a software developer looking directly at the camera, natural lighting, sharp focus, editorial style." src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;q=80&amp;w=800">
+</div>
+<div class="space-y-1 mb-4">
+<h3 class="font-headline-md text-body-md font-bold text-primary">Alex Mercer</h3>
+<p class="font-mono text-mono text-secondary uppercase tracking-widest text-[11px]">BCR313</p>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mb-6 line-clamp-2">Golang · Next.js · PostgreSQL · Docker</p>
+<div class="flex items-center space-x-3 pt-4 border-t border-surface-variant">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="link">link</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="code">code</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="terminal">terminal</span></a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="border border-surface-variant bg-surface-container-lowest p-6 rounded transition-colors duration-300 hover:border-primary group">
+<div class="aspect-square mb-6 overflow-hidden rounded bg-surface-container-low">
+<img alt="Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Vibrant full-color professional portrait of an asian female software engineer, natural window lighting, shallow depth of field, editorial style." src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&amp;fit=crop&amp;q=80&amp;w=800">
+</div>
+<div class="space-y-1 mb-4">
+<h3 class="font-headline-md text-body-md font-bold text-primary">Samantha Chen</h3>
+<p class="font-mono text-mono text-secondary uppercase tracking-widest text-[11px]">BCR313</p>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mb-6 line-clamp-2">React · TypeScript · Node.js · GraphQL</p>
+<div class="flex items-center space-x-3 pt-4 border-t border-surface-variant">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="link">link</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="code">code</span></a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="border border-surface-variant bg-surface-container-lowest p-6 rounded transition-colors duration-300 hover:border-primary group">
+<div class="aspect-square mb-6 overflow-hidden rounded bg-surface-container-low">
+<img alt="Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Vibrant full-color professional portrait of a black male software architect, confident expression, studio lighting, editorial style." src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;q=80&amp;w=800">
+</div>
+<div class="space-y-1 mb-4">
+<h3 class="font-headline-md text-body-md font-bold text-primary">Marcus Johnson</h3>
+<p class="font-mono text-mono text-secondary uppercase tracking-widest text-[11px]">BCR312</p>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mb-6 line-clamp-2">Python · Django · AWS · Kubernetes</p>
+<div class="flex items-center space-x-3 pt-4 border-t border-surface-variant">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="link">link</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="code">code</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="terminal">terminal</span></a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="border border-surface-variant bg-surface-container-lowest p-6 rounded transition-colors duration-300 hover:border-primary group">
+<div class="aspect-square mb-6 overflow-hidden rounded bg-surface-container-low">
+<img alt="Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Vibrant full-color professional portrait of a software developer with glasses, thoughtful expression, soft diffuse lighting, editorial style." src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&amp;fit=crop&amp;q=80&amp;w=800">
+</div>
+<div class="space-y-1 mb-4">
+<h3 class="font-headline-md text-body-md font-bold text-primary">Elena Rodriguez</h3>
+<p class="font-mono text-mono text-secondary uppercase tracking-widest text-[11px]">BCR314</p>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mb-6 line-clamp-2">Vue.js · Laravel · MySQL · Redis</p>
+<div class="flex items-center space-x-3 pt-4 border-t border-surface-variant">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="link">link</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="terminal">terminal</span></a>
+</div>
+</article>
+</section>
+<!-- Pagination -->
+<div class="flex justify-center pb-section-gap border-b border-surface-variant">
+<button class="px-8 py-3 border border-surface-variant bg-surface-container-lowest text-primary font-label-sm text-label-sm rounded uppercase tracking-wider hover:bg-surface-container-low transition-colors duration-300">
+                Load More
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap border-t border-outline-variant flat no shadows transition-opacity duration-200 bg-surface dark:bg-background">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1 flex flex-col space-y-4">
+<a class="font-headline-md text-headline-md text-primary" href="#">ACE</a>
+<p class="font-body-md text-body-md text-on-surface-variant">© ACE Community. All rights reserved.</p>
+</div>
+<div class="col-span-1 md:col-span-3 flex flex-wrap gap-x-12 gap-y-4 justify-start md:justify-end items-center">
+<a class="font-body-md text-body-md text-primary font-medium hover:underline decoration-outline-variant underline-offset-4" href="#">Directory</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline decoration-outline-variant underline-offset-4" href="#">Admin</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline decoration-outline-variant underline-offset-4" href="#">Stats</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline decoration-outline-variant underline-offset-4" href="#">Privacy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline decoration-outline-variant underline-offset-4" href="#">Terms</a>
+</div>
+</div>
+</footer>
+
+
+
+
+
+
+
+
+</body></html>

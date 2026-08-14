@@ -1,0 +1,290 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ACE Outcomes - Placement Statistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#838487",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-container": "#e3e1ec",
+                        "on-tertiary-fixed-variant": "#454749",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3f3",
+                        "primary-container": "#1c1b1d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#1c1b1d",
+                        "on-primary-fixed-variant": "#474649",
+                        "on-tertiary-fixed": "#1a1c1e",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#c8c6c8",
+                        "tertiary-container": "#1a1c1e",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-fixed": "#1a1b22",
+                        "on-secondary-fixed-variant": "#46464e",
+                        "tertiary-fixed": "#e2e2e5",
+                        "on-secondary-container": "#63646c",
+                        "surface-bright": "#f9f9f9",
+                        "outline": "#78767b",
+                        "surface": "#f9f9f9",
+                        "outline-variant": "#c8c5ca",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#e5e1e4",
+                        "surface-container": "#eeeeee",
+                        "on-surface-variant": "#47464a",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "secondary": "#5d5e66",
+                        "secondary-fixed-dim": "#c6c5cf",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed-dim": "#c6c6c9",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-tint": "#5f5e60",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#e3e1ec",
+                        "primary": "#000000",
+                        "on-primary-container": "#858386",
+                        "primary-fixed-dim": "#c8c6c8",
+                        "inverse-on-surface": "#f0f1f1",
+                        
+                        // Editorial Overrides
+                        "paper": "#FFFFFF",
+                        "charcoal": "#09090B",
+                        "slate": "#71717A",
+                        "zinc-border": "#E4E4E7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "container-max": "1280px",
+                        "section-gap": "96px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "mono": ["Geist"],
+                        "display-lg": ["Playfair Display"],
+                        "body-lg": ["Geist"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-sm": ["Geist"],
+                        "headline-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "mono": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #FFFFFF;
+            color: #09090B;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .border-zinc {
+            border-color: #E4E4E7;
+        }
+        .text-slate {
+            color: #71717A;
+        }
+        .text-charcoal {
+            color: #09090B;
+        }
+    </style>
+</head>
+<body class="bg-paper text-charcoal font-body-md">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 dark:bg-surface border-b border-zinc text-primary dark:text-primary bg-paper">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary">ACE</div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Story</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Directory</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Outcomes</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Alumni</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Handlers</a>
+<a class="text-on-surface-variant font-medium pb-1 style_universal_hover style_interactions font-label-sm text-label-sm uppercase" href="#">Journal</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:block style_interactions font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search" data-weight="regular">search</span>
+</button>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-6 py-2 rounded-none uppercase tracking-wider style_interactions">CONTACT</button>
+<button class="md:hidden style_interactions">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-section-gap">
+<!-- 1. Header -->
+<section class="pt-16 pb-12 border-b border-zinc"><div class="max-w-container-max pt-16 pb-12">
+  <h1 class="font-display-lg text-display-lg text-charcoal mb-8 text-left">The Outcomes.</h1>
+  <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[50%] text-left">A data-driven record of engineering excellence and career growth.</p>
+</div></section>
+<!-- 2. Key Metrics -->
+<section class="py-24 border-b border-zinc">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-0 divide-y md:divide-y-0 md:divide-x divide-zinc">
+<div class="p-8 text-center flex flex-col items-center justify-center">
+<div class="font-display-lg text-display-lg text-charcoal mb-4">150+</div>
+<div class="font-label-sm text-label-sm text-slate uppercase tracking-wider">Placements</div>
+</div>
+<div class="p-8 text-center flex flex-col items-center justify-center">
+<div class="font-display-lg text-display-lg text-charcoal mb-4">12 <span class="font-headline-md text-headline-md">LPA</span></div>
+<div class="font-label-sm text-label-sm text-slate uppercase tracking-wider">Average</div>
+</div>
+<div class="p-8 text-center flex flex-col items-center justify-center">
+<div class="font-display-lg text-display-lg text-charcoal mb-4">36 <span class="font-headline-md text-headline-md">LPA</span></div>
+<div class="font-label-sm text-label-sm text-slate uppercase tracking-wider">Highest</div>
+</div>
+<div class="p-8 text-center flex flex-col items-center justify-center">
+<div class="font-display-lg text-display-lg text-charcoal mb-4">98%</div>
+<div class="font-label-sm text-label-sm text-slate uppercase tracking-wider">Placement Rate</div>
+</div>
+</div>
+</section>
+<!-- 3. Hiring Partners -->
+<section class="py-24 border-b border-zinc">
+<h2 class="font-headline-lg text-headline-lg text-center mb-16 text-charcoal">Where our engineers go.</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+<div class="aspect-square border border-zinc rounded-sm flex items-center justify-center p-8 hover:bg-surface-low transition-colors group cursor-pointer">
+<img class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity grayscale filter" data-alt="A monochromatic, starkly minimalist, high-contrast flat logo of a major tech company. Centered in a wide field of pure white paper background. The logo is rendered in dark charcoal gray. Editorial and architectural vibe. The scene is brightly lit with flat, even light, eliminating shadows and emphasizing graphic starkness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB37uhBsUUxgvDoR77U8NR7xjohLRjH5ywO_kmbplRBAwUY6D4wQ1L3E18nnku__5qtq_jHoFrdLmkj-j4T0gG9BKAVGUtN2K3nKe27LDlibXVbV3CYIRStyGobyQRAKyF7QmC9Nqb6QbPFW-bJ7uAL3dYyTY-DNX6sDgOvzoEjgbMmjQTtASQIWGVpbI-_qb_aFU95sfx6aGkRUwZlkmoONBkxORDY3es0WIOt96UeW66vLIEk6gds">
+</div>
+<div class="aspect-square border border-zinc rounded-sm flex items-center justify-center p-8 hover:bg-surface-low transition-colors group cursor-pointer">
+<img class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity grayscale filter" data-alt="A starkly minimalist, high-contrast flat logo of a major enterprise software corporation. Monochromatic dark slate gray ink on a pristine white background. Emphasizing sharp vectors and architectural precision. Flat lighting, completely eliminating dimension, reducing the image to pure graphic geometry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSyXggKNVfRhxTbSWz7HIuf3f7lK-86S_VRCHYjjxLpEqDOxUJivmzAsmFQlv-rZ2AY2WlE5yclHgpPNUkvil2ABMA87Okk0V1AOK5XB6GsVaubvadRxzt6HOJv2WP_6w2eYYio-8DiOg8dTmGsWX34VYieA23TTmzccqppNPs4TwjaH4b-6socGV_D_aSLhNsQCFSOSpXT7AzwQmTtDGMgIGmXSsRlmyYS35j_ORx3Tyr1KvzUEer">
+</div>
+<div class="aspect-square border border-zinc rounded-sm flex items-center justify-center p-8 hover:bg-surface-low transition-colors group cursor-pointer">
+<img class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity grayscale filter" data-alt="A minimalist, monochromatic logo of a modern social media conglomerate. Executed in dense, pure black on an expansive white background. The style is strictly editorial and high-end print design. Zero shadow or gradient. Flat, unyielding high-key illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7VUfA0mhRLw_ZI2JC1KR-7UN7z4CLjie6Z-Wg9_qxdnt9WB9t1Wm3TouV--1OtxHvNLN6XpK6dXDyNgCcrR0RfpaIcr_8GokWQnA0bx6mds-WXys5kqg-cF1rWPb2Mh3Nf2HDOTIhpBaTG_QBFOtU4hHR7r5SR8peVQBddbHCoRrh55s89aI8T_rX_fAWNCPcFwZNaafGkKynkOm74hBIQqfEprQvRP0ZKH6UsNqFA5nsC1iIKEaf">
+</div>
+<div class="aspect-square border border-zinc rounded-sm flex items-center justify-center p-8 hover:bg-surface-low transition-colors group cursor-pointer">
+<img class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity grayscale filter" data-alt="A highly stylized, flat monochromatic logo of a leading financial tech company. Dense charcoal lines on a pure, textureless white paper ground. The image channels minimalist corporate design manuals. Stark, even lighting with no volume or shadow, focusing entirely on the silhouette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcu1pRnnBaWbWRtybClQ_JJW4xtH5Gn__VMrUFxwWUSn8oZDYsS4k9SjmQuHDxXyVpNFZc1s2YUtHTkeqhAq7Sxhda78WUGIUU3yYCnotWxxcyQ_MHGXzWbSTeIvUGsxa53Q4QltJr8EtnHDbv1xKT97Lfet4TahakPVRRxbt4t5MFbbbVKOUTL-4zOoEcVRkjjmop6Z722zLbyk1QMWrvrTQKTIrbg_lGjNKE5IIrxHgFsjQ6-UxR">
+</div>
+<div class="aspect-square border border-zinc rounded-sm flex items-center justify-center p-8 hover:bg-surface-low transition-colors group cursor-pointer">
+<img class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity grayscale filter" data-alt="A pure minimalist, flat graphic logo of a prominent cloud hosting platform. Rendered entirely in flat slate gray against a glaring white canvas. The aesthetic is strict, architectural, and devoid of embellishment. Bright, uniform illumination ensuring perfect clarity and no depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDybEQtjDI5af1yeEhEjlAAAl03Ss6BWXe_fkTg8Ax7Ia9ylKvtIkVIYJpqaCJw6R2pNj_Fwn3e_5zBA19d7GRmspo8vyBTnL1TRjxxgv9FzOegJDgw8zSbG7whr4BmVng4QkhMkEU079A3FhNoJJ-qCMh2TI6ws3w-0T77vSlfp8XiEjx9uAYgMFFVtUAk8rDlvF1DOzne7HBiv9hESgI7N-mZgAP4jl9xuX87oWNyrE_IA1l0fgT0">
+</div>
+<div class="aspect-square border border-zinc rounded-sm flex items-center justify-center p-8 hover:bg-surface-low transition-colors group cursor-pointer">
+<img class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity grayscale filter" data-alt="A sleek, flat monochromatic logo of an elite project management startup. Deep charcoal vector form set amidst a vast field of pure white. It reflects high-end developer tools and editorial brutalism. The light is flat and absolute, removing all sense of texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQBLnd8IESzvvA8cdExXSy2tMYrNEuI4uRzb6Q4ceYA64JwnEGSlG-rfvDWbCU9vvuwU6LaeLyq1oQUv-TRKFucKDesNqv-eZmDTfdSuXWuOh-oJrUIW7K6va4sibD_53lx5IPJbJ3P0aebl_XMjUlBratImER5OKGT5D3dxGsZu9PEbDKMCDUJPdco71F1oQ5podSmd7kjn3gUSjwfNwC7fDpZy9OYoRL6VP9gVZoJNlSdRAWwG-k">
+</div>
+</div>
+</section>
+<!-- 4. Placement Ledger -->
+<section class="py-24 border-b border-zinc">
+<h2 class="font-headline-lg text-headline-lg mb-12 text-charcoal">Recent Offers</h2>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b-2 border-charcoal">
+<th class="py-4 px-4 font-label-sm text-label-sm text-slate uppercase tracking-wider font-medium">Date</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-slate uppercase tracking-wider font-medium">Name</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-slate uppercase tracking-wider font-medium">Role</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-slate uppercase tracking-wider font-medium">Company</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-slate uppercase tracking-wider font-medium">Batch</th>
+</tr>
+</thead>
+<tbody class="font-mono text-mono">
+<tr class="border-b border-zinc hover:bg-surface-low transition-colors">
+<td class="py-6 px-4 text-slate">Aug 2024</td>
+<td class="py-6 px-4 font-medium text-charcoal">Aria Patel</td>
+<td class="py-6 px-4 text-charcoal">Backend Engineer</td>
+<td class="py-6 px-4 text-charcoal">Stripe</td>
+<td class="py-6 px-4 text-slate">W-24</td>
+</tr>
+<tr class="border-b border-zinc hover:bg-surface-low transition-colors">
+<td class="py-6 px-4 text-slate">Jul 2024</td>
+<td class="py-6 px-4 font-medium text-charcoal">David Kim</td>
+<td class="py-6 px-4 text-charcoal">Systems Engineer</td>
+<td class="py-6 px-4 text-charcoal">Google</td>
+<td class="py-6 px-4 text-slate">S-24</td>
+</tr>
+<tr class="border-b border-zinc hover:bg-surface-low transition-colors">
+<td class="py-6 px-4 text-slate">Jun 2024</td>
+<td class="py-6 px-4 font-medium text-charcoal">Sarah Jenkins</td>
+<td class="py-6 px-4 text-charcoal">Data Scientist</td>
+<td class="py-6 px-4 text-charcoal">Meta</td>
+<td class="py-6 px-4 text-slate">S-24</td>
+</tr>
+<tr class="border-b border-zinc hover:bg-surface-low transition-colors">
+<td class="py-6 px-4 text-slate">May 2024</td>
+<td class="py-6 px-4 font-medium text-charcoal">Omar Farooq</td>
+<td class="py-6 px-4 text-charcoal">Frontend Engineer</td>
+<td class="py-6 px-4 text-charcoal">Vercel</td>
+<td class="py-6 px-4 text-slate">S-24</td>
+</tr>
+<tr class="border-b border-zinc hover:bg-surface-low transition-colors">
+<td class="py-6 px-4 text-slate">Apr 2024</td>
+<td class="py-6 px-4 font-medium text-charcoal">Elena Rostova</td>
+<td class="py-6 px-4 text-charcoal">Infrastructure Lead</td>
+<td class="py-6 px-4 text-charcoal">Linear</td>
+<td class="py-6 px-4 text-slate">W-23</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 5. CTA -->
+<section class="py-32 text-center">
+<h2 class="font-headline-lg text-headline-lg text-charcoal mb-8">Join the next generation of engineers.</h2>
+<a class="inline-flex items-center font-mono text-mono text-slate hover:text-charcoal transition-colors group" href="#">
+                View Alumni Stories
+                <span class="material-symbols-outlined ml-2 transform group-hover:translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</a>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap border-t border-zinc bg-surface dark:bg-surface">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-charcoal">ACE</div>
+<div class="col-span-1 md:col-span-3 flex flex-wrap gap-8 md:justify-end">
+<a class="font-body-md text-body-md text-slate hover:text-charcoal transition-all duration-200" href="#">Directory</a>
+<a class="font-body-md text-body-md text-slate hover:text-charcoal transition-all duration-200" href="#">Admin</a>
+<a class="font-body-md text-body-md text-slate hover:text-charcoal transition-all duration-200" href="#">Stats</a>
+<a class="font-body-md text-body-md text-slate hover:text-charcoal transition-all duration-200" href="#">Privacy</a>
+<a class="font-body-md text-body-md text-slate hover:text-charcoal transition-all duration-200" href="#">Terms</a>
+</div>
+</div>
+<div class="px-margin-desktop max-w-container-max mx-auto mt-12 font-body-md text-body-md text-slate">
+            © 2024 ACE Engineering Community. All rights reserved.
+        </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body></html>
