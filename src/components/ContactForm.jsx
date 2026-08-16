@@ -9,12 +9,25 @@ const revealVariant = {
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
 export default function ContactForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
   const [sent, setSent] = useState(false);
 
-  const onSubmit = data => {
-    console.log('Form data:', data);
-    setSent(true);
+  const onSubmit = async data => {
+    try {
+      const formData = new FormData();
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+      });
+
+      await fetch(import.meta.env.VITE_CONTACT_FORM_WEB_APP_URL, {
+        method: 'POST',
+        body: formData,
+      });
+      setSent(true);
+    } catch (error) {
+      console.error('Submission failed:', error);
+      alert('Failed to send message. Please try again later.');
+    }
   };
 
   return (
@@ -100,10 +113,11 @@ export default function ContactForm() {
               rows={4}
               placeholder="How can we assist you?"
               {...register('message', {
+                setValueAs: v => (v ? v.trim() : v),
                 required: 'Message is required',
                 minLength: { value: 10, message: 'Message must be at least 10 characters' },
                 validate: {
-                  notEmpty: value => value.trim().length > 0 || 'Message cannot be empty',
+                  notEmpty: value => value.length > 0 || 'Message cannot be empty',
                   notOnlyNumbers: value => /[^\d\s]/.test(value) || 'Message cannot contain only numbers',
                   notOnlySpecialChars: value => /[a-zA-Z0-9]/.test(value) || 'Message cannot contain only special characters'
                 }
@@ -115,10 +129,11 @@ export default function ContactForm() {
 
           <button
             type="submit"
-            className="w-full md:w-auto bg-primary text-on-primary font-body-md py-4 px-8 flex items-center justify-center md:justify-start gap-2 hover:bg-primary/80 transition-colors duration-200 group"
+            disabled={isSubmitting}
+            className="w-full md:w-auto bg-primary text-on-primary font-body-md py-4 px-8 flex items-center justify-center md:justify-start gap-2 hover:bg-primary/80 transition-colors duration-200 group disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            Submit Request
-            <span className="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            {isSubmitting ? 'Submitting...' : 'Submit Request'}
+            {!isSubmitting && <span className="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>}
           </button>
         </motion.form>
       )}
