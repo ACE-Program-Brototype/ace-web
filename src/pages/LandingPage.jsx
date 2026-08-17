@@ -1,18 +1,25 @@
-import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Footer from '../components/Footer';
-import { STUDENTS } from '../constants/studentsDatas';
-import { ALUMNI_STORIES } from '../constants/alumniDatas';
+import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Footer from "../components/Footer";
+import { STUDENTS } from "../constants/studentsDatas";
+import { ALUMNI_STORIES } from "../constants/alumniDatas";
+import { PROJECTS } from "../constants/projectDatas";
 
-const recentAlumni = ALUMNI_STORIES.find(a => a.recent) || ALUMNI_STORIES[0];
-const otherAlumni = ALUMNI_STORIES.filter(a => a !== recentAlumni).slice(0, 2);
-
+const recentAlumni = ALUMNI_STORIES.find((a) => a.recent) || ALUMNI_STORIES[0];
+const otherAlumni = ALUMNI_STORIES.filter((a) => a !== recentAlumni).slice(
+  0,
+  2,
+);
 
 /* ─── Reveal animation ─────────────────────────────────────────── */
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 const stagger = {
   hidden: {},
@@ -22,14 +29,17 @@ const stagger = {
 /* ─── LandingPage ──────────────────────────────────────────────── */
 export default function LandingPage() {
   const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   const rosterRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -44,13 +54,16 @@ export default function LandingPage() {
         const singleSetWidth = STUDENTS.length * cardWidth;
 
         // Smoothly scroll to next card
-        scrollContainer.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        scrollContainer.scrollBy({ left: cardWidth, behavior: "smooth" });
 
         // Check if we've scrolled past the first set of items
         setTimeout(() => {
           if (scrollContainer.scrollLeft >= singleSetWidth) {
             // Instantly reset scroll position to loop seamlessly
-            scrollContainer.scrollTo({ left: scrollContainer.scrollLeft - singleSetWidth, behavior: 'instant' });
+            scrollContainer.scrollTo({
+              left: scrollContainer.scrollLeft - singleSetWidth,
+              behavior: "instant",
+            });
           }
         }, 600); // Wait for the smooth scroll animation to finish
       }, 1800); // 3-second pause between each scroll
@@ -61,11 +74,13 @@ export default function LandingPage() {
 
   return (
     <div className="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary font-body-md">
-
       {/* ══════════════════════════════════════════════════════════
           2. HERO SECTION
       ══════════════════════════════════════════════════════════ */}
-      <header ref={heroRef} className="relative bg-surface border-b border-outline-variant overflow-hidden">
+      <header
+        ref={heroRef}
+        className="relative bg-surface border-b border-outline-variant overflow-hidden"
+      >
         <motion.div
           style={{ opacity: heroOpacity }}
           className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-16"
@@ -84,7 +99,9 @@ export default function LandingPage() {
               variants={revealVariant}
               className="font-body-lg text-body-lg text-on-surface-variant md:w-3/5 leading-relaxed"
             >
-              ACE is a high-performance ecosystem within Brototype. We are a student-led collective bridging the gap between baseline learning and elite, production-grade software engineering.
+              ACE is a high-performance ecosystem within Brototype. We are a
+              student-led collective bridging the gap between baseline learning
+              and elite, production-grade software engineering.
             </motion.p>
           </div>
         </motion.div>
@@ -98,13 +115,16 @@ export default function LandingPage() {
         className="py-section-gap border-b border-outline-variant"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
             {/* Image */}
-            <motion.div variants={revealVariant} className="lg:col-span-7 aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-2">
+            <motion.div
+              variants={revealVariant}
+              className="lg:col-span-7 aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-2"
+            >
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGMyqiLRso0zD71filZ0IwIl4vxrL3jTH-8BpRYPvcDIMpK4edoGBu28_8ZuQYqnr5KqsJNkV2F4540Z4wx-vo6k_Xr5jqfxnW5zF5p1cQ3BicvDHOT-XiGYET8FTZ1ZNtGd6cLidA-gQwJci69N-HSJ-y5hkFh1BsOEiyg1_7B37wkr2Sog_uECl6aQRIQdjBIF99ayxp7Adwpmv3uRalQDS2nl1UZjX9BfOQ2DmZAXhaZrXdxTNX"
                 alt="ACE Software Engineers Collaborating"
@@ -113,12 +133,19 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Copy */}
-            <motion.div variants={revealVariant} className="lg:col-span-5 lg:pl-12 flex flex-col justify-center">
+            <motion.div
+              variants={revealVariant}
+              className="lg:col-span-5 lg:pl-12 flex flex-col justify-center"
+            >
               <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">
                 A Culture of Rigor.
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                Built for those who push boundaries, our community thrives on advanced domain research, peer-led code reviews, and industry-grade sprints. We don't just learn frameworks; we engineer resilient systems and cultivate the discipline required for elite output.
+                Built for those who push boundaries, our community thrives on
+                advanced domain research, peer-led code reviews, and
+                industry-grade sprints. We don't just learn frameworks; we
+                engineer resilient systems and cultivate the discipline required
+                for elite output.
               </p>
             </motion.div>
           </div>
@@ -132,7 +159,7 @@ export default function LandingPage() {
         className="py-section-gap border-b border-outline-variant bg-surface"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -140,26 +167,47 @@ export default function LandingPage() {
             <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
               Proven Outcomes.
             </h2>
-            <p className="font-body-md text-on-surface-variant">The numbers behind our high-performance ecosystem.</p>
+            <p className="font-body-md text-on-surface-variant">
+              The numbers behind our high-performance ecosystem.
+            </p>
           </motion.div>
 
           {/* 4-column stat grid */}
-          <motion.div variants={revealVariant} className="grid grid-cols-2 md:grid-cols-4 border-t border-outline-variant">
+          <motion.div
+            variants={revealVariant}
+            className="grid grid-cols-2 md:grid-cols-4 border-t border-outline-variant"
+          >
             <div className="py-12 pr-8 border-r border-outline-variant">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">150+</div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Total Placements</div>
+              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+                150+
+              </div>
+              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+                Total Placements
+              </div>
             </div>
             <div className="py-12 px-8 border-r border-outline-variant">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">12 LPA</div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Average Package</div>
+              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+                12 LPA
+              </div>
+              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+                Average Package
+              </div>
             </div>
             <div className="py-12 px-8 border-r border-outline-variant">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">36 LPA</div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Highest Package</div>
+              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+                36 LPA
+              </div>
+              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+                Highest Package
+              </div>
             </div>
             <div className="py-12 pl-8">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">45+</div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Hiring Partners</div>
+              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+                45+
+              </div>
+              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+                Hiring Partners
+              </div>
             </div>
           </motion.div>
 
@@ -170,7 +218,9 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary hover:underline underline-offset-4"
             >
               View full placement report
-              <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              <span className="material-symbols-outlined text-[16px]">
+                arrow_forward
+              </span>
             </Link>
           </motion.div>
         </div>
@@ -183,17 +233,22 @@ export default function LandingPage() {
         className="py-section-gap border-b border-outline-variant bg-surface-container-lowest"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           {/* Header row */}
-          <motion.div variants={revealVariant} className="flex justify-between items-end mb-12">
+          <motion.div
+            variants={revealVariant}
+            className="flex justify-between items-end mb-12"
+          >
             <div>
               <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
                 The Roster.
               </h2>
-              <p className="font-body-md text-on-surface-variant">A curated look at the current generation of ACE engineers.</p>
+              <p className="font-body-md text-on-surface-variant">
+                A curated look at the current generation of ACE engineers.
+              </p>
             </div>
             <Link
               onClick={handleScrollToTop}
@@ -215,13 +270,26 @@ export default function LandingPage() {
             onTouchEnd={() => setIsHovered(false)}
           >
             {[...STUDENTS, ...STUDENTS].map((s, idx) => (
-              <div key={`${s.name}-${idx}`} className="snap-start min-w-[320px] w-80 border border-outline-variant bg-surface flex flex-col overflow-hidden p-4 group hover:border-primary transition-colors duration-200">
-                <img src={s.img} alt={s.name} className="w-full h-64 object-cover mb-4 group-hover:scale-[1.02] transition-transform duration-300" />
+              <div
+                key={`${s.name}-${idx}`}
+                className="snap-start min-w-[320px] w-80 border border-outline-variant bg-surface flex flex-col overflow-hidden p-4 group hover:border-primary transition-colors duration-200"
+              >
+                <img
+                  src={s.img}
+                  alt={s.name}
+                  className="w-full h-64 object-cover mb-4 group-hover:scale-[1.02] transition-transform duration-300"
+                />
                 <div className="flex flex-col gap-1">
-                  <div className="font-bold text-primary font-headline-md text-headline-md">{s.name}</div>
-                  <div className="text-sm text-on-surface-variant font-mono text-mono">{s.batch}</div>
+                  <div className="font-bold text-primary font-headline-md text-headline-md">
+                    {s.name}
+                  </div>
+                  <div className="text-sm text-on-surface-variant font-mono text-mono">
+                    {s.batch}
+                  </div>
                   <div className="flex flex-wrap gap-2 mt-3">
-                    <span className="px-2 py-1 bg-surface-container-high font-mono text-[10px] uppercase text-on-surface">{s.stack}</span>
+                    <span className="px-2 py-1 bg-surface-container-high font-mono text-[10px] uppercase text-on-surface">
+                      {s.stack}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -229,7 +297,11 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="mt-8 md:hidden">
-            <Link onClick={handleScrollToTop} to="/students" className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 hover:bg-primary/80 transition-colors">
+            <Link
+              onClick={handleScrollToTop}
+              to="/students"
+              className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 hover:bg-primary/80 transition-colors"
+            >
               Explore the Directory
             </Link>
           </div>
@@ -243,7 +315,7 @@ export default function LandingPage() {
         className="py-section-gap border-b border-outline-variant bg-surface"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -251,11 +323,16 @@ export default function LandingPage() {
             <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
               Alumni Network.
             </h2>
-            <p className="font-body-md text-on-surface-variant">Our engineers build the future at top-tier organizations.</p>
+            <p className="font-body-md text-on-surface-variant">
+              Our engineers build the future at top-tier organizations.
+            </p>
           </motion.div>
 
           {/* Bento Grid */}
-          <motion.div variants={revealVariant} className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <motion.div
+            variants={revealVariant}
+            className="grid grid-cols-1 md:grid-cols-4 gap-6"
+          >
             {/* Spotlight Feature Card */}
             <div className="md:col-span-2 md:row-span-2 flex flex-col overflow-hidden border border-outline-variant bg-surface-container-lowest">
               <div className="relative flex-1 min-h-0">
@@ -267,8 +344,12 @@ export default function LandingPage() {
               </div>
               <div className="p-6 shrink-0">
                 <div>
-                  <div className="font-headline-md text-headline-md text-primary">{recentAlumni.name}</div>
-                  <div className="font-body-md text-sm text-on-surface-variant">{recentAlumni.role}</div>
+                  <div className="font-headline-md text-headline-md text-primary">
+                    {recentAlumni.name}
+                  </div>
+                  <div className="font-body-md text-sm text-on-surface-variant">
+                    {recentAlumni.role}
+                  </div>
                 </div>
               </div>
             </div>
@@ -281,19 +362,32 @@ export default function LandingPage() {
             </div>
 
             {/* Photo Tiles dynamically generated from otherAlumni */}
-            {otherAlumni.map(a => (
-              <div key={a.name} className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant">
+            {otherAlumni.map((a) => (
+              <div
+                key={a.name}
+                className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant"
+              >
                 <img
                   src={a.img}
                   alt={a.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                  <div className="text-white font-bold text-sm mb-1">{a.name}</div>
-                  <div className="text-white/90 text-xs mb-3 line-clamp-1">{a.role}</div>
+                  <div className="text-white font-bold text-sm mb-1">
+                    {a.name}
+                  </div>
+                  <div className="text-white/90 text-xs mb-3 line-clamp-1">
+                    {a.role}
+                  </div>
                   <div className="flex flex-wrap gap-2">
-                    <span className="text-[10px] uppercase tracking-wider bg-white/20 text-white px-2 py-1 rounded-sm">{a.domain}</span>
-                    {a.pkg && <span className="text-[10px] font-mono bg-primary text-on-primary px-2 py-1 rounded-sm">{a.pkg}</span>}
+                    <span className="text-[10px] uppercase tracking-wider bg-white/20 text-white px-2 py-1 rounded-sm">
+                      {a.domain}
+                    </span>
+                    {a.pkg && (
+                      <span className="text-[10px] font-mono bg-primary text-on-primary px-2 py-1 rounded-sm">
+                        {a.pkg}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -307,7 +401,10 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          <motion.div variants={revealVariant} className="mt-12 flex justify-center">
+          <motion.div
+            variants={revealVariant}
+            className="mt-12 flex justify-center"
+          >
             <Link
               onClick={handleScrollToTop}
               to="/alumni"
@@ -326,38 +423,53 @@ export default function LandingPage() {
         className="py-section-gap border-b border-outline-variant bg-surface-container-lowest"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <motion.h2 variants={revealVariant} className="font-headline-md text-headline-md text-primary mb-16 text-center">
+          <motion.h2
+            variants={revealVariant}
+            className="font-headline-md text-headline-md text-primary mb-16 text-center"
+          >
             The Ecosystem
           </motion.h2>
 
-          <motion.div variants={revealVariant} className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-outline-variant">
+          <motion.div
+            variants={revealVariant}
+            className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-outline-variant"
+          >
             {[
               {
-                icon: 'psychology',
-                title: 'ACE Forge',
-                desc: 'Discovering and shaping high-intent engineers through disciplined pre-training. A crucible for foundational excellence.',
+                icon: "psychology",
+                title: "ACE Forge",
+                desc: "Discovering and shaping high-intent engineers through disciplined pre-training. A crucible for foundational excellence.",
               },
               {
-                icon: 'terminal',
-                title: 'ACE DevelUp',
-                desc: 'Sharpening algorithmic logic through peer-driven, gamified coding arenas. Continuous iteration towards mastery.',
+                icon: "terminal",
+                title: "ACE DevelUp",
+                desc: "Sharpening algorithmic logic through peer-driven, gamified coding arenas. Continuous iteration towards mastery.",
               },
               {
-                icon: 'forum',
-                title: 'Community & Panels',
-                desc: 'Cultivating leadership through public speaking, alumni mentorship, and open dialogue. Building the next generation of tech voices.',
+                icon: "forum",
+                title: "Community & Panels",
+                desc: "Cultivating leadership through public speaking, alumni mentorship, and open dialogue. Building the next generation of tech voices.",
               },
-            ].map(p => (
-              <div key={p.title} className="p-8 md:p-12 border-b border-r border-outline-variant hover:bg-surface-container-low transition-colors duration-300">
+            ].map((p) => (
+              <div
+                key={p.title}
+                className="p-8 md:p-12 border-b border-r border-outline-variant hover:bg-surface-container-low transition-colors duration-300"
+              >
                 <div className="w-12 h-12 mb-8 flex items-center justify-center border border-outline-variant rounded bg-surface">
-                  <span className="material-symbols-outlined text-primary">{p.icon}</span>
+                  <span className="material-symbols-outlined text-primary">
+                    {p.icon}
+                  </span>
                 </div>
-                <h3 className="font-label-sm text-label-sm uppercase tracking-wider text-primary mb-4">{p.title}</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant">{p.desc}</p>
+                <h3 className="font-label-sm text-label-sm uppercase tracking-wider text-primary mb-4">
+                  {p.title}
+                </h3>
+                <p className="font-body-md text-body-md text-on-surface-variant">
+                  {p.desc}
+                </p>
               </div>
             ))}
           </motion.div>
@@ -365,70 +477,90 @@ export default function LandingPage() {
       </motion.section>
 
       {/* ══════════════════════════════════════════════════════════
-          8. THE PROJECT SHOWCASE
-      ══════════════════════════════════════════════════════════ */}
+    8. THE PROJECT SHOWCASE
+══════════════════════════════════════════════════════════ */}
       <motion.section
         className="py-section-gap border-b border-outline-variant bg-surface"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <motion.div variants={revealVariant} className="flex justify-between items-end mb-16">
-            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">The Project Showcase.</h2>
-            {/* <Link
-              onClick={handleScrollToTop}
-              to="/directory"
-              className="hidden md:inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary hover:text-on-surface-variant transition-colors"
-            >
-              View full directory
-              <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </Link> */}
+          <motion.div
+            variants={revealVariant}
+            className="flex justify-between items-end mb-16"
+          >
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+              The Project Showcase.
+            </h2>
           </motion.div>
 
-          <motion.div variants={revealVariant} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                tag: 'Golang / React', title: 'Distributed Task Queue', meta: 'Batch 14 • High Concurrency',
-                desc: 'Architected a highly available distributed task queue system handling 10k+ concurrent requests using Go routines and gRPC for inter-service communication.',
-                author: 'Aswin Sreeraj',
-                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDmhKpFactP2TzfdRbejL3bt625z5KSZNy0eFbP9bKO_yv4RiJ6eqcYCtqF6nehtumHQDn9o5zxAzFPwTJc7cN0int04wZqF5UyZZPL5mJbHgpuNzE-cLZJxfuk1qlpyjmKG12ZciOTamcI-7llRaRo6DlxW_3N5daeycz2TwmEaWrkyjF6mDOOGSWTNGkfLflY2ZYdNyp1YL8npHifHSmipoIQ1eqgOEioM7MaMzuYKNzi34tEW6R',
-              },
-              {
-                tag: 'Node.js / Redis', title: 'Real-time Analytics Engine', meta: 'Batch 12 • Data Pipeline',
-                desc: 'Engineered a low-latency analytics ingestion pipeline processing streaming events using Redis Streams and optimized Node.js workers.',
-                author: 'Neha Sharma',
-                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqg4q0FXbXyzzmgwmxiBWfx8p_Q6NascEA5Paf2b4E-c7_Nlirsym5S6tg3Kz5H2Bq2pZDBzrFD4EXvcM74-Geo8M8R4--cTwmIZDXpJVKwqIjr_tDq8-AwFbHrgam4WrqZQDqXMY1bxy867tzQQaDqMnTll1oIG8wRZocRM6X-lGhwz0maoJm7LYRTJkbqbYcbdxn7XCZ0J4VDNS-VYTT-zbB4zomdHwhUa4DnOqkjG0jV2LmArzW',
-              },
-              {
-                tag: 'Rust / WebAssembly', title: 'Browser-Based IDE Core', meta: 'Batch 15 • Systems Level',
-                desc: 'Implemented a lightweight syntax parser and execution engine in Rust, compiled to WebAssembly for near-native in-browser performance.',
-                author: 'Rahul Verma',
-                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBJ2hbfRoBuWy6EiOmY3F4UsvXB5JmCApr9ShpyST5vyV8stCZ9uwdZj6hYMiVlTxQ1GEEX9JhE43fxmIm_yQCqeC0s9gK-i9TCfy7EkADPJ_7iMuuZdhZ-NjAMvub7n6NVTtd02uu-s9xRuEmPLiZwd381ipwRN4M57QmytyyFZYiw6EJ4UrSQeia52traooiGs2Gb82G8Zk8pSa4-MYYesImAokuQrRp42aoY0ML9fJhUD8CVGLS-',
-              },
-            ].map(proj => (
-              <div key={proj.title} className="bg-surface-container-lowest border border-outline-variant p-6 hover:border-primary transition-colors duration-300 flex flex-col h-full group">
+          <motion.div
+            variants={revealVariant}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {PROJECTS.map((proj) => (
+              <div
+                key={proj.title}
+                className="bg-surface-container-lowest border border-outline-variant p-6 hover:border-on-surface-variant transition-colors duration-300 flex flex-col h-full group"
+              >
                 <div className="aspect-video bg-surface-container-low border border-outline-variant mb-6 overflow-hidden relative">
                   <img
                     src={proj.img}
                     alt={proj.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-2 left-2 bg-surface border border-outline-variant px-2 py-1 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-primary block" />
-                    <span className="font-mono text-[10px] uppercase tracking-wider">{proj.tag}</span>
+
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/45 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a
+                      href={proj.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${proj.title} on GitHub`}
+                      className="w-11 h-11 flex items-center justify-center rounded-full bg-white/95 text-black shadow-lg hover:bg-white hover:scale-105 transition-all duration-200"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-5 h-5"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.604-3.369-1.341-3.369-1.341-.455-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.831.091-.646.349-1.087.636-1.338-2.221-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.6 9.6 0 0 1 2.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.841-2.338 4.687-4.566 4.935.359.309.678.919.678 1.852 0 .3-.012 2.415-.012 2.744 0 .267.18.578.688.48A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10Z" />
+                      </svg>
+                    </a>
                   </div>
                 </div>
+
                 <div className="flex flex-col flex-grow">
                   <div className="mb-4">
-                    <h4 className="font-headline-md text-[20px] text-primary leading-tight">{proj.title}</h4>
-                    <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">{proj.meta}</p>
+                    <span className="inline-flex items-center px-2 py-1 mb-3 border border-outline-variant bg-surface-container-low font-mono text-[10px] uppercase tracking-wider text-on-surface-variant">
+                      {proj.tag}
+                    </span>
+
+                    <h4 className="font-headline-md text-[20px] text-primary leading-tight">
+                      {proj.title}
+                    </h4>
+
+                    <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">
+                      {proj.meta}
+                    </p>
                   </div>
-                  <p className="font-body-md text-body-md text-on-surface-variant text-sm flex-grow mb-6">{proj.desc}</p>
+
+                  <p className="font-body-md text-body-md text-on-surface-variant text-sm flex-grow mb-6">
+                    {proj.desc}
+                  </p>
+
                   <div className="flex items-center gap-3 pt-4 border-t border-outline-variant mt-auto">
-                    <div className="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant" />
-                    <span className="font-label-sm text-label-sm uppercase tracking-wider">{proj.author}</span>
+                    <img
+                      src={proj.authorImg}
+                      alt={proj.author}
+                      className="w-8 h-8 rounded-full object-cover border border-outline-variant"
+                    />
+
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider">
+                      {proj.author}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -442,7 +574,9 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary border border-outline-variant px-6 py-3 hover:bg-surface-container-low transition-colors"
             >
               View full directory
-              <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              <span className="material-symbols-outlined text-[16px]">
+                arrow_forward
+              </span>
             </Link>
           </div>
         </div>
@@ -507,7 +641,7 @@ export default function LandingPage() {
         className="py-32 bg-background flex flex-col items-center justify-center text-center px-margin-mobile"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: "-80px" }}
         variants={revealVariant}
       >
         <h2 className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary max-w-4xl mx-auto tracking-tighter">
@@ -520,7 +654,6 @@ export default function LandingPage() {
           11. FOOTER
       ══════════════════════════════════════════════════════════ */}
       <Footer />
-
     </div>
   );
 }
