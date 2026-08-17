@@ -9,20 +9,44 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } 
 
 const FAQS = [
   {
-    q: 'Who is eligible for the ACE track?',
-    a: 'Eligibility is reserved for candidates who demonstrate exceptional aptitude and a documented history of high performance in their respective fields. Specific prerequisites vary by cohort, but generally require prior foundational experience.',
+    q: 'What is ACE?',
+    a: 'ACE (Advanced Curriculum for Excellence) is an advanced technical and career-development program designed for high performing students to become more technically capable, consistent, and industry-ready.',
   },
   {
-    q: 'What does the selection process look like?',
-    a: 'The process is multi-staged, beginning with an initial dossier review, followed by technical assessments, and concluding with a series of interviews with our senior Handlers to ensure cultural and academic alignment.',
+    q: 'How is ACE different from the regular curriculum?',
+    a: 'ACE goes beyond regular learning by combining daily technical practice, weekly assessments, technical reviews, professional development, leadership, and placement preparation.',
   },
   {
-    q: 'How are monthly reviews conducted?',
-    a: 'Monthly reviews are comprehensive evaluations of project deliverables, conceptual grasp, and peer collaboration. They are conducted in a board-style format where candidates defend their methodologies to a panel.',
+    q: 'Who can join ACE?',
+    a: 'Students who demonstrate the required technical foundation, commitment, and potential can be considered for ACE through the program\'s selection and evaluation process.',
   },
   {
-    q: 'Can I apply if I am in a different batch?',
-    a: 'Cross-batch transfers are considered on a case-by-case basis and require endorsement from your current primary Handler along with a formal portfolio submission.',
+    q: 'What does the ACE selection process involve?',
+    a: 'Selection may include technical questions, problem-solving, foundation-level concepts, communication, and domain-specific evaluations to assess a candidate\'s readiness for the program.',
+  },
+  {
+    q: 'What happens inside ACE?',
+    a: 'Students work on regular technical tasks, maintain Daily Logs, participate in assessments and interview-style reviews, attend technical discussions, and continuously work on their professional and placement readiness.',
+  },
+  {
+    q: 'How is ACE exam differ from normal exams?',
+    a: 'ACE exams are conducted in an interview-style format, covering technical knowledge from fundamentals to advanced concepts while also evaluating communication, attitude, presentation, and professionalism.',
+  },
+  {
+    q: 'What is the ACE credit system?',
+    a: 'Credits track a student\'s technical performance, consistency, documentation, attitude, participation, and review performance. Credits contribute to leaderboard rankings and can affect program continuation.',
+  },
+  {
+    q: 'What is the ACE leaderboard?',
+    a: 'The leaderboard tracks student performance based on credit scores. ACE maintains monthly and overall rankings to encourage healthy competition and recognize strong performers.',
+  },
+  {
+    q: 'What is the average package for ACE students?',
+    a: 'The average package reported for ACE students is ₹9.5 LPA. However, individual placement outcomes may vary based on skills, performance, experience, and hiring opportunities.',
+  },
+  {
+    q: 'What skills will I develop through ACE?',
+    a: 'ACE helps develop technical depth, problem-solving, communication, consistency, professionalism, leadership, interview skills, and industry awareness.',
   },
 ];
 
