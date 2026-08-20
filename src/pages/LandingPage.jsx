@@ -126,7 +126,7 @@ export default function LandingPage() {
               className="lg:col-span-7 aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-2"
             >
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGMyqiLRso0zD71filZ0IwIl4vxrL3jTH-8BpRYPvcDIMpK4edoGBu28_8ZuQYqnr5KqsJNkV2F4540Z4wx-vo6k_Xr5jqfxnW5zF5p1cQ3BicvDHOT-XiGYET8FTZ1ZNtGd6cLidA-gQwJci69N-HSJ-y5hkFh1BsOEiyg1_7B37wkr2Sog_uECl6aQRIQdjBIF99ayxp7Adwpmv3uRalQDS2nl1UZjX9BfOQ2DmZAXhaZrXdxTNX"
+                src="/images/culture_rigor.jpeg"
                 alt="ACE Software Engineers Collaborating"
                 className="w-full h-full object-cover transition-all duration-700 ease-in-out"
               />
