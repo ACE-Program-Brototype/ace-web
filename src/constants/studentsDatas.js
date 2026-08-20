@@ -70,12 +70,6 @@ export const STUDENTS = [
     img: naveenImg,
   },
   {
-    name: "Muhammad Fuvad Sinin M",
-    batch: "BCR312",
-    stack: "Data Science",
-    img: fuvad,
-  },
-  {
     name: "Fathima Shifana",
     batch: "BCR313",
     stack: "AI /ML",
