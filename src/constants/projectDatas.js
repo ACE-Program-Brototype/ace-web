@@ -6,7 +6,7 @@ export const PROJECTS = [
     desc: "A scalable, multi-role event management platform for discovering events, booking tickets, managing wallets, and enabling organizers and admins to manage events, payments, analytics, and platform operations.",
     author: "Aswin Sreeraj",
     authorImg: "/assets/candidates/aswin.webp",
-    img: "assets/projects/Evntx.png",
+    img: "/assets/projects/Evntx.png",
     githubUrl: "https://github.com/aswinsreeraj/evntx",
   },
   {
@@ -16,7 +16,7 @@ export const PROJECTS = [
     desc: "A full-stack football jersey e-commerce platform designed for seamless online shopping, featuring an AI-powered support experience, real-time customer assistance, and reliable inventory management for high-concurrency orders.",
     author: "Ajex Joshy",
     authorImg: "/assets/candidates/ajex.webp",
-    img: "assets/projects/11Jersey.shop.jpeg",
+    img: "/assets/projects/11Jersey.shop.jpeg",
     githubUrl: "https://github.com/Ajex-Joshy/11jersery.com",
   },
   {
@@ -26,7 +26,7 @@ export const PROJECTS = [
     desc: "A full-stack freelancing platform connecting clients with independent professionals, featuring escrow-based payments, real-time chat, contract management, structured dispute resolution, and role-based administration.",
     author: "Navaneeth Sankar",
     authorImg: "/assets/candidates/navaneeth.webp",
-    img: "assets/projects/grolance.png",
+    img: "/assets/projects/grolance.png",
     githubUrl: "https://github.com/navaneethsankar07/Grolance",
   },
 ];
