@@ -14,17 +14,17 @@ export const FOUNDERS = [
 
 export const HANDLERS = [
   {
-    role: 'ACE Community Manager', name: 'Aswin Sreeraj',
-    quote: '"Safeguarding the integrity and philosophical rigor of community engagements."',
-    img: aswin,
-    linkedin: 'https://www.linkedin.com/in/aswinsreeraj/',
-  },
-  {
-    role: 'Assistant Community Manager',
+    role: 'ACE Community Manager',
     name: 'Venkitesh NS',
     quote: '"Connecting foundational learning with real-world engineering impact, one milestone at a time."',
     img: venkiteshImg,
     linkedin: 'https://www.linkedin.com/in/venkitesh-n-s-53195132b/',
+  },
+  {
+    role: 'Assistant Community Manager', name: 'Aswin Sreeraj',
+    quote: '"Safeguarding the integrity and philosophical rigor of community engagements."',
+    img: aswin,
+    linkedin: 'https://www.linkedin.com/in/aswinsreeraj/',
   },
   {
     role: 'Program Coordinator',
