@@ -126,7 +126,7 @@ export default function LandingPage() {
               className="lg:col-span-7 aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-2"
             >
               <img
-                src="/images/culture_rigor.jpeg"
+                src="https://plus.unsplash.com/premium_photo-1683120730432-b5ea74bd9047?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="ACE Software Engineers Collaborating"
                 className="w-full h-full object-cover transition-all duration-700 ease-in-out"
               />
