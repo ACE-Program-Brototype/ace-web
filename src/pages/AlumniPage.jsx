@@ -247,9 +247,8 @@ export default function AlumniPage() {
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`h-1.5 transition-all duration-300 ${
-                    currentIndex === i ? 'w-8 bg-primary' : 'w-2 bg-outline-variant hover:bg-primary/50'
-                  }`}
+                  className={`h-1.5 transition-all duration-300 ${currentIndex === i ? 'w-8 bg-primary' : 'w-2 bg-outline-variant hover:bg-primary/50'
+                    }`}
                 />
               ))}
             </div>
@@ -379,13 +378,6 @@ export default function AlumniPage() {
                       {alumnus.domain}
                     </span>
                   </div>
-                  {alumnus.spotlight && (
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2 py-0.5 bg-primary text-on-primary font-mono text-[9px] tracking-wider uppercase">
-                        Spotlight
-                      </span>
-                    </div>
-                  )}
                 </div>
 
                 {/* Card details */}
