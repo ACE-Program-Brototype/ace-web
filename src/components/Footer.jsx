@@ -57,8 +57,8 @@ export default function Footer() {
             <a href={`mailto:${import.meta.env.VITE_ORGANIZATION_EMAIL}`} className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">
               {import.meta.env.VITE_ORGANIZATION_EMAIL}
             </a>
-            <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors mb-4">Twitter / X</a>
+            {/* <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors mb-4">Twitter / X</a> */}
             <Link
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               to="/contact"
