@@ -78,7 +78,7 @@ export default function PlacementPage() {
             <table className="w-full text-left border-collapse min-w-[720px]">
               <thead>
                 <tr className="border-b-2 border-primary">
-                  {['Date', 'Name', 'Role', 'Company', 'Batch'].map(h => (
+                  {['Placed On', 'Name', 'Role', 'Domain', 'Company', 'Package'].map(h => (
                     <th key={h} className="py-4 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">{h}</th>
                   ))}
                 </tr>
@@ -86,11 +86,18 @@ export default function PlacementPage() {
               <tbody className="font-mono text-mono">
                 {PLACEMENTS.map(p => (
                   <tr key={p.name} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
-                    <td className="py-6 px-4 text-on-surface-variant">{p.date}</td>
+                    <td className="py-6 px-4 text-on-surface-variant">{p.placedOn}</td>
                     <td className="py-6 px-4 font-medium text-primary">{p.name}</td>
                     <td className="py-6 px-4 text-on-surface">{p.role}</td>
-                    <td className="py-6 px-4 text-on-surface">{p.company}</td>
-                    <td className="py-6 px-4 text-on-surface-variant">{p.batch}</td>
+                    <td className="py-6 px-4 text-on-surface-variant">{p.domain}</td>
+                    <td className="py-6 px-4 text-on-surface">
+                      {p.company === 'ND' ? (
+                        <span className="text-on-surface-variant italic">ND (Non-Disclosable)</span>
+                      ) : (
+                        p.company
+                      )}
+                    </td>
+                    <td className="py-6 px-4 text-primary font-medium">{p.pkg}</td>
                   </tr>
                 ))}
               </tbody>

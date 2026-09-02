@@ -88,12 +88,6 @@ export const STUDENTS = [
     img: sreehari,
   },
   {
-    name: "Faizal Raheem",
-    batch: "BCR63",
-    stack: "Cybersecurity",
-    img: faizalR,
-  },
-  {
     name: "Bennet Sharwin",
     batch: "BCR63",
     stack: "MERN Stack",
