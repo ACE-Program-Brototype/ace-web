@@ -93,10 +93,4 @@ export const STUDENTS = [
     stack: "MERN Stack",
     img: bennet,
   },
-  {
-    name: "Kenneth Roger Nelson",
-    batch: "BCR66",
-    stack: "MERN Stack",
-    img: kenneth,
-  },
 ];
