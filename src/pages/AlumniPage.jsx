@@ -210,7 +210,7 @@ export default function AlumniPage() {
                           {alumnus.name}
                         </h2>
                         <p className="font-body-lg text-body-lg text-on-surface-variant mb-6">
-                          {alumnus.companyRole || `${alumnus.role} ${alumnus.company !== 'ND' ? `@ ${alumnus.company}` : ''}`}
+                          {alumnus.companyRole || `${alumnus.role} ${alumnus.company !== 'ND' && alumnus.company !== 'Non-Disclosable' ? `@ ${alumnus.company}` : ''}`}
                         </p>
 
                         <div className="flex flex-wrap gap-2 mb-8">
@@ -318,7 +318,7 @@ export default function AlumniPage() {
                         {a.name}
                       </h3>
                       <p className="font-label-sm text-xs text-on-surface-variant line-clamp-1">
-                        {a.companyRole || `${a.role} ${a.company !== 'ND' ? `@ ${a.company}` : ''}`}
+                        {a.companyRole || `${a.role} ${a.company !== 'ND' && a.company !== 'Non-Disclosable' ? `@ ${a.company}` : ''}`}
                       </p>
                     </div>
                   </div>
@@ -402,8 +402,8 @@ export default function AlumniPage() {
                       <div className="flex items-center justify-between">
                         <span className="font-label-sm uppercase text-[10px] text-on-surface-variant/70">Company</span>
                         <span className="font-medium text-on-surface text-right">
-                          {alumnus.company === 'ND' ? (
-                            <span className="italic text-on-surface-variant">ND (Non-Disclosable)</span>
+                          {alumnus.company === 'ND' || alumnus.company === 'Non-Disclosable' ? (
+                            <span className="italic text-on-surface-variant">Non-Disclosable</span>
                           ) : (
                             alumnus.company
                           )}
@@ -419,7 +419,11 @@ export default function AlumniPage() {
                   <div className="mt-5 pt-3 border-t border-outline-variant flex items-center justify-between">
                     <span className="font-label-sm text-[10px] uppercase text-on-surface-variant">Package</span>
                     <span className="font-mono text-xs font-semibold text-primary">
-                      {alumnus.pkg === 'ND' || alumnus.pkg === 'Non Disclosable' ? 'ND' : alumnus.pkg}
+                      {alumnus.pkg === 'ND' || alumnus.pkg === 'Non-Disclosable' || alumnus.pkg === 'Non Disclosable' ? (
+                        <span className="italic font-normal text-on-surface-variant">Non-Disclosable</span>
+                      ) : (
+                        alumnus.pkg
+                      )}
                     </span>
                   </div>
                 </div>
