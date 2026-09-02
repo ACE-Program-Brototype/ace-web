@@ -44,7 +44,7 @@ export const ALUMNI_MEMBERS = [
   {
     id: 4,
     name: 'Muhammed Shahan P P',
-    role: 'AI Specialist',
+    role: 'Associate Engineer',
     domain: 'Data Science',
     company: 'Non-Disclosable',
     placedOn: 'June 2026',

@@ -1,3 +1,5 @@
+import { ALUMNI_MEMBERS, ALUMNI_STATS } from './alumniDatas';
+
 export const PARTNER_LOGOS = [
   {
     name: 'Skai Lama',
@@ -21,28 +23,13 @@ export const PARTNER_LOGOS = [
   },
   {
     name: 'AccuMateAi',
-    src: '/accumate.png',
+    src: '/accumate.svg',
     type: 'dark',
   },
 ];
 
-export const PLACEMENTS = [
-  { placedOn: 'September 2026', name: 'Faizal Raheem', role: 'Software Engineer', domain: 'MERN', company: 'Non-Disclosable', pkg: '30+ LPA' },
-  { placedOn: 'September 2026', name: 'Zameer Ahammed', role: 'Software Engineer', domain: 'MERN', company: 'Non-Disclosable', pkg: '30+ LPA' },
-  { placedOn: 'August 2026', name: 'Abdul Basith', role: 'AI Engineer', domain: 'MERN', company: 'AccuMateAi', pkg: 'Non-Disclosable' },
-  { placedOn: 'June 2026', name: 'Muhammed Shahan P P', role: 'AI Specialist', domain: 'Data Science', company: 'Non-Disclosable', pkg: '25+ LPA' },
-  { placedOn: 'May 2026', name: 'Afzal A', role: 'ML Engineer', domain: 'Data Science', company: 'Golgix', pkg: 'Non-Disclosable' },
-  { placedOn: 'May 2026', name: 'Fizan Muhammed Faisal', role: 'Software Engineer', domain: 'MERN', company: 'Skai Lama', pkg: 'Non-Disclosable' },
-  { placedOn: 'May 2026', name: 'Faheem Basheer', role: 'Software Engineer', domain: 'MERN', company: 'Skai Lama', pkg: 'Non-Disclosable' },
-  { placedOn: 'May 2026', name: 'Ijas Ahammed', role: 'Full-stack Developer', domain: 'MERN', company: 'Kalpas Innovations Pvt Ltd', pkg: 'Non-Disclosable' },
-  { placedOn: 'May 2026', name: 'Anandhu P Raj', role: 'ML Engineer', domain: 'AI/ML', company: 'Non-Disclosable', pkg: '9 LPA' },
-  { placedOn: 'April 2026', name: 'Amal Deep', role: 'DevOps Engineer', domain: 'DevOps', company: 'KubeNine', pkg: 'Non-Disclosable' },
-  { placedOn: 'March 2026', name: 'Abhiram S Sajeev', role: 'Software Engineer', domain: 'MERN', company: 'Skai Lama', pkg: '9 LPA' },
-];
+// Single source of truth: derived directly from ALUMNI_MEMBERS
+export const PLACEMENTS = ALUMNI_MEMBERS;
 
-export const PLACEMENT_STATS = [
-  { value: '11+', label: 'Placements' },
-  { value: '13.45 LPA', label: 'Average Package' },
-  { value: '30+ LPA', label: 'Highest Package' },
-  { value: '5+', label: 'Hiring Partners' },
-];
+// Single source of truth: shared stats
+export const PLACEMENT_STATS = ALUMNI_STATS;
