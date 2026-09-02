@@ -334,6 +334,7 @@ export default function LandingPage() {
             <div className="md:col-span-2 md:row-span-2 flex flex-col overflow-hidden border border-outline-variant bg-surface-container-lowest group hover:border-primary/50 transition-all">
               <div className="relative flex-1 min-h-[280px] overflow-hidden bg-surface-container-high">
                 <img
+                  referrerPolicy="no-referrer"
                   src={spotlightAlumni.img}
                   alt={`${spotlightAlumni.name} — ${spotlightAlumni.role}`}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -395,6 +396,7 @@ export default function LandingPage() {
                 className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant bg-surface-container-high"
               >
                 <img
+                  referrerPolicy="no-referrer"
                   src={a.img}
                   alt={a.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"

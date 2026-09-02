@@ -8,11 +8,7 @@ import sreehari from "../../assets/candidates/sreehari.png";
 import naveenImg from "../../assets/candidates/naveen.webp";
 import shifanaImg from "../../assets/candidates/shifana.webp";
 import venkiteshImg from "../../assets/candidates/venkitesh.webp";
-import faizalR from "../../assets/candidates/faizalR.jpeg";
-import fuvad from "../../assets/candidates/fuvad.jpeg";
-import kenneth from "../../assets/candidates/kenneth.jpeg";
 import bennet from "../../assets/candidates/bennet.jpeg";
-import anonymous from "../../assets/candidates/anonymous.jpeg";
 
 export const STUDENTS = [
   {
