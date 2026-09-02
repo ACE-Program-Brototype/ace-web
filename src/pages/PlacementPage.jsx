@@ -108,13 +108,19 @@ export default function PlacementPage() {
                     <td className="py-6 px-4 text-on-surface">{p.role}</td>
                     <td className="py-6 px-4 text-on-surface-variant">{p.domain}</td>
                     <td className="py-6 px-4 text-on-surface">
-                      {p.company === 'ND' ? (
-                        <span className="text-on-surface-variant italic">ND (Non-Disclosable)</span>
+                      {p.company === 'ND' || p.company === 'Non-Disclosable' ? (
+                        <span className="text-on-surface-variant italic">Non-Disclosable</span>
                       ) : (
                         p.company
                       )}
                     </td>
-                    <td className="py-6 px-4 text-primary font-medium">{p.pkg}</td>
+                    <td className="py-6 px-4 text-primary font-medium">
+                      {p.pkg === 'ND' || p.pkg === 'Non-Disclosable' || p.pkg === 'Non Disclosable' ? (
+                        <span className="text-on-surface-variant italic font-normal">Non-Disclosable</span>
+                      ) : (
+                        p.pkg
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
