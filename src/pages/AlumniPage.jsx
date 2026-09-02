@@ -178,6 +178,7 @@ export default function AlumniPage() {
                         className="relative h-[380px] sm:h-[450px] lg:h-[500px] w-full overflow-hidden border border-outline-variant bg-surface-container-low"
                       >
                         <img
+                          referrerPolicy="no-referrer"
                           className="absolute inset-0 w-full h-full object-cover"
                           alt={alumnus.name}
                           src={alumnus.img}
@@ -308,6 +309,7 @@ export default function AlumniPage() {
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <img
+                      referrerPolicy="no-referrer"
                       className="w-12 h-12 rounded-full object-cover border border-outline-variant shrink-0"
                       alt={a.name}
                       src={a.img}
@@ -369,6 +371,7 @@ export default function AlumniPage() {
                 {/* Photo container */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-container-high">
                   <img
+                    referrerPolicy="no-referrer"
                     src={alumnus.img}
                     alt={alumnus.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

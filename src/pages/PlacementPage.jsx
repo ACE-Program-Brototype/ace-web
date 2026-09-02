@@ -66,6 +66,7 @@ export default function PlacementPage() {
                 >
                   <div className="w-full flex-1 flex items-center justify-center min-h-[60px]">
                     <img
+                      referrerPolicy="no-referrer"
                       style={isWhiteLogo ? { filter: 'brightness(0)' } : undefined}
                       className="max-h-12 max-w-[85%] object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                       src={src}

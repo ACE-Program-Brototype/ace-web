@@ -1,5 +1,14 @@
 import faheem from '../../assets/alumnis/faheem.jpeg';
-import faizalR from '../../assets/candidates/faizalR.jpeg';
+import faizalR from '../../assets/alumnis/faizalR.jpeg';
+import abhiram from '../../assets/alumnis/abhiram.jpg';
+import afzal from '../../assets/alumnis/afzal.jpg';
+import amal from '../../assets/alumnis/amal.jpg';
+import anandhu from '../../assets/alumnis/anandhu.jpg';
+import basith from '../../assets/alumnis/basith.jpg';
+import fizan from '../../assets/alumnis/fizan.jpg';
+import ijas from '../../assets/alumnis/ijas.jpg';
+import shahan from '../../assets/alumnis/shahan.jpg';
+import zameer from '../../assets/alumnis/zameer.jpg';
 
 export const ALUMNI_MEMBERS = [
   // September 2026
@@ -25,7 +34,7 @@ export const ALUMNI_MEMBERS = [
     pkg: '30+ LPA',
     spotlight: true,
     quote: 'Achieved a landmark 30+ LPA placement through rigorous mastery of scalable web infrastructure and software craft at ACE.',
-    img: 'https://media.licdn.com/dms/image/v2/D4D03AQGKZqsGi5MCQQ/profile-displayphoto-scale_400_400/B4DZ3uWzTJKAAg-/0/1777820453298?e=1790208000&v=beta&t=DZKhcLnf2LuPkT0bo62SSXC62lybIF-dpBmEejP7lZ0',
+    img: zameer,
   },
   // August 2026
   {
@@ -38,7 +47,7 @@ export const ALUMNI_MEMBERS = [
     placedOn: 'August 2026',
     pkg: 'Non-Disclosable',
     quote: 'The community aspect of ACE was unparalleled. Building complex side projects with peers prepared me perfectly for the fast pace of early-stage startups.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQGmUbk5PjsWsw/profile-displayphoto-shrink_400_400/B56ZboZa9FGgAg-/0/1747655701772?e=1788393600&v=beta&t=fMeiBT5KOpLUVl1NHj2hpLJwWKmJaPKOetI2vxfv5zw',
+    img: basith,
   },
   // June 2026
   {
@@ -50,8 +59,8 @@ export const ALUMNI_MEMBERS = [
     placedOn: 'June 2026',
     pkg: '25+ LPA',
     spotlight: true,
-    quote: 'Stepped into an AI Specialist role commanding 25+ LPA, driving machine learning models and intelligent data systems.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQH_RuNd4z8LCA/profile-displayphoto-scale_400_400/B56Zte_R6eHAAk-/0/1766825206303?e=1790208000&v=beta&t=HuHIdmY0letff35VDus54nt9GTnUENZhpEFo_vHpwj4',
+    quote: 'Stepped into an Associate Engineer role commanding 25+ LPA, driving machine learning models and intelligent data systems.',
+    img: shahan,
   },
   // May 2026
   {
@@ -62,9 +71,9 @@ export const ALUMNI_MEMBERS = [
     domain: 'Data Science',
     company: 'Golgix',
     placedOn: 'May 2026',
-    pkg: 'Non-Disclosable',
+    pkg: '8 LPA',
     quote: 'Working with real-world ML datasets and building end-to-end inference pipelines at ACE made the transition to industry seamless.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQEpALUzeH-szA/profile-displayphoto-scale_400_400/B56Z8P7qmxIUAg-/0/1782678728810?e=1790208000&v=beta&t=uo5z3X9CA7U4vbJMkHGwSvAXsokfdMeNVeqdK6DmAX8',
+    img: afzal,
   },
   {
     id: 6,
@@ -74,9 +83,9 @@ export const ALUMNI_MEMBERS = [
     domain: 'MERN',
     company: 'Skai Lama',
     placedOn: 'May 2026',
-    pkg: 'Non-Disclosable',
+    pkg: '8.5 LPA',
     quote: 'Building production architectures with intense peer code reviews helped me step into high-impact engineering from day one.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQHMDBKbaFpFtA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718249752686?e=1790208000&v=beta&t=3mDzDeVo3YYEJrny8Z5xUAjv1kwp-nf6rbJqddv3cSo',
+    img: fizan,
   },
   {
     id: 7,
@@ -86,7 +95,7 @@ export const ALUMNI_MEMBERS = [
     domain: 'MERN',
     company: 'Skai Lama',
     placedOn: 'May 2026',
-    pkg: 'Non-Disclosable',
+    pkg: '8.5 LPA',
     quote: 'The peer learning and engineering rigor at ACE set a benchmark that continues to guide my daily work.',
     img: faheem,
   },
@@ -98,9 +107,9 @@ export const ALUMNI_MEMBERS = [
     domain: 'MERN',
     company: 'Kalpas Innovations Pvt Ltd',
     placedOn: 'May 2026',
-    pkg: 'Non-Disclosable',
+    pkg: '6 LPA',
     quote: 'The culture of building scalable web apps from ground up gave me the confidence to deliver production features effortlessly.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQE8aEtjgr_Tgg/profile-displayphoto-scale_400_400/B56ZpKKTMfIcAg-/0/1762180819496?e=1790208000&v=beta&t=EYos3uxI1mB2nmtIKWSw_L_-BF1KCoE9XVxH-N2JTB8',
+    img: ijas,
   },
   {
     id: 9,
@@ -111,7 +120,7 @@ export const ALUMNI_MEMBERS = [
     placedOn: 'May 2026',
     pkg: '9 LPA',
     quote: "ACE didn't just teach syntax; it taught us how to think like engineers. The transition to cloud AI environments felt completely natural.",
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQHw3q2HIMuprw/profile-displayphoto-shrink_400_400/B56ZRhW5MEHQAg-/0/1736800179613?e=1788393600&v=beta&t=CF2_lvBxOaRf1XofGsbMD9xpkg2O82VjYv5AI37AEqU',
+    img: anandhu,
   },
   // April 2026
   {
@@ -122,9 +131,9 @@ export const ALUMNI_MEMBERS = [
     domain: 'DevOps',
     company: 'KubeNine',
     placedOn: 'April 2026',
-    pkg: 'Non-Disclosable',
+    pkg: '6 LPA',
     quote: 'The deep focus on cloud systems, containers, and deployment reliability at ACE gave me the exact skillset required in modern DevOps.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQFNrOWdkht72Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727163469555?e=1790208000&v=beta&t=F3-TIGFkwd1q4j4MYy2mWbpldqEH431rvKFj2DP7d60',
+    img: amal,
   },
   // March 2026
   {
@@ -137,7 +146,7 @@ export const ALUMNI_MEMBERS = [
     placedOn: 'March 2026',
     pkg: '9 LPA',
     quote: 'The rigorous architectural patterns taught at ACE became my foundation. When scaling distributed systems today, I still fall back on those core principles.',
-    img: 'https://media.licdn.com/dms/image/v2/D5603AQGZVqQhBrUFkA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1708889149547?e=1788393600&v=beta&t=-9Poqt6Sd7wzxlWqS_6xBnWp5X2cqKOXg_YMbxwXlag',
+    img: abhiram,
   },
 ];
 
