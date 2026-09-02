@@ -94,9 +94,8 @@ export default function TeamPage() {
         {/* CTA */}
         <section className="py-section-gap flex flex-col items-center justify-center text-center">
           <p className="font-body-lg text-body-lg text-on-surface-variant mb-6">Have a question for the team?</p>
-          <Link onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+          <Link
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             to="/contact"
             className="inline-flex items-center gap-2 font-headline-md text-headline-md text-primary hover:text-on-surface-variant transition-colors duration-200 border-b border-primary pb-1 hover:border-outline-variant"
           >

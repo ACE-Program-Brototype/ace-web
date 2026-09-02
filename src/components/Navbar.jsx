@@ -70,6 +70,7 @@ export default function Navbar() {
             <span className="material-symbols-outlined">search</span>
           </button> */}
           <Link
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             to="/contact"
             className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-6 py-2 transition-colors hover:bg-primary/80"
           >

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const revealVariant = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
@@ -131,7 +131,9 @@ export default function PlacementPage() {
         {/* 5. CTA */}
         <section className="py-32 text-center">
           <h2 className="font-headline-lg text-headline-lg text-primary mb-8">Join the next generation of engineers.</h2>
-          <Link to="/alumni" className="inline-flex items-center font-mono text-mono text-on-surface-variant hover:text-primary transition-colors group">
+          <Link
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            to="/alumni" className="inline-flex items-center font-mono text-mono text-on-surface-variant hover:text-primary transition-colors group">
             View Alumni Stories
             <span className="material-symbols-outlined ml-2 transform group-hover:translate-x-1 transition-transform text-[18px]">arrow_forward</span>
           </Link>
