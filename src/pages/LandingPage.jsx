@@ -3,14 +3,11 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Footer from "../components/Footer";
 import { STUDENTS } from "../constants/studentsDatas";
-import { ALUMNI_STORIES } from "../constants/alumniDatas";
+import { ALUMNI_MEMBERS, SPOTLIGHT_ALUMNI } from "../constants/alumniDatas";
 import { PROJECTS } from "../constants/projectDatas";
 
-const recentAlumni = ALUMNI_STORIES.find((a) => a.recent) || ALUMNI_STORIES[0];
-const otherAlumni = ALUMNI_STORIES.filter((a) => a !== recentAlumni).slice(
-  0,
-  2,
-);
+const spotlightAlumni = SPOTLIGHT_ALUMNI[0] || ALUMNI_MEMBERS[0];
+const otherAlumni = ALUMNI_MEMBERS.filter((a) => a.id !== spotlightAlumni.id).slice(0, 2);
 
 /* ─── Reveal animation ─────────────────────────────────────────── */
 const revealVariant = {
@@ -179,7 +176,7 @@ export default function LandingPage() {
           >
             <div className="py-12 pr-8 border-r border-outline-variant">
               <div className="font-headline-lg text-headline-lg text-primary mb-2">
-                150+
+                11+
               </div>
               <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Total Placements
@@ -187,7 +184,7 @@ export default function LandingPage() {
             </div>
             <div className="py-12 px-8 border-r border-outline-variant">
               <div className="font-headline-lg text-headline-lg text-primary mb-2">
-                12 LPA
+                13.45 LPA
               </div>
               <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Average Package
@@ -195,7 +192,7 @@ export default function LandingPage() {
             </div>
             <div className="py-12 px-8 border-r border-outline-variant">
               <div className="font-headline-lg text-headline-lg text-primary mb-2">
-                36 LPA
+                30+ LPA
               </div>
               <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Highest Package
@@ -203,7 +200,7 @@ export default function LandingPage() {
             </div>
             <div className="py-12 pl-8">
               <div className="font-headline-lg text-headline-lg text-primary mb-2">
-                45+
+                5+
               </div>
               <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Hiring Partners
@@ -334,38 +331,68 @@ export default function LandingPage() {
             className="grid grid-cols-1 md:grid-cols-4 gap-6"
           >
             {/* Spotlight Feature Card */}
-            <div className="md:col-span-2 md:row-span-2 flex flex-col overflow-hidden border border-outline-variant bg-surface-container-lowest">
-              <div className="relative flex-1 min-h-0">
+            <div className="md:col-span-2 md:row-span-2 flex flex-col overflow-hidden border border-outline-variant bg-surface-container-lowest group hover:border-primary/50 transition-all">
+              <div className="relative flex-1 min-h-[280px] overflow-hidden bg-surface-container-high">
                 <img
-                  src={recentAlumni.img}
-                  alt={`${recentAlumni.name} — ${recentAlumni.role}`}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  src={spotlightAlumni.img}
+                  alt={`${spotlightAlumni.name} — ${spotlightAlumni.role}`}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-              </div>
-              <div className="p-6 shrink-0">
-                <div>
-                  <div className="font-headline-md text-headline-md text-primary">
-                    {recentAlumni.name}
-                  </div>
-                  <div className="font-body-md text-sm text-on-surface-variant">
-                    {recentAlumni.role}
-                  </div>
+                <div className="absolute top-4 left-4">
+                  <span className="bg-primary text-on-primary text-[10px] font-mono uppercase tracking-widest px-3 py-1">
+                    Spotlight
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-3 py-1 bg-black/80 backdrop-blur-xs text-white font-mono text-xs font-semibold">
+                    {spotlightAlumni.pkg}
+                  </span>
                 </div>
               </div>
-            </div>
-
-            {/* Dark Typography Tile */}
-            <div className="col-span-1 row-span-1 aspect-square bg-primary p-8 flex items-center justify-center text-center">
-              <div className="font-display-lg text-headline-md text-on-primary tracking-tighter leading-none uppercase">
-                PRODUCT COMPANIES
+              <div className="p-6 shrink-0 flex items-center justify-between">
+                <div>
+                  <div className="font-headline-md text-headline-md text-primary text-lg font-bold">
+                    {spotlightAlumni.name}
+                  </div>
+                  <div className="font-body-md text-sm text-on-surface-variant">
+                    {spotlightAlumni.role} • {spotlightAlumni.domain}
+                  </div>
+                </div>
+                <span className="font-mono text-xs text-on-surface-variant">
+                  {spotlightAlumni.placedOn}
+                </span>
               </div>
             </div>
 
-            {/* Photo Tiles dynamically generated from otherAlumni */}
+            {/* Dark Typography Outcome Tile */}
+            <div className="col-span-1 row-span-1 aspect-square bg-primary p-6 md:p-8 flex flex-col justify-between text-on-primary">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs tracking-widest uppercase opacity-80">
+                  Outcomes
+                </span>
+                <span className="material-symbols-outlined text-[20px] opacity-80">
+                  trending_up
+                </span>
+              </div>
+              <div>
+                <div className="font-display-lg text-2xl md:text-3xl font-bold tracking-tighter leading-tight uppercase mb-1">
+                  30+ LPA
+                </div>
+                <div className="text-xs uppercase tracking-wider opacity-90 font-medium">
+                  Highest Compensation
+                </div>
+              </div>
+              <div className="pt-3 border-t border-on-primary/20 flex justify-between items-center text-[11px] font-mono opacity-85">
+                <span>Avg Package</span>
+                <span className="font-bold">13.45 LPA</span>
+              </div>
+            </div>
+
+            {/* Photo Tiles for Person 2 and Person 3 */}
             {otherAlumni.map((a) => (
               <div
-                key={a.name}
-                className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant"
+                key={a.id || a.name}
+                className="col-span-1 row-span-1 aspect-square relative group overflow-hidden border border-outline-variant bg-surface-container-high"
               >
                 <img
                   src={a.img}
@@ -373,18 +400,18 @@ export default function LandingPage() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                  <div className="text-white font-bold text-sm mb-1">
+                  <div className="text-white font-bold text-sm mb-0.5">
                     {a.name}
                   </div>
-                  <div className="text-white/90 text-xs mb-3 line-clamp-1">
+                  <div className="text-white/80 text-xs mb-2.5 line-clamp-1">
                     {a.role}
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-[10px] uppercase tracking-wider bg-white/20 text-white px-2 py-1 rounded-sm">
+                  <div className="flex flex-wrap gap-1.5 items-center">
+                    <span className="text-[10px] uppercase tracking-wider bg-white/20 text-white px-2 py-0.5">
                       {a.domain}
                     </span>
                     {a.pkg && (
-                      <span className="text-[10px] font-mono bg-primary text-on-primary px-2 py-1 rounded-sm">
+                      <span className="text-[10px] font-mono bg-primary text-on-primary px-2 py-0.5 font-medium">
                         {a.pkg}
                       </span>
                     )}
@@ -393,10 +420,27 @@ export default function LandingPage() {
               </div>
             ))}
 
-            {/* Surface Tile */}
-            <div className="col-span-1 row-span-1 aspect-square bg-surface-container-high p-8 flex items-center justify-center text-center border border-outline-variant">
-              <div className="font-display-lg text-headline-md text-primary tracking-tighter leading-none uppercase">
-                GLOBAL NETWORK
+            {/* Feature & Ecosystem Tile */}
+            <div className="col-span-1 row-span-1 aspect-square bg-surface-container-high p-6 md:p-8 flex flex-col justify-between border border-outline-variant group hover:border-primary/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-on-surface-variant tracking-widest uppercase">
+                  Career Pipeline
+                </span>
+                <span className="material-symbols-outlined text-primary text-[20px]">
+                  verified
+                </span>
+              </div>
+              <div>
+                <div className="font-headline-md text-lg md:text-xl font-bold text-primary mb-1">
+                  High-Growth Teams
+                </div>
+                <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                  Direct hiring channels for engineers across MERN, AI/ML, and DevOps.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-outline-variant flex items-center justify-between text-[11px] font-mono text-on-surface-variant">
+                <span>Partner Network</span>
+                <span className="text-primary font-bold">5+ Companies</span>
               </div>
             </div>
           </motion.div>

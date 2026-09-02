@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 52" fill="none">
+  <!-- AccuMate 3-blade Pinwheel Mark -->
+  <g transform="translate(26, 26)">
+    <!-- Top Blade -->
+    <path d="M-3,-5 L-7,-20 C-3,-22 3,-20 7,-18 L2,-5 Z" fill="#0F0F0F"/>
+    <path d="M2,-5 L7,-18 L10,-9 L2,-5 Z" fill="#333333"/>
+    
+    <!-- Bottom Right Blade (120 deg) -->
+    <g transform="rotate(120)">
+      <path d="M-3,-5 L-7,-20 C-3,-22 3,-20 7,-18 L2,-5 Z" fill="#0F0F0F"/>
+      <path d="M2,-5 L7,-18 L10,-9 L2,-5 Z" fill="#333333"/>
+    </g>
+    
+    <!-- Bottom Left Blade (240 deg) -->
+    <g transform="rotate(240)">
+      <path d="M-3,-5 L-7,-20 C-3,-22 3,-20 7,-18 L2,-5 Z" fill="#0F0F0F"/>
+      <path d="M2,-5 L7,-18 L10,-9 L2,-5 Z" fill="#333333"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="58" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" letter-spacing="-0.6px" fill="#0F0F0F">AccuMate<tspan font-weight="400" fill="#262626">.ai</tspan></text>
+</svg>
