@@ -91,6 +91,17 @@ body {
   overflow-x: hidden;
 }
 
+/* --- Text Selection / Copy Highlighting --- */
+::selection {
+  background-color: var(--color-surface-dim);
+  color: var(--color-primary);
+}
+
+::-moz-selection {
+  background-color: var(--color-surface-dim);
+  color: var(--color-primary);
+}
+
 img {
   max-width: 100%;
   height: auto;

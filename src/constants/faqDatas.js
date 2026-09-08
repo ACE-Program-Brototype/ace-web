@@ -33,7 +33,7 @@ export const FAQS = [
   },
   {
     q: 'What is the average package for ACE students?',
-    a: 'The average package reported for ACE students is ₹9.5 LPA. However, individual placement outcomes may vary based on skills, performance, experience, and hiring opportunities.',
+    a: 'The average package reported for ACE students is ₹13.45 LPA. However, individual placement outcomes may vary based on skills, performance, experience, and hiring opportunities.',
   },
   {
     q: 'What skills will I develop through ACE?',
