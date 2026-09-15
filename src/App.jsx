@@ -46,6 +46,7 @@ export default function App() {
           <Route path="/outcomes" element={<PageWrapper><PlacementPage /></PageWrapper>} />
           <Route path="/placements" element={<PageWrapper><PlacementPage /></PageWrapper>} />
           <Route path="/directory" element={<PageWrapper><StudentsPage /></PageWrapper>} />
+          <Route path="/students" element={<PageWrapper><StudentsPage /></PageWrapper>} />
           <Route path="/journal" element={<PageWrapper><JournalPage /></PageWrapper>} />
           <Route path="/handlers" element={<PageWrapper><TeamPage /></PageWrapper>} />
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />

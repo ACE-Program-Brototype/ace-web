@@ -296,7 +296,7 @@ export default function LandingPage() {
           <div className="mt-8 md:hidden">
             <Link
               onClick={handleScrollToTop}
-              to="/students"
+              to="/directory"
               className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 hover:bg-primary/80 transition-colors"
             >
               Explore the Directory
@@ -616,7 +616,7 @@ export default function LandingPage() {
           <div className="mt-8 text-center md:hidden">
             <Link
               onClick={handleScrollToTop}
-              to="/students"
+              to="/directory"
               className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary border border-outline-variant px-6 py-3 hover:bg-surface-container-low transition-colors"
             >
               View full directory
