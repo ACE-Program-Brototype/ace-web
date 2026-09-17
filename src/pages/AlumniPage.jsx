@@ -21,6 +21,49 @@ export default function AlumniPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSpotlightPaused, setIsSpotlightPaused] = useState(false);
 
+  // Mobile Touch Swipe Handling for Spotlight Carousel
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
+
+  const handleSpotlightTouchStart = (e) => {
+    setIsSpotlightPaused(true);
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchEndX.current = 0;
+    touchEndY.current = 0;
+  };
+
+  const handleSpotlightTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+    touchEndY.current = e.touches[0].clientY;
+  };
+
+  const handleSpotlightTouchEnd = () => {
+    setIsSpotlightPaused(false);
+    if (touchEndX.current === 0) return;
+
+    const diffX = touchStartX.current - touchEndX.current;
+    const diffY = touchStartY.current - touchEndY.current;
+
+    // Detect dominant horizontal swipe with 40px threshold
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swiped left -> next card
+        setCurrentIndex((prev) => (prev + 1) % SPOTLIGHT_ALUMNI.length);
+      } else {
+        // Swiped right -> prev card
+        setCurrentIndex((prev) => (prev - 1 + SPOTLIGHT_ALUMNI.length) % SPOTLIGHT_ALUMNI.length);
+      }
+    }
+
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+    touchStartY.current = 0;
+    touchEndY.current = 0;
+  };
+
   // Testimonials Carousel State
   const testimonialsRef = useRef(null);
   const [isTestimonialsPaused, setIsTestimonialsPaused] = useState(false);
@@ -177,11 +220,12 @@ export default function AlumniPage() {
           </div>
 
           <div
-            className="relative group/spotlight px-2 sm:px-6 flex flex-col items-center justify-center"
+            className="relative group/spotlight px-2 sm:px-6 flex flex-col items-center justify-center touch-pan-y"
             onMouseEnter={() => setIsSpotlightPaused(true)}
             onMouseLeave={() => setIsSpotlightPaused(false)}
-            onTouchStart={() => setIsSpotlightPaused(true)}
-            onTouchEnd={() => setIsSpotlightPaused(false)}
+            onTouchStart={handleSpotlightTouchStart}
+            onTouchMove={handleSpotlightTouchMove}
+            onTouchEnd={handleSpotlightTouchEnd}
           >
             {/* 3D Coverflow Stage */}
             <div
