@@ -33,6 +33,7 @@ export const STUDENTS = [
     batch: "BCR313",
     stack: "MERN Stack",
     img: ajexImg,
+    github: "http://www.github.com/Ajex-Joshy",
   },
   {
     name: "Al Ameen S",
@@ -77,6 +78,7 @@ export const STUDENTS = [
     batch: "BCR313",
     stack: "Data Science",
     img: sreehari,
+    github: "https://github.com/sreehari-sreesunil",
   },
   {
     name: "Adarsh M",
@@ -84,7 +86,7 @@ export const STUDENTS = [
     stack: "Java SpringBoot",
     img: adarshImg,
     linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    github: "https://github.com/Adarsh-Melath/",
   },
   {
     name: "Bennet Sharwin",
