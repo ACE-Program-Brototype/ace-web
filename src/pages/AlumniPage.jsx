@@ -185,14 +185,14 @@ export default function AlumniPage() {
           >
             {/* 3D Coverflow Stage */}
             <div
-              className="relative w-full h-[560px] sm:h-[600px] flex items-center justify-center overflow-hidden py-4"
+              className="relative w-full h-[620px] sm:h-[680px] md:h-[720px] flex items-center justify-center overflow-hidden py-6"
               style={{ perspective: '1200px' }}
             >
               {SPOTLIGHT_ALUMNI.map((alumnus, idx) => {
                 const offset = getCardOffset(idx, currentIndex, SPOTLIGHT_ALUMNI.length);
                 const isCenter = offset === 0;
 
-                // Compute coverflow 3D transforms
+                // Compute carousel transforms (all cards at same flat angle, not tilted)
                 let xTransform = '0%';
                 let scaleTransform = 1;
                 let rotateTransform = 0;
@@ -207,20 +207,20 @@ export default function AlumniPage() {
                   opacityVal = 1;
                 } else if (offset === -1) {
                   xTransform = '-64%';
-                  scaleTransform = 0.85;
-                  rotateTransform = 24;
+                  scaleTransform = 0.88;
+                  rotateTransform = 0;
                   zIndexVal = 20;
-                  opacityVal = 0.65;
+                  opacityVal = 0.7;
                 } else if (offset === 1) {
                   xTransform = '64%';
-                  scaleTransform = 0.85;
-                  rotateTransform = -24;
+                  scaleTransform = 0.88;
+                  rotateTransform = 0;
                   zIndexVal = 20;
-                  opacityVal = 0.65;
+                  opacityVal = 0.7;
                 } else {
                   xTransform = offset < 0 ? '-120%' : '120%';
-                  scaleTransform = 0.7;
-                  rotateTransform = offset < 0 ? 35 : -35;
+                  scaleTransform = 0.75;
+                  rotateTransform = 0;
                   zIndexVal = 10;
                   opacityVal = 0;
                 }
@@ -246,48 +246,43 @@ export default function AlumniPage() {
                     style={{
                       transformStyle: 'preserve-3d',
                     }}
-                    className={`absolute inset-0 m-auto w-[290px] sm:w-[360px] md:w-[390px] h-[480px] sm:h-[520px] flex flex-col bg-surface border transition-colors select-none ${
+                    className={`absolute inset-0 m-auto w-[310px] sm:w-[390px] md:w-[460px] h-[520px] sm:h-[580px] md:h-[620px] flex flex-col bg-surface border transition-colors select-none ${
                       isCenter
-                        ? 'border-accent shadow-[0_20px_50px_rgba(0,44,95,0.18),0_0_24px_rgba(252,172,4,0.2)] ring-1 ring-accent/30 cursor-default'
+                        ? 'border-accent shadow-[0_24px_60px_rgba(0,44,95,0.2),0_0_30px_rgba(252,172,4,0.25)] ring-1 ring-accent/30 cursor-default'
                         : 'border-outline-variant shadow-md hover:border-primary/50 cursor-pointer'
                     }`}
                   >
                     {/* Card Image Header (Vertical) */}
-                    <div className="relative h-[210px] sm:h-[240px] w-full overflow-hidden bg-surface-container-low shrink-0 border-b border-outline-variant">
+                    <div className="relative h-[240px] sm:h-[280px] md:h-[310px] w-full overflow-hidden bg-surface-container-low shrink-0 border-b border-outline-variant">
                       <img
                         referrerPolicy="no-referrer"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/spotlight:scale-105"
                         alt={alumnus.name}
                         src={alumnus.img}
                       />
-                      <div className="absolute top-3 left-3">
-                        <span className="bg-primary text-on-primary text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 shadow-sm">
-                          Spotlight
-                        </span>
-                      </div>
-                      <div className="absolute bottom-3 left-3">
-                        <span className="px-3 py-1 bg-black/85 backdrop-blur-xs text-accent font-mono text-xs sm:text-sm font-semibold border border-white/10 shadow-sm">
+                      <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+                        <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-xs text-accent font-mono text-xs sm:text-sm md:text-base font-semibold border border-white/10 shadow-sm">
                           {alumnus.pkg}
                         </span>
                       </div>
                     </div>
 
                     {/* Card Body (Vertical) */}
-                    <div className="flex-1 p-4 sm:p-5 flex flex-col justify-between overflow-hidden bg-surface">
+                    <div className="flex-1 p-5 sm:p-6 flex flex-col justify-between overflow-hidden bg-surface">
                       <div>
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className="font-label-sm text-[11px] text-accent uppercase tracking-widest font-semibold">
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span className="font-label-sm text-xs sm:text-sm text-accent uppercase tracking-widest font-semibold">
                             {alumnus.domain}
                           </span>
-                          <span className="font-mono text-[11px] text-on-surface-variant">
+                          <span className="font-mono text-xs sm:text-sm text-on-surface-variant">
                             {alumnus.placedOn}
                           </span>
                         </div>
 
-                        <h3 className="font-headline-sm text-base sm:text-lg font-bold text-primary truncate">
+                        <h3 className="font-headline-sm text-lg sm:text-xl md:text-2xl font-bold text-primary truncate">
                           {alumnus.name}
                         </h3>
-                        <p className="font-body-md text-xs sm:text-sm text-on-surface-variant line-clamp-1 mb-2.5">
+                        <p className="font-body-md text-xs sm:text-sm md:text-base text-on-surface-variant line-clamp-1 mb-3">
                           {alumnus.companyRole ||
                             `${alumnus.role} ${
                               alumnus.company !== 'ND' && alumnus.company !== 'Non-Disclosable'
@@ -298,11 +293,11 @@ export default function AlumniPage() {
                       </div>
 
                       {/* Highlight Quote */}
-                      <div className="p-3 sm:p-3.5 bg-surface-container-low border-l-2 border-accent relative">
-                        <span className="material-symbols-outlined text-accent/30 text-base sm:text-lg absolute top-2 right-2 select-none">
+                      <div className="p-3.5 sm:p-4 bg-surface-container-low border-l-2 border-accent relative">
+                        <span className="material-symbols-outlined text-accent/30 text-base sm:text-xl absolute top-2 right-2 sm:top-3 sm:right-3 select-none">
                           format_quote
                         </span>
-                        <p className="font-body-md text-xs sm:text-sm text-on-surface italic leading-relaxed line-clamp-3 sm:line-clamp-4">
+                        <p className="font-body-md text-xs sm:text-sm md:text-base text-on-surface italic leading-relaxed line-clamp-3 sm:line-clamp-4">
                           "{alumnus.quote}"
                         </p>
                       </div>
