@@ -1,103 +1,171 @@
-// Shared event details
-export const EVENT_DATA = [
-    {
-        title: "Editorial UI Design Patterns",
-        date: "NOVEMBER 05, 2024",
-        time: "14:00 PM",
-        venue: "Studio Alpha",
-        description: "Join us for an intensive workshop focused on the practical realities of editorial design systems, micro-typography, and high-contrast layout principles. We will dissect real-world component libraries and build robust design tokens.",
-        carouselImages: [
-            "https://placehold.co/800x400/1a1c1e/ffffff?text=Event+Slide+1",
-            "https://placehold.co/800x400/2f3131/ffffff?text=Event+Slide+2",
-            "https://placehold.co/800x400/47464a/ffffff?text=Event+Slide+3"
-        ],
-        image: "/images/events/panel-discussion.jpg",
-        slug: "editorial-ui-design-patterns",
-        category: "Workshop",
-        agenda: [
-            { time: "14:00 - 15:00", topic: "Design Systems & Token Architecture" },
-            { time: "15:15 - 16:30", topic: "Micro-Typography & Dynamic Layouts" },
-            { time: "16:45 - 17:30", topic: "Component Composition & Code Review" },
-        ],
-        handler: {
-            name: "Dr. Elena Rostova",
-            role: "Principal Systems Architect",
-            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
-        },
-    },
-    {
-        title: "Microservices Architecture Masterclass",
-        date: "Saturday, October 12, 2024",
-        time: "09:00 AM - 17:00 PM",
-        venue: "The ACE Atrium",
-        description: "Join us for an intensive, full-day masterclass focused on the practical realities of designing, deploying, and maintaining microservices architectures at scale. We will move beyond the theory and dissect real-world case studies.",
-        carouselImages: [
-            "https://placehold.co/800x400/1a1c1e/ffffff?text=Event+Slide+1",
-            "https://placehold.co/800x400/2f3131/ffffff?text=Event+Slide+2",
-            "https://placehold.co/800x400/47464a/ffffff?text=Event+Slide+3"
-        ],
-        image: "/images/events/tech-summit.jpg",
-        slug: "microservices-architecture-masterclass",
-        category: "Masterclass",
-        agenda: [
-            { time: "09:00 - 10:30", topic: "Domain-Driven Design Principles" },
-            { time: "11:00 - 12:30", topic: "Service Boundaries & Data Consistency" },
-            { time: "13:30 - 15:00", topic: "Observability & Distributed Tracing" },
-        ],
-        handler: {
-            name: "Dr. Elena Rostova",
-            role: "Principal Systems Architect",
-            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
-        },
-    },
-    {
-        title: "AI & Systems Engineering Bootcamp",
-        date: "Friday, May 10, 2024",
-        time: "10:00 AM - 16:00 PM",
-        venue: "Studio Alpha",
-        description: "Hands-on deep dive into building production-grade LLM pipelines, autonomous agents, and low-latency distributed systems. Learn how to optimize inference speeds and manage vector embeddings effectively.",
-        carouselImages: [
-            "https://placehold.co/800x400/1a1c1e/ffffff?text=Event+Slide+1",
-            "https://placehold.co/800x400/2f3131/ffffff?text=Event+Slide+2",
-            "https://placehold.co/800x400/47464a/ffffff?text=Event+Slide+3"
-        ],
-        image: "/images/events/ai-bootcamp.jpg",
-        slug: "ai-systems-engineering-bootcamp",
-        category: "Bootcamp",
-        agenda: [
-            { time: "10:00 - 11:30", topic: "LLM Pipeline Architecture & Quantization" },
-            { time: "12:00 - 13:30", topic: "Vector Search & Retrieval-Augmented Generation" },
-            { time: "14:30 - 16:00", topic: "Agentic Workflows & Multi-Agent Orchestration" },
-        ],
-        handler: {
+// ACE Events Data
+export const SPOTLIGHT_EVENT = {
+    id: "ace-public-speaking-community-launch",
+    title: "ACE Public Speaking and Community Launch Event",
+    subtitle: "Public Speaking, Community Introduction & Launch",
+    tagline: "Discover what ACE is, explore the opportunities, meet our members, and be a part of something bigger.",
+    slogan: "More than just a program. It's your next step.",
+    date: "Friday, 18 September 2026",
+    time: "3:00 PM – 4:30 PM",
+    venue: "Brototype Kochi Hub",
+    category: "Community Launch & Keynote",
+    isSpotlight: true,
+    isVisible: true,
+    poster: "/events/ace-launch-poster.jpg",
+    carouselImages: ["/events/ace-launch-poster.jpg"],
+    slug: "ace-public-speaking-community-launch",
+    objective: "To introduce ACE and its benefits, highlight ACE results and member experiences, launch the ACE website and ACE Forge, and create an engaging and professional experience for students.",
+    description: "Join us for the premier ACE Public Speaking and Community Introduction Launch Event. Discover how ACE is reshaping tech careers through rigor, public speaking, mentorship, and collective engineering excellence.",
+    orchestratedBy: "ACE Members",
+    coordinators: {
+        aceCoordinator: {
             name: "Shahid Noushad",
-            role: "ACE Handler & Mentor",
-            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+            role: "R/D Associate & ACE Coordinator",
+        },
+        anchors: [
+            { name: "Athira Suresh", role: "Anchor / ACE Member" },
+            { name: "Venkitesh", role: "ACE Community Manager / Anchor" },
+        ],
+        aceForgeLead: {
+            name: "Ashwin Sreeraj",
+            role: "Assistant Manager / ACE Forge Lead",
+        },
+        programCoordinator: {
+            name: "Al Ameen",
+            role: "Program Coordinator",
         },
     },
+    team: [
+        { name: "Venkitesh", role: "ACE Community Manager / Anchor" },
+        { name: "Aswin Sreeraj", role: "Assistant Manager / ACE Forge Lead" },
+        { name: "Al Ameen", role: "Program Coordinator" },
+        { name: "Athira Suresh", role: "ACE Member / Anchor" },
+        { name: "Navaneeth", role: "ACE Member" },
+        { name: "Ajex", role: "ACE Member" },
+        { name: "Sreehari", role: "ACE Member" },
+        { name: "Fathima Shifana", role: "ACE Member" },
+    ],
+    highlights: [
+        {
+            icon: "record_voice_over",
+            title: "ACE Public Speaking",
+            desc: "Build Confidence. Communicate with Impact.",
+        },
+        {
+            icon: "trending_up",
+            title: "ACE Results",
+            desc: "Students, companies, packages & more",
+        },
+        {
+            icon: "groups",
+            title: "Member Journeys",
+            desc: "Real stories. Real growth.",
+        },
+        {
+            icon: "language",
+            title: "ACE Website Launch",
+            desc: "Explore, enquire, take the first step",
+        },
+        {
+            icon: "rocket_launch",
+            title: "ACE Forge Launch",
+            desc: "Guidance & follow-up for interested students",
+        },
+        {
+            icon: "forum",
+            title: "Q&A Session",
+            desc: "Your questions, our answers",
+        },
+        {
+            icon: "military_tech",
+            title: "Cash Prize Recognition",
+            desc: "Be engaged. Win a prize.",
+        },
+    ],
+    agenda: [
+        {
+            time: "3:00 PM – 3:05 PM",
+            session: "Welcome & Ice Breaker",
+            activity: "Welcome, introductions and a humorous/engaging question.",
+        },
+        {
+            time: "3:05 PM – 3:15 PM",
+            session: "ACE Introduction",
+            activity: "Introduce ACE, what we do, benefits and audience interaction.",
+        },
+        {
+            time: "3:15 PM – 3:25 PM",
+            session: "ACE Results",
+            activity: "Present students, companies, packages and other key benefits/results.",
+        },
+        {
+            time: "3:25 PM – 3:40 PM",
+            session: "Member Journeys",
+            activity: "Current ACE members share their journey and benefits.",
+        },
+        {
+            time: "3:40 PM – 3:50 PM",
+            session: "ACE Website Launch",
+            activity: "Launch and introduce the website; interested students can enquire through it.",
+        },
+        {
+            time: "3:50 PM – 4:00 PM",
+            session: "ACE Forge Launch",
+            activity: "Introduce ACE Forge as guidance and follow-up for students who enquire to join ACE.",
+        },
+        {
+            time: "4:00 PM – 4:15 PM",
+            session: "Question & Answer",
+            activity: "Open Q&A session with students.",
+        },
+        {
+            time: "4:15 PM – 4:20 PM",
+            session: "Cash Prize",
+            activity: "Recognise an actively engaged student; prize presented by Shahid Noushad.",
+        },
+        {
+            time: "4:20 PM – 4:25 PM",
+            session: "Winding Up",
+            activity: "Closing remarks, appreciation and final call to action.",
+        },
+        {
+            time: "4:25 PM – 4:30 PM",
+            session: "Buffer",
+            activity: "Reserved for transitions or minor schedule overruns.",
+        },
+    ],
+    audienceEngagement: "An engaging question will be included after each major segment to encourage participation and maintain audience involvement throughout the program.",
+    cashPrize: {
+        title: "Cash Prize Recognition",
+        desc: "The cash prize will be awarded based on the student's response and engagement with the questions asked during the program. As the first ACE program to include a cash-prize recognition, this adds a distinctive, elegant, and professional touch to the overall event experience.",
+        presentedBy: "Shahid Noushad",
+    },
+    finalCallToAction: "Students interested in ACE will be directed to the ACE website to learn more and submit an enquiry. ACE Forge will provide the subsequent guidance and follow-up.",
+};
+
+// Events array: Spotlight event + 1 placeholder template for future events (hidden from visitors)
+export const EVENT_DATA = [
+    SPOTLIGHT_EVENT,
     {
-        title: "ACE Annual Hackathon",
-        date: "Monday, July 22, 2024",
-        time: "09:00 AM - 18:00 PM",
-        venue: "Engineering Block Hall A",
-        description: "48-hour continuous coding sprint where developers collaborate to build scalable software solutions for real-world industry challenges. Pitch your project to senior industry leaders and win mentorship opportunities.",
-        carouselImages: [
-            "https://placehold.co/800x400/1a1c1e/ffffff?text=Event+Slide+1",
-            "https://placehold.co/800x400/2f3131/ffffff?text=Event+Slide+2",
-            "https://placehold.co/800x400/47464a/ffffff?text=Event+Slide+3"
-        ],
-        image: "/images/events/hackathon.jpg",
-        slug: "ace-annual-hackathon",
-        category: "Hackathon",
+        id: "future-event-template",
+        title: "Future Event Template",
+        date: "TBA",
+        time: "TBA",
+        venue: "ACE Learning Hub",
+        description: "Placeholder template for upcoming workshops and tech talks. Retained for future event scheduling.",
+        carouselImages: ["/events/ace-launch-poster.jpg"],
+        image: "/events/ace-launch-poster.jpg",
+        slug: "future-event-template",
+        category: "Workshop",
+        isSpotlight: false,
+        isVisible: false, // Keep invisible to visitors
         agenda: [
-            { time: "09:00 - 10:00", topic: "Problem Statement Unveiling & Team Formation" },
-            { time: "10:00 - 14:00", topic: "Prototyping & Mid-Sprint Architecture Review" },
-            { time: "14:00 - 18:00", topic: "Final Demos, Judging & Award Ceremony" },
+            { time: "TBA", topic: "Agenda details will be announced soon" },
         ],
         handler: {
-            name: "Aswin Sreeraj",
-            role: "ACE Community Manager",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+            name: "ACE Mentor",
+            role: "Technical Lead",
+            image: "https://placehold.co/150x150",
         },
     },
 ];

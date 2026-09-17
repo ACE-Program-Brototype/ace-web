@@ -250,7 +250,7 @@ export default function LandingPage() {
             <Link
               onClick={handleScrollToTop}
               to="/directory"
-              className="hidden md:block bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/80 transition-colors"
+              className="hidden md:block bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
             >
               EXPLORE THE DIRECTORY
             </Link>
@@ -297,7 +297,7 @@ export default function LandingPage() {
             <Link
               onClick={handleScrollToTop}
               to="/directory"
-              className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 hover:bg-primary/80 transition-colors"
+              className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
             >
               Explore the Directory
             </Link>
@@ -454,7 +454,7 @@ export default function LandingPage() {
             <Link
               onClick={handleScrollToTop}
               to="/alumni"
-              className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-12 py-4 hover:bg-primary/80 transition-colors"
+              className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-12 py-4 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
             >
               View All Alumni
             </Link>
@@ -475,9 +475,9 @@ export default function LandingPage() {
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <motion.h2
             variants={revealVariant}
-            className="font-headline-md text-headline-md text-primary mb-16 text-center"
+            className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-16 text-center"
           >
-            The Ecosystem
+            The Ecosystem.
           </motion.h2>
 
           <motion.div

@@ -17,13 +17,18 @@ export const PARTNER_LOGOS = [
     type: 'white',
   },
   {
-    name: 'Kalpas Innovations',
-    src: '/kalpas.svg',
-    type: 'dark',
+    name: 'e& (Etisalat and)',
+    src: '/etisalat.svg',
+    type: 'white',
   },
   {
     name: 'AccuMateAi',
     src: '/accumate.svg',
+    type: 'dark',
+  },
+  {
+    name: 'Kalpas Innovations Pvt. Ltd.',
+    src: '/kalpas.svg',
     type: 'dark',
   },
 ];

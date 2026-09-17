@@ -1,6 +1,6 @@
 import shahid from '../../assets/handlers/shahid.webp';
 import aswin from '../../assets/candidates/aswin.webp';
-import venkiteshImg from '../../assets/candidates/venkitesh.webp';
+import venkiteshImg from '../../assets/candidates/venkitesh.jpg';
 import alAmeenImg from '../../assets/candidates/al ameen.webp';
 
 export const FOUNDERS = [
