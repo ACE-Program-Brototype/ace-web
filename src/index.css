@@ -381,6 +381,34 @@ ul, ol {
   animation-play-state: paused;
 }
 
+/* --- Partner Logos Single-Line Marquee --- */
+.partner-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: partnerMarquee 35s linear infinite;
+  will-change: transform;
+}
+
+.partner-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes partnerMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee-track {
+    animation-duration: 90s;
+  }
+}
+
 /* --- Accordion --- */
 .accordion-content {
   overflow: hidden;

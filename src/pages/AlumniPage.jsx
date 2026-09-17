@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ALUMNI_MEMBERS, SPOTLIGHT_ALUMNI, ALUMNI_STORIES, ALUMNI_STATS } from '../constants/alumniDatas';
+import PartnerLogosMarquee from '../components/PartnerLogosMarquee';
 
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -109,7 +110,7 @@ export default function AlumniPage() {
 
         {/* 2. Stats Strip */}
         <motion.section
-          className="grid grid-cols-2 md:grid-cols-4 border-t border-outline-variant mb-24"
+          className="grid grid-cols-2 md:grid-cols-4 border-y border-outline-variant"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -131,9 +132,26 @@ export default function AlumniPage() {
           ))}
         </motion.section>
 
-        {/* 3. Automatic 3D Coverflow Spotlight Carousel */}
+        {/* 3. Hiring Partners */}
         <motion.section
-          className="border-y border-outline-variant py-16 mb-28"
+          className="py-24 border-b border-outline-variant"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
+          <motion.h2
+            variants={revealVariant}
+            className="font-headline-lg text-headline-lg text-center mb-16 text-primary"
+          >
+            Where our engineers go.
+          </motion.h2>
+          <PartnerLogosMarquee />
+        </motion.section>
+
+        {/* 4. Automatic 3D Coverflow Spotlight Carousel */}
+        <motion.section
+          className="border-b border-outline-variant py-20 mb-28"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -262,7 +280,7 @@ export default function AlumniPage() {
                             {alumnus.domain}
                           </span>
                           <span className="font-mono text-[11px] text-on-surface-variant">
-                            Placed: {alumnus.placedOn}
+                            {alumnus.placedOn}
                           </span>
                         </div>
 
