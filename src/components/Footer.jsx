@@ -16,7 +16,7 @@ const FOOTER_COLS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral-950 text-white w-full border-t border-white/10">
+    <footer className="bg-[#030914] text-white w-full border-t border-white/10">
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
 
         {/* Main Footer Content: 3 Columns */}
@@ -24,8 +24,8 @@ export default function Footer() {
 
           {/* Column 1: Brand + Tagline */}
           <div className="flex flex-col">
-            <Link to="/" className="font-headline-lg text-headline-lg text-white font-bold tracking-tighter uppercase">
-              ACE
+            <Link to="/" className="flex items-center">
+              <img src="/logo.png" alt="ACE" className="h-8 md:h-9 w-auto object-contain brightness-0 invert" />
             </Link>
             <p className="font-body-md text-body-md text-white/50 mt-3 max-w-xs leading-relaxed">
               A high-performance ecosystem within Brototype, bridging baseline learning and elite, production-grade engineering.
@@ -62,7 +62,7 @@ export default function Footer() {
             <Link
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               to="/contact"
-              className="border border-white/30 text-white font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-neutral-950 transition-colors"
+              className="border border-white/30 text-white font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-[#030914] transition-colors"
             >
               CONTACT
             </Link>

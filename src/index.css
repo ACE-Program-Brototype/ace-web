@@ -10,26 +10,28 @@
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Colors */
-  --color-bg: #f9f9f9;
+  /* Colors — ACE Navy #002C5F + Amber #FCAC04 */
+  --color-bg: #f9f9fb;
   --color-surface: #ffffff;
-  --color-surface-low: #f3f3f3;
-  --color-surface-container: #eeeeee;
-  --color-surface-high: #e8e8e8;
-  --color-surface-highest: #e2e2e2;
-  --color-surface-dim: #dadada;
+  --color-surface-low: #f2f4f8;
+  --color-surface-container: #eaedf4;
+  --color-surface-high: #e2e6ef;
+  --color-surface-highest: #d9dfeb;
+  --color-surface-dim: #d8dce6;
 
-  --color-primary: #09090b;
-  --color-primary-soft: #1c1b1d;
+  --color-primary: #002C5F;
+  --color-primary-soft: #001F43;
   --color-on-primary: #ffffff;
 
-  --color-secondary: #5d5e66;
-  --color-muted: #78767b;
-  --color-outline: #c8c5ca;
-  --color-outline-strong: #47464a;
+  --color-secondary: #4A5568;
+  --color-muted: #64748B;
+  --color-outline: #D4D8E2;
+  --color-outline-strong: #334155;
 
   --color-error: #ba1a1a;
-  --color-accent: #3d3a40;
+  --color-accent: #FCAC04;
+  --color-accent-hover: #E59B00;
+  --color-accent-soft: #FFF5E0;
 
   /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
@@ -93,13 +95,13 @@ body {
 
 /* --- Text Selection / Copy Highlighting --- */
 ::selection {
-  background-color: var(--color-surface-dim);
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 ::-moz-selection {
-  background-color: var(--color-surface-dim);
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 img {
@@ -215,9 +217,9 @@ ul, ol {
 }
 
 .btn-primary:hover {
-  background: var(--color-accent);
+  background: var(--color-primary-soft);
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 20px rgba(252, 172, 4, 0.25), 0 2px 8px rgba(0, 44, 95, 0.3);
 }
 
 .btn-secondary {
@@ -238,8 +240,8 @@ ul, ol {
 }
 
 .btn-secondary:hover {
-  border-color: var(--color-primary);
-  background: var(--color-surface-low);
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
 }
 
 /* --- Card Base --- */
@@ -285,7 +287,7 @@ ul, ol {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--color-primary);
+  background: linear-gradient(90deg, #002C5F 0%, #FCAC04 100%);
   transform-origin: left;
   z-index: 9999;
 }
@@ -437,7 +439,7 @@ ul, ol {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--color-accent);
   border: 3px solid var(--color-bg);
   box-shadow: 0 0 0 2px var(--color-primary);
 }

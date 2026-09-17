@@ -29,8 +29,8 @@ export default function Navbar() {
       <div className="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 
         {/* Brand */}
-        <Link to="/" onClick={close} className="font-headline-md text-headline-md font-bold tracking-tighter text-primary uppercase">
-          ACE
+        <Link to="/" onClick={close} className="flex items-center">
+          <img src="/logo.png" alt="ACE" className="h-6 md:h-7 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav Links */}
@@ -50,7 +50,7 @@ export default function Navbar() {
                 key={link.label}
                 to={link.to}
                 className={`font-medium pb-1 transition-colors ${location.pathname === link.to
-                  ? 'text-primary border-b border-primary'
+                  ? 'text-primary border-b-2 border-accent'
                   : 'text-on-surface-variant hover:text-primary'
                   }`}
               >
@@ -72,7 +72,7 @@ export default function Navbar() {
           <Link
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             to="/contact"
-            className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-6 py-2 transition-colors hover:bg-primary/80"
+            className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-6 py-2 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
           >
             CONTACT
           </Link>
@@ -142,7 +142,7 @@ export default function Navbar() {
             <Link
               to="/contact"
               onClick={close}
-              className="bg-primary text-on-primary px-6 py-2 text-center hover:bg-primary/80 transition-colors"
+              className="bg-primary text-on-primary px-6 py-2 text-center border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
             >
               CONTACT
             </Link>
