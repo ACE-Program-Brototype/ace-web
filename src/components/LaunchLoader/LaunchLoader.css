@@ -1,0 +1,66 @@
+/* ==========================================================================
+   LaunchLoader — Fullscreen Chroma-Key Video Overlay
+   Keying out green screen to seamlessly reveal the website landing page
+   ========================================================================== */
+
+.launch-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 99999;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  user-select: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1800ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 1800ms ease;
+  will-change: opacity;
+}
+
+/* Hardware-accelerated WebGL canvas where green screen is transparent */
+.launch-loader-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  z-index: 2;
+  transform: scale(1);
+  filter: blur(0px);
+  transition: transform 1800ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter;
+}
+
+/* Exit Transition State: Smooth dissolve */
+.launch-loader.exit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1800ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 1800ms ease;
+}
+
+.launch-loader.exit .launch-loader-canvas {
+  transform: scale(1.05);
+  filter: blur(6px);
+}
+
+/* Hidden video feeding frames to WebGL */
+.launch-loader-hidden-video {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+  top: -9999px;
+}
