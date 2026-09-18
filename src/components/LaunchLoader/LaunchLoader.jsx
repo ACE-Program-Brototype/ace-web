@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './LaunchLoader.css';
-import launchVideo from '../../../assets/launch/launch_final.mp4';
+import desktopLaunchVideo from '../../../assets/launch/launch_final.mp4';
+import mobileLaunchVideo from '../../../assets/launch/mobile_launch.mp4';
 import { IS_LAUNCH_ENABLED } from '../../constants/launchConfig';
 
 // Vertex Shader for WebGL Chroma Key
@@ -63,7 +64,7 @@ const DEFAULT_KEY_COLOR = [0.0, 1.0, 0.0];
 /**
  * LaunchLoader Component
  *
- * Fullscreen inauguration overlay featuring launch_final.mp4.
+ * Fullscreen inauguration overlay featuring launch_final.mp4 (desktop) and mobile_launch.mp4 (mobile).
  * Hardware-accelerated WebGL chroma-key transparently replaces the green screen
  * area with the live website landing page sitting underneath.
  */
@@ -73,15 +74,45 @@ export default function LaunchLoader({
   smoothness = 0.20,
   spill = 0.35,
   keyColor = DEFAULT_KEY_COLOR,
+  desktopSrc = desktopLaunchVideo,
+  mobileSrc = mobileLaunchVideo,
 }) {
   const isLaunchEnabled = IS_LAUNCH_ENABLED;
 
   const [kR, kG, kB] = keyColor;
 
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(max-width: 767px)').matches;
+    }
+    return false;
+  });
+
+  const activeVideo = isMobile ? mobileSrc : desktopSrc;
+
+  // Listen to viewport changes before video starts playing
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mql = window.matchMedia('(max-width: 767px)');
+    const handleMediaChange = (e) => {
+      setLaunchState((current) => {
+        if (current === 'loading') {
+          setIsMobile(e.matches);
+        }
+        return current;
+      });
+    };
+
+    mql.addEventListener?.('change', handleMediaChange);
+    return () => mql.removeEventListener?.('change', handleMediaChange);
+  }, []);
+
   const [launchState, setLaunchState] = useState(
     isLaunchEnabled ? 'loading' : 'disabled'
   );
   const [isRevealing, setIsRevealing] = useState(false);
+  const isRevealingRef = useRef(false);
 
   const containerRef = useRef(null);
   const videoRef = useRef(null);
@@ -281,7 +312,8 @@ export default function LaunchLoader({
       }
 
       // When reaching the green screen reveal (t >= 5.5s), make container transparent to reveal landing page
-      if (video.currentTime >= 5.5 && !isRevealing) {
+      if (video.currentTime >= 5.5 && !isRevealingRef.current) {
+        isRevealingRef.current = true;
         setIsRevealing(true);
       }
 
@@ -327,8 +359,8 @@ export default function LaunchLoader({
     };
 
     const handleLoadedMetadata = () => {
-      canvas.width = video.videoWidth || 1280;
-      canvas.height = video.videoHeight || 720;
+      canvas.width = video.videoWidth || (isMobile ? 720 : 1280);
+      canvas.height = video.videoHeight || (isMobile ? 1280 : 720);
     };
 
     const handlePlay = () => {
@@ -370,7 +402,7 @@ export default function LaunchLoader({
         }
       }
     };
-  }, [isLaunchEnabled, similarity, smoothness, spill, kR, kG, kB, handleEndTransition]);
+  }, [isLaunchEnabled, activeVideo, similarity, smoothness, spill, kR, kG, kB, handleEndTransition, isMobile]);
 
   const handleTimeUpdate = () => {
     if (videoRef.current && videoRef.current.duration) {
@@ -420,7 +452,8 @@ export default function LaunchLoader({
       {/* Hidden preloaded video source providing frames to WebGL */}
       <video
         ref={videoRef}
-        src={launchVideo}
+        key={activeVideo}
+        src={activeVideo}
         autoPlay
         muted
         playsInline
