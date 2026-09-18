@@ -19,7 +19,6 @@ export const STUDENTS = [
     img: venkiteshImg,
     linkedin: "https://www.linkedin.com/in/venkitesh-n-s-53195132b/",
     github: "https://github.com/venkiteshns",
-    portfolio: "https://example.com",
   },
   {
     name: "Aswin Sreeraj",
