@@ -8,10 +8,11 @@ export default function Navbar() {
   const [query, setQuery] = useState('');
   const location = useLocation();
 
-  // Close mobile menu on route change
+  // Close mobile menu on route change and reset scroll smoothly
   const close = () => {
     setMenuOpen(false);
     setSearchOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navLinks = [

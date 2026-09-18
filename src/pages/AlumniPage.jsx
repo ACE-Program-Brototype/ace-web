@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ALUMNI_MEMBERS, SPOTLIGHT_ALUMNI, ALUMNI_STORIES, ALUMNI_STATS } from '../constants/alumniDatas';
+import PartnerLogosMarquee from '../components/PartnerLogosMarquee';
 
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -8,10 +9,60 @@ const revealVariant = {
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
 
+const getCardOffset = (index, current, total) => {
+  let diff = index - current;
+  if (diff > total / 2) diff -= total;
+  if (diff < -total / 2) diff += total;
+  return diff;
+};
+
 export default function AlumniPage() {
   // Spotlight Series State
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSpotlightPaused, setIsSpotlightPaused] = useState(false);
+
+  // Mobile Touch Swipe Handling for Spotlight Carousel
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
+
+  const handleSpotlightTouchStart = (e) => {
+    setIsSpotlightPaused(true);
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchEndX.current = 0;
+    touchEndY.current = 0;
+  };
+
+  const handleSpotlightTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+    touchEndY.current = e.touches[0].clientY;
+  };
+
+  const handleSpotlightTouchEnd = () => {
+    setIsSpotlightPaused(false);
+    if (touchEndX.current === 0) return;
+
+    const diffX = touchStartX.current - touchEndX.current;
+    const diffY = touchStartY.current - touchEndY.current;
+
+    // Detect dominant horizontal swipe with 40px threshold
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swiped left -> next card
+        setCurrentIndex((prev) => (prev + 1) % SPOTLIGHT_ALUMNI.length);
+      } else {
+        // Swiped right -> prev card
+        setCurrentIndex((prev) => (prev - 1 + SPOTLIGHT_ALUMNI.length) % SPOTLIGHT_ALUMNI.length);
+      }
+    }
+
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+    touchStartY.current = 0;
+    touchEndY.current = 0;
+  };
 
   // Testimonials Carousel State
   const testimonialsRef = useRef(null);
@@ -47,14 +98,6 @@ export default function AlumniPage() {
     }, 4000);
     return () => clearInterval(interval);
   }, [isTestimonialsPaused]);
-
-  const prevSpotlight = () => {
-    setCurrentIndex((prev) => (prev - 1 + SPOTLIGHT_ALUMNI.length) % SPOTLIGHT_ALUMNI.length);
-  };
-
-  const nextSpotlight = () => {
-    setCurrentIndex((prev) => (prev + 1) % SPOTLIGHT_ALUMNI.length);
-  };
 
   const scrollTestimonialsPrev = () => {
     if (testimonialsRef.current) {
@@ -110,7 +153,7 @@ export default function AlumniPage() {
 
         {/* 2. Stats Strip */}
         <motion.section
-          className="grid grid-cols-2 md:grid-cols-4 border-t border-outline-variant mb-24"
+          className="grid grid-cols-2 md:grid-cols-4 border-y border-outline-variant"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -132,113 +175,180 @@ export default function AlumniPage() {
           ))}
         </motion.section>
 
-        {/* 3. Automatic Full-Width Spotlight Carousel (Above Testimonials) */}
+        {/* 3. Hiring Partners */}
         <motion.section
-          className="border-y border-outline-variant py-16 mb-28"
+          className="py-24 border-b border-outline-variant"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={stagger}
         >
+          <motion.h2
+            variants={revealVariant}
+            className="font-headline-lg text-headline-lg text-center mb-16 text-primary"
+          >
+            Where our engineers go.
+          </motion.h2>
+          <PartnerLogosMarquee />
+        </motion.section>
+
+        {/* 4. Automatic 3D Coverflow Spotlight Carousel */}
+        <motion.section
+          className="border-b border-outline-variant py-20 mb-28"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
+          {/* Section Header: Centered in the middle */}
+          <div className="flex flex-col items-center text-center mb-8 md:mb-12 px-4 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <span className="font-label-sm text-label-sm text-accent uppercase tracking-widest font-semibold block">
+                Spotlight Series
+              </span>
+              <span className="text-on-surface-variant/40">•</span>
+              <span className="font-mono text-xs text-on-surface-variant">
+                0{currentIndex + 1} / 0{SPOTLIGHT_ALUMNI.length}
+              </span>
+            </div>
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-3">
+              Distinguished Alumni
+            </h2>
+            <p className="font-body-md text-sm text-on-surface-variant">
+              Discover how our alumni transformed their passion into industry-defining careers.
+            </p>
+          </div>
+
           <div
-            className="relative group/spotlight px-2 sm:px-6"
+            className="relative group/spotlight px-2 sm:px-6 flex flex-col items-center justify-center touch-pan-y"
             onMouseEnter={() => setIsSpotlightPaused(true)}
             onMouseLeave={() => setIsSpotlightPaused(false)}
+            onTouchStart={handleSpotlightTouchStart}
+            onTouchMove={handleSpotlightTouchMove}
+            onTouchEnd={handleSpotlightTouchEnd}
           >
-            {/* Side Navigation Arrow: Left */}
-            <button
-              onClick={prevSpotlight}
-              aria-label="Previous Spotlight"
-              className="absolute -left-3 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-surface border border-outline-variant hover:border-primary hover:bg-surface-container-high text-primary flex items-center justify-center transition-all shadow-md"
+            {/* 3D Coverflow Stage */}
+            <div
+              className="relative w-full h-[620px] sm:h-[680px] md:h-[720px] flex items-center justify-center overflow-hidden py-6"
+              style={{ perspective: '1200px' }}
             >
-              <span className="material-symbols-outlined text-[20px]">arrow_back</span>
-            </button>
+              {SPOTLIGHT_ALUMNI.map((alumnus, idx) => {
+                const offset = getCardOffset(idx, currentIndex, SPOTLIGHT_ALUMNI.length);
+                const isCenter = offset === 0;
 
-            {/* Side Navigation Arrow: Right */}
-            <button
-              onClick={nextSpotlight}
-              aria-label="Next Spotlight"
-              className="absolute -right-3 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-surface border border-outline-variant hover:border-primary hover:bg-surface-container-high text-primary flex items-center justify-center transition-all shadow-md"
-            >
-              <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-            </button>
+                // Compute carousel transforms (all cards at same flat angle, not tilted)
+                let xTransform = '0%';
+                let scaleTransform = 1;
+                let rotateTransform = 0;
+                let zIndexVal = 30;
+                let opacityVal = 1;
 
-            {/* Carousel Slider Track */}
-            <div className="overflow-hidden w-full">
-              <div
-                className="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              >
-                {SPOTLIGHT_ALUMNI.map((alumnus) => (
-                  <div key={alumnus.id} className="w-full shrink-0">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                      {/* Image container: same 500px height */}
-                      <motion.div
-                        variants={revealVariant}
-                        className="relative h-[380px] sm:h-[450px] lg:h-[500px] w-full overflow-hidden border border-outline-variant bg-surface-container-low"
-                      >
-                        <img
-                          referrerPolicy="no-referrer"
-                          className="absolute inset-0 w-full h-full object-cover"
-                          alt={alumnus.name}
-                          src={alumnus.img}
-                        />
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-primary text-on-primary text-[10px] font-mono uppercase tracking-widest px-3 py-1">
-                            Spotlight
-                          </span>
-                        </div>
-                        <div className="absolute bottom-4 left-4">
-                          <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-xs text-white font-mono text-sm font-semibold border border-white/10">
-                            {alumnus.pkg}
-                          </span>
-                        </div>
-                      </motion.div>
+                if (offset === 0) {
+                  xTransform = '0%';
+                  scaleTransform = 1;
+                  rotateTransform = 0;
+                  zIndexVal = 30;
+                  opacityVal = 1;
+                } else if (offset === -1) {
+                  xTransform = '-64%';
+                  scaleTransform = 0.88;
+                  rotateTransform = 0;
+                  zIndexVal = 20;
+                  opacityVal = 0.7;
+                } else if (offset === 1) {
+                  xTransform = '64%';
+                  scaleTransform = 0.88;
+                  rotateTransform = 0;
+                  zIndexVal = 20;
+                  opacityVal = 0.7;
+                } else {
+                  xTransform = offset < 0 ? '-120%' : '120%';
+                  scaleTransform = 0.75;
+                  rotateTransform = 0;
+                  zIndexVal = 10;
+                  opacityVal = 0;
+                }
 
-                      {/* Content side */}
-                      <motion.div variants={revealVariant} className="flex flex-col justify-center">
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">
-                            Spotlight Series
-                          </span>
-                          <span className="text-on-surface-variant/40">•</span>
-                          <span className="font-mono text-xs text-on-surface-variant">
-                            0{currentIndex + 1} / 0{SPOTLIGHT_ALUMNI.length}
-                          </span>
-                        </div>
+                return (
+                  <motion.div
+                    key={alumnus.id}
+                    onClick={() => {
+                      if (!isCenter) setCurrentIndex(idx);
+                    }}
+                    animate={{
+                      x: xTransform,
+                      y: 0,
+                      scale: scaleTransform,
+                      rotateY: rotateTransform,
+                      zIndex: zIndexVal,
+                      opacity: opacityVal,
+                    }}
+                    transition={{
+                      duration: 0.65,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    style={{
+                      transformStyle: 'preserve-3d',
+                    }}
+                    className={`absolute inset-0 m-auto w-[310px] sm:w-[390px] md:w-[460px] h-[520px] sm:h-[580px] md:h-[620px] flex flex-col bg-surface border transition-colors select-none ${
+                      isCenter
+                        ? 'border-accent shadow-[0_24px_60px_rgba(0,44,95,0.2),0_0_30px_rgba(252,172,4,0.25)] ring-1 ring-accent/30 cursor-default'
+                        : 'border-outline-variant shadow-md hover:border-primary/50 cursor-pointer'
+                    }`}
+                  >
+                    {/* Card Image Header (Vertical) */}
+                    <div className="relative h-[240px] sm:h-[280px] md:h-[310px] w-full overflow-hidden bg-surface-container-low shrink-0 border-b border-outline-variant">
+                      <img
+                        referrerPolicy="no-referrer"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/spotlight:scale-105"
+                        alt={alumnus.name}
+                        src={alumnus.img}
+                      />
+                      <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+                        <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-xs text-accent font-mono text-xs sm:text-sm md:text-base font-semibold border border-white/10 shadow-sm">
+                          {alumnus.pkg}
+                        </span>
+                      </div>
+                    </div>
 
-                        <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">
-                          {alumnus.name}
-                        </h2>
-                        <p className="font-body-lg text-body-lg text-on-surface-variant mb-6">
-                          {alumnus.companyRole || `${alumnus.role} ${alumnus.company !== 'ND' && alumnus.company !== 'Non-Disclosable' ? `@ ${alumnus.company}` : ''}`}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2 mb-8">
-                          <span className="px-3 py-1 bg-surface-container-high text-primary font-label-sm text-xs uppercase tracking-wider border border-outline-variant">
+                    {/* Card Body (Vertical) */}
+                    <div className="flex-1 p-5 sm:p-6 flex flex-col justify-between overflow-hidden bg-surface">
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span className="font-label-sm text-xs sm:text-sm text-accent uppercase tracking-widest font-semibold">
                             {alumnus.domain}
                           </span>
-                          <span className="px-3 py-1 bg-surface-container-high text-on-surface-variant font-label-sm text-xs uppercase tracking-wider border border-outline-variant">
-                            Placed: {alumnus.placedOn}
-                          </span>
-                          <span className="px-3 py-1 bg-surface-container-high text-primary font-mono text-xs border border-outline-variant">
-                            Package: {alumnus.pkg}
+                          <span className="font-mono text-xs sm:text-sm text-on-surface-variant">
+                            {alumnus.placedOn}
                           </span>
                         </div>
 
-                        <div className="p-6 bg-surface-container-low border-l-2 border-primary">
-                          <h4 className="font-label-sm text-label-sm text-primary font-bold uppercase mb-2">
-                            Featured Highlight
-                          </h4>
-                          <p className="font-body-md text-body-md text-on-surface italic leading-relaxed">
-                            "{alumnus.quote}"
-                          </p>
-                        </div>
-                      </motion.div>
+                        <h3 className="font-headline-sm text-lg sm:text-xl md:text-2xl font-bold text-primary truncate">
+                          {alumnus.name}
+                        </h3>
+                        <p className="font-body-md text-xs sm:text-sm md:text-base text-on-surface-variant line-clamp-1 mb-3">
+                          {alumnus.companyRole ||
+                            `${alumnus.role} ${
+                              alumnus.company !== 'ND' && alumnus.company !== 'Non-Disclosable'
+                                ? `@ ${alumnus.company}`
+                                : ''
+                            }`}
+                        </p>
+                      </div>
+
+                      {/* Highlight Quote */}
+                      <div className="p-3.5 sm:p-4 bg-surface-container-low border-l-2 border-accent relative">
+                        <span className="material-symbols-outlined text-accent/30 text-base sm:text-xl absolute top-2 right-2 sm:top-3 sm:right-3 select-none">
+                          format_quote
+                        </span>
+                        <p className="font-body-md text-xs sm:text-sm md:text-base text-on-surface italic leading-relaxed line-clamp-3 sm:line-clamp-4">
+                          "{alumnus.quote}"
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Carousel Dots Indicator */}
@@ -248,8 +358,9 @@ export default function AlumniPage() {
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`h-1.5 transition-all duration-300 ${currentIndex === i ? 'w-8 bg-primary' : 'w-2 bg-outline-variant hover:bg-primary/50'
-                    }`}
+                  className={`h-1.5 transition-all duration-300 rounded-full ${
+                    currentIndex === i ? 'w-8 bg-accent' : 'w-2 bg-outline-variant hover:bg-primary/50'
+                  }`}
                 />
               ))}
             </div>
