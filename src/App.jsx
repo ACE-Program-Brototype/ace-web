@@ -14,7 +14,7 @@ import StudentsPage from './pages/StudentsPage';
 import JournalPage from './pages/JournalPage';
 import TeamPage from './pages/TeamPage';
 import ContactPage from './pages/ContactPage';
-import AdminDashboard from './pages/AdminDashboard';
+// import AdminDashboard from './pages/AdminDashboard';
 import EventsPage from './pages/EventsPage';
 
 import { motion } from 'framer-motion';
@@ -51,16 +51,14 @@ export default function App() {
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
-          <Route path="/alumni" element={<PageWrapper><AlumniPage /></PageWrapper>} />
-          <Route path="/outcomes" element={<PageWrapper><PlacementPage /></PageWrapper>} />
-          <Route path="/placements" element={<PageWrapper><PlacementPage /></PageWrapper>} />
           <Route path="/directory" element={<PageWrapper><StudentsPage /></PageWrapper>} />
-          <Route path="/students" element={<PageWrapper><StudentsPage /></PageWrapper>} />
+          <Route path="/outcomes" element={<PageWrapper><PlacementPage /></PageWrapper>} />
+          <Route path="/events" element={<PageWrapper><EventsPage /></PageWrapper>} />
+          <Route path="/alumni" element={<PageWrapper><AlumniPage /></PageWrapper>} />
           <Route path="/journal" element={<PageWrapper><JournalPage /></PageWrapper>} />
           <Route path="/handlers" element={<PageWrapper><TeamPage /></PageWrapper>} />
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
-          <Route path="/admin" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
-          <Route path="/events" element={<PageWrapper><EventsPage /></PageWrapper>} />
+          {/* <Route path="/admin" element={<PageWrapper><AdminDashboard /></PageWrapper>} /> */}
         </Routes>
       </AnimatePresence>
 

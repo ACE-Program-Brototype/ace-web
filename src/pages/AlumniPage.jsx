@@ -229,7 +229,7 @@ export default function AlumniPage() {
           >
             {/* 3D Coverflow Stage */}
             <div
-              className="relative w-full h-[620px] sm:h-[680px] md:h-[720px] flex items-center justify-center overflow-hidden py-6"
+              className="relative w-full h-[540px] sm:h-[600px] md:h-[640px] flex items-center justify-center overflow-hidden py-6"
               style={{ perspective: '1200px' }}
             >
               {SPOTLIGHT_ALUMNI.map((alumnus, idx) => {
@@ -290,14 +290,13 @@ export default function AlumniPage() {
                     style={{
                       transformStyle: 'preserve-3d',
                     }}
-                    className={`absolute inset-0 m-auto w-[310px] sm:w-[390px] md:w-[460px] h-[520px] sm:h-[580px] md:h-[620px] flex flex-col bg-surface border transition-colors select-none ${
-                      isCenter
-                        ? 'border-accent shadow-[0_24px_60px_rgba(0,44,95,0.2),0_0_30px_rgba(252,172,4,0.25)] ring-1 ring-accent/30 cursor-default'
-                        : 'border-outline-variant shadow-md hover:border-primary/50 cursor-pointer'
-                    }`}
+                    className={`absolute inset-0 m-auto w-[310px] sm:w-[390px] md:w-[460px] h-[450px] sm:h-[500px] md:h-[530px] flex flex-col bg-surface border transition-colors select-none ${isCenter
+                      ? 'border-accent shadow-[0_24px_60px_rgba(0,44,95,0.2),0_0_30px_rgba(252,172,4,0.25)] ring-1 ring-accent/30 cursor-default'
+                      : 'border-outline-variant shadow-md hover:border-primary/50 cursor-pointer'
+                      }`}
                   >
                     {/* Card Image Header (Vertical) */}
-                    <div className="relative h-[240px] sm:h-[280px] md:h-[310px] w-full overflow-hidden bg-surface-container-low shrink-0 border-b border-outline-variant">
+                    <div className="relative h-[230px] sm:h-[260px] md:h-[280px] w-full overflow-hidden bg-surface-container-low shrink-0 border-b border-outline-variant">
                       <img
                         referrerPolicy="no-referrer"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/spotlight:scale-105"
@@ -312,7 +311,7 @@ export default function AlumniPage() {
                     </div>
 
                     {/* Card Body (Vertical) */}
-                    <div className="flex-1 p-5 sm:p-6 flex flex-col justify-between overflow-hidden bg-surface">
+                    <div className="flex-1 p-5 sm:p-6 flex flex-col gap-3 sm:gap-3.5 overflow-hidden bg-surface">
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-1.5">
                           <span className="font-label-sm text-xs sm:text-sm text-accent uppercase tracking-widest font-semibold">
@@ -326,14 +325,14 @@ export default function AlumniPage() {
                         <h3 className="font-headline-sm text-lg sm:text-xl md:text-2xl font-bold text-primary truncate">
                           {alumnus.name}
                         </h3>
-                        <p className="font-body-md text-xs sm:text-sm md:text-base text-on-surface-variant line-clamp-1 mb-3">
+                        {/* <p className="font-body-md text-xs sm:text-sm md:text-base text-on-surface-variant line-clamp-1 mb-3">
                           {alumnus.companyRole ||
                             `${alumnus.role} ${
                               alumnus.company !== 'ND' && alumnus.company !== 'Non-Disclosable'
                                 ? `@ ${alumnus.company}`
                                 : ''
                             }`}
-                        </p>
+                        </p> */}
                       </div>
 
                       {/* Highlight Quote */}
@@ -358,9 +357,8 @@ export default function AlumniPage() {
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`h-1.5 transition-all duration-300 rounded-full ${
-                    currentIndex === i ? 'w-8 bg-accent' : 'w-2 bg-outline-variant hover:bg-primary/50'
-                  }`}
+                  className={`h-1.5 transition-all duration-300 rounded-full ${currentIndex === i ? 'w-8 bg-accent' : 'w-2 bg-outline-variant hover:bg-primary/50'
+                    }`}
                 />
               ))}
             </div>
@@ -429,9 +427,9 @@ export default function AlumniPage() {
                       <h3 className="font-headline-md text-headline-md text-primary text-base font-bold">
                         {a.name}
                       </h3>
-                      <p className="font-label-sm text-xs text-on-surface-variant line-clamp-1">
+                      {/* <p className="font-label-sm text-xs text-on-surface-variant line-clamp-1">
                         {a.companyRole || `${a.role} ${a.company !== 'ND' && a.company !== 'Non-Disclosable' ? `@ ${a.company}` : ''}`}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <span className="inline-block px-2.5 py-0.5 bg-surface-container-low text-on-surface-variant font-label-sm text-[10px] uppercase tracking-wider mb-4 border border-outline-variant">
@@ -505,7 +503,7 @@ export default function AlumniPage() {
                     </p>
 
                     <div className="space-y-1.5 text-xs text-on-surface-variant">
-                      <div className="flex items-center justify-between">
+                      {/* <div className="flex items-center justify-between">
                         <span className="font-label-sm uppercase text-[10px] text-on-surface-variant/70">Company</span>
                         <span className="font-medium text-on-surface text-right">
                           {alumnus.company === 'ND' || alumnus.company === 'Non-Disclosable' ? (
@@ -514,7 +512,7 @@ export default function AlumniPage() {
                             alumnus.company
                           )}
                         </span>
-                      </div>
+                      </div> */}
                       <div className="flex items-center justify-between">
                         <span className="font-label-sm uppercase text-[10px] text-on-surface-variant/70">Placed On</span>
                         <span className="font-mono text-on-surface text-right">{alumnus.placedOn}</span>
