@@ -68,6 +68,7 @@ const DEFAULT_KEY_COLOR = [0.0, 1.0, 0.0];
  * area with the live website landing page sitting underneath.
  */
 export default function LaunchLoader({
+  onEnded,
   similarity = 0.35,
   smoothness = 0.20,
   spill = 0.35,
@@ -80,6 +81,7 @@ export default function LaunchLoader({
   const [launchState, setLaunchState] = useState(
     isLaunchEnabled ? 'loading' : 'disabled'
   );
+  const [isRevealing, setIsRevealing] = useState(false);
 
   const containerRef = useRef(null);
   const videoRef = useRef(null);
@@ -121,10 +123,11 @@ export default function LaunchLoader({
     const timer = setTimeout(() => {
       setLaunchState('completed');
       document.documentElement.classList.remove('launch-pending');
-    }, 1850);
+      onEnded?.();
+    }, 350);
 
     return () => clearTimeout(timer);
-  }, [launchState]);
+  }, [launchState, onEnded]);
 
   // Allow Escape key to exit intro
   useEffect(() => {
@@ -133,12 +136,13 @@ export default function LaunchLoader({
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         handleEndTransition();
+        onEnded?.();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [launchState, handleEndTransition]);
+  }, [launchState, handleEndTransition, onEnded]);
 
   // WebGL Chroma-Key Engine
   useEffect(() => {
@@ -276,6 +280,11 @@ export default function LaunchLoader({
         video.playbackRate = 1.0;
       }
 
+      // When reaching the green screen reveal (t >= 5.5s), make container transparent to reveal landing page
+      if (video.currentTime >= 5.5 && !isRevealing) {
+        setIsRevealing(true);
+      }
+
       if (!isUsing2DFallback && gl && webglResourcesRef.current) {
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.bindTexture(gl.TEXTURE_2D, webglResourcesRef.current.texture);
@@ -377,17 +386,20 @@ export default function LaunchLoader({
 
   const handleVideoEnded = () => {
     handleEndTransition();
+    onEnded?.();
   };
 
   const handleVideoError = (e) => {
     console.warn('Intro video failed to load:', e);
     handleEndTransition();
+    onEnded?.();
   };
 
   const handleTransitionEnd = (e) => {
     if (e.target === containerRef.current && launchState === 'ending') {
       setLaunchState('completed');
       document.documentElement.classList.remove('launch-pending');
+      onEnded?.();
     }
   };
 
@@ -401,7 +413,7 @@ export default function LaunchLoader({
   return (
     <div
       ref={containerRef}
-      className={`launch-loader ${isPlaying ? 'is-playing' : ''} ${isExiting ? 'exit' : ''}`}
+      className={`launch-loader ${isPlaying ? 'is-playing' : ''} ${isRevealing ? 'is-revealing' : ''} ${isExiting ? 'exit' : ''}`}
       onTransitionEnd={handleTransitionEnd}
       aria-label="Launch Intro"
     >

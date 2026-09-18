@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
 import LaunchLoader from './components/LaunchLoader/LaunchLoader';
+import { IS_LAUNCH_ENABLED } from './constants/launchConfig';
 
 import LandingPage from './pages/LandingPage';
 import AlumniPage from './pages/AlumniPage';
@@ -32,12 +34,17 @@ function PageWrapper({ children }) {
 
 export default function App() {
   const location = useLocation();
+  const [isLaunchActive, setIsLaunchActive] = useState(IS_LAUNCH_ENABLED);
+
   const noFooterPaths = ['/', '/admin'];
   const showFooter = !noFooterPaths.includes(location.pathname);
 
   return (
     <>
-      <LaunchLoader />
+      {isLaunchActive && (
+        <LaunchLoader onEnded={() => setIsLaunchActive(false)} />
+      )}
+
       <ScrollProgress />
       <Navbar />
 
@@ -61,3 +68,4 @@ export default function App() {
     </>
   );
 }
+
