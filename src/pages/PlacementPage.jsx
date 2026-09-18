@@ -78,22 +78,20 @@ export default function PlacementPage() {
             <motion.div variants={revealVariant} className="inline-flex p-1 border border-outline-variant bg-surface self-start sm:self-auto">
               <button
                 onClick={() => setViewMode('cards')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 font-label-sm text-xs font-semibold uppercase tracking-wider transition-all ${
-                  viewMode === 'cards'
-                    ? 'bg-primary text-on-primary shadow-xs'
-                    : 'text-on-surface-variant hover:text-primary'
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 font-label-sm text-xs font-semibold uppercase tracking-wider transition-all ${viewMode === 'cards'
+                  ? 'bg-primary text-on-primary shadow-xs'
+                  : 'text-on-surface-variant hover:text-primary'
+                  }`}
               >
                 <span className="material-symbols-outlined text-[16px]">grid_view</span>
                 Mini Cards
               </button>
               <button
                 onClick={() => setViewMode('table')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 font-label-sm text-xs font-semibold uppercase tracking-wider transition-all ${
-                  viewMode === 'table'
-                    ? 'bg-primary text-on-primary shadow-xs'
-                    : 'text-on-surface-variant hover:text-primary'
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 font-label-sm text-xs font-semibold uppercase tracking-wider transition-all ${viewMode === 'table'
+                  ? 'bg-primary text-on-primary shadow-xs'
+                  : 'text-on-surface-variant hover:text-primary'
+                  }`}
               >
                 <span className="material-symbols-outlined text-[16px]">table_rows</span>
                 Table View
@@ -142,11 +140,10 @@ export default function PlacementPage() {
                         </div>
 
                         <span
-                          className={`font-mono text-xs px-2.5 py-1 border font-semibold tracking-tight ${
-                            isDisclosablePkg
-                              ? 'bg-accent/15 border-accent/40 text-primary'
-                              : 'bg-surface-container-high border-outline-variant text-on-surface-variant'
-                          }`}
+                          className={`font-mono text-xs px-2.5 py-1 border font-semibold tracking-tight ${isDisclosablePkg
+                            ? 'bg-accent/15 border-accent/40 text-primary'
+                            : 'bg-surface-container-high border-outline-variant text-on-surface-variant'
+                            }`}
                         >
                           {isDisclosablePkg ? p.pkg : 'Non-Disclosable'}
                         </span>
@@ -165,9 +162,9 @@ export default function PlacementPage() {
                         <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 bg-surface-container-high text-on-surface border border-outline-variant">
                           {p.domain}
                         </span>
-                        <span className="font-mono text-xs text-on-surface-variant truncate font-medium">
+                        {/* <span className="font-mono text-xs text-on-surface-variant truncate font-medium">
                           {isDisclosableCompany ? p.company : 'Non-Disclosable'}
-                        </span>
+                        </span> */}
                       </div>
                     </div>
                   </div>
@@ -180,7 +177,7 @@ export default function PlacementPage() {
               <table className="w-full text-left border-collapse min-w-[720px]">
                 <thead>
                   <tr className="border-b-2 border-primary">
-                    {['Placed On', 'Name', 'Role', 'Domain', 'Company', 'Package'].map(h => (
+                    {['Placed On', 'Name', 'Role', 'Domain', 'Package'].map(h => (
                       <th key={h} className="py-4 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">{h}</th>
                     ))}
                   </tr>
@@ -192,13 +189,13 @@ export default function PlacementPage() {
                       <td className="py-6 px-4 font-medium text-primary">{p.name}</td>
                       <td className="py-6 px-4 text-on-surface">{p.role}</td>
                       <td className="py-6 px-4 text-on-surface-variant">{p.domain}</td>
-                      <td className="py-6 px-4 text-on-surface">
+                      {/* <td className="py-6 px-4 text-on-surface">
                         {p.company === 'ND' || p.company === 'Non-Disclosable' ? (
                           <span className="text-on-surface-variant italic">Non-Disclosable</span>
                         ) : (
                           p.company
                         )}
-                      </td>
+                      </td> */}
                       <td className="py-6 px-4 text-primary font-medium">
                         {p.pkg === 'ND' || p.pkg === 'Non-Disclosable' || p.pkg === 'Non Disclosable' ? (
                           <span className="text-on-surface-variant italic font-normal">Non-Disclosable</span>
