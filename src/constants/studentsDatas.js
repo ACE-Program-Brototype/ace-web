@@ -9,7 +9,7 @@ import farhanaImg from "../../assets/candidates/farhana.jpeg"
 import shifanaImg from "../../assets/candidates/shifana.webp";
 import venkiteshImg from "../../assets/candidates/venkitesh.jpg";
 import bennetImg from "../../assets/candidates/bennet.jpeg";
-import fayazImg from "../../assets/candidates/fayaz.jpeg";
+import fayasImg from "../../assets/candidates/fayaz.jpeg";
 
 export const STUDENTS = [
   {
@@ -86,10 +86,10 @@ export const STUDENTS = [
     github: "https://github.com/codesofara-bit/",
   },
   {
-    name: "Fayaz K.P.",
+    name: "Fayas K.P.",
     batch: "BCE317",
     stack: "MERN Stack",
-    img: fayazImg,
+    img: fayasImg,
     github: "https://github.com/Fayasktr/",
     linkedin: "https://www.linkedin.com/in/fayas-kp-ktr/",
   },
