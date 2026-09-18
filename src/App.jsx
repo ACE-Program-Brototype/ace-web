@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
+import LaunchLoader from './components/LaunchLoader/LaunchLoader';
 
 import LandingPage from './pages/LandingPage';
 import AlumniPage from './pages/AlumniPage';
@@ -36,6 +37,7 @@ export default function App() {
 
   return (
     <>
+      <LaunchLoader />
       <ScrollProgress />
       <Navbar />
 

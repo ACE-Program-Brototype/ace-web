@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0',
-    allowedHosts: ['title-ceramic-ripe-agencies.trycloudflare.com'],
+    allowedHosts: ['arm-rain-projection-involves.trycloudflare.com'],
   },
 })
