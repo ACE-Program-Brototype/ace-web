@@ -14,13 +14,18 @@
   visibility: visible;
   pointer-events: auto;
   user-select: none;
-  background-color: transparent;
+  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 1800ms cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 1800ms ease;
+  transition: opacity 350ms ease, visibility 350ms ease;
   will-change: opacity;
+}
+
+/* While video is in intro/logo phase, container is solid black so landing page never flashes.
+   When video reaches the green screen reveal (t >= 5.5s), background becomes transparent. */
+.launch-loader.is-revealing {
+  background-color: transparent;
 }
 
 /* Hardware-accelerated WebGL canvas where green screen is transparent */
@@ -35,23 +40,15 @@
   z-index: 2;
   transform: scale(1);
   filter: blur(0px);
-  transition: transform 1800ms cubic-bezier(0.16, 1, 0.3, 1),
-              filter 1800ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, filter;
+  will-change: opacity;
 }
 
-/* Exit Transition State: Smooth dissolve */
+/* Exit Transition State: Smooth quick fade into the landing page */
 .launch-loader.exit {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 1800ms cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 1800ms ease;
-}
-
-.launch-loader.exit .launch-loader-canvas {
-  transform: scale(1.05);
-  filter: blur(6px);
+  transition: opacity 350ms ease, visibility 350ms ease;
 }
 
 /* Hidden video feeding frames to WebGL */
