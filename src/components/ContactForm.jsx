@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
 import ErrorToast from './ErrorToast';
@@ -11,13 +11,35 @@ const revealVariant = {
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
 export default function ContactForm() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    unregister,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      isBrototypeStudent: 'no',
+    },
+  });
   const [sent, setSent] = useState(false);
+
+  const isBrototypeStudent = watch('isBrototypeStudent');
+
+  useEffect(() => {
+    if (isBrototypeStudent !== 'yes') {
+      unregister('batchNumber');
+      unregister('counsellorName');
+    }
+  }, [isBrototypeStudent, unregister]);
 
   const onSubmit = async data => {
     try {
       const formData = new FormData();
       Object.keys(data).forEach(key => {
+        if (data.isBrototypeStudent !== 'yes' && ['batchNumber', 'counsellorName'].includes(key)) {
+          return;
+        }
         formData.append(key, data[key]);
       });
       // throw new Error("Message sent failed!!!!");
@@ -132,6 +154,83 @@ export default function ContactForm() {
               />
               {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
             </div>
+
+            <div>
+              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-3">
+                Are you a Brototype student?
+              </label>
+              <div className="flex items-center gap-8 py-1">
+                <label className="inline-flex items-center gap-2.5 cursor-pointer font-body-md text-on-surface select-none group">
+                  <input
+                    type="radio"
+                    value="yes"
+                    {...register('isBrototypeStudent')}
+                    className="w-4 h-4 accent-primary text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer"
+                  />
+                  <span className="group-hover:text-primary transition-colors">Yes</span>
+                </label>
+                <label className="inline-flex items-center gap-2.5 cursor-pointer font-body-md text-on-surface select-none group">
+                  <input
+                    type="radio"
+                    value="no"
+                    {...register('isBrototypeStudent')}
+                    className="w-4 h-4 accent-primary text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer"
+                  />
+                  <span className="group-hover:text-primary transition-colors">No</span>
+                </label>
+              </div>
+            </div>
+
+            <AnimatePresence initial={false}>
+              {isBrototypeStudent === 'yes' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-8 overflow-hidden"
+                >
+                  <div>
+                    <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="batchNumber">
+                      Batch Number
+                    </label>
+                    <input
+                      id="batchNumber"
+                      type="text"
+                      placeholder="e.g. BCE319, BC312"
+                      {...register('batchNumber', {
+                        required: 'Batch number is required',
+                        validate: {
+                          notEmpty: value => (value && value.trim().length >= 2) || 'Batch number must be at least 2 characters',
+                          validBatch: value => /^BC[a-zA-Z0-9\s-]*$/i.test(value?.trim()) || 'Batch number should start with BC (e.g. BCE319, BC312)'
+                        }
+                      })}
+                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none uppercase"
+                    />
+                    {errors.batchNumber && <p className="text-red-500 text-sm mt-1">{errors.batchNumber.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="counsellorName">
+                      Counsellor Name
+                    </label>
+                    <input
+                      id="counsellorName"
+                      type="text"
+                      placeholder="What is the name of your counsellor?"
+                      {...register('counsellorName', {
+                        required: 'Counsellor name is required',
+                        minLength: { value: 2, message: 'Must be at least 2 characters' },
+                        pattern: { value: /^[a-zA-Z\s.]+$/, message: 'Counsellor name cannot contain digits or special characters' },
+                        validate: value => (value && value.trim().length >= 2) || 'Counsellor name cannot be empty spaces'
+                      })}
+                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none"
+                    />
+                    {errors.counsellorName && <p className="text-red-500 text-sm mt-1">{errors.counsellorName.message}</p>}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div>
               <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="message">Your Message</label>
