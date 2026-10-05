@@ -1,36 +1,51 @@
-import shahid from '../../assets/handlers/shahid.webp';
-import aswin from '../../assets/candidates/aswin.webp';
-import venkiteshImg from '../../assets/candidates/venkitesh.jpg';
-import alAmeenImg from '../../assets/candidates/al ameen.webp';
+import shahid from "../../assets/handlers/shahid.webp";
+import aswin from "../../assets/candidates/aswin.webp";
+import venkiteshImg from "../../assets/candidates/venkitesh.jpg";
+import alAmeenImg from "../../assets/candidates/al ameen.webp";
+import RizvanImg from "../../assets/handlers/Rizvan.jpeg";
 
 export const FOUNDERS = [
   {
-    role: 'ACE Handler & Mentor', name: 'Shahid Noushad',
-    quote: '"Shaping the pedagogical frameworks that elevate our collective discourse."',
+    role: "ACE Handler & Mentor",
+    name: "Shahid Noushad",
+    quote:
+      '"Shaping the pedagogical frameworks that elevate our collective discourse."',
     img: shahid,
-    linkedin: 'https://www.linkedin.com/in/shahid-noushad/',
+    linkedin: "https://www.linkedin.com/in/shahid-noushad/",
+  },
+  {
+    role: "ACE Supporting Mentor",
+    name: "Rizvan Ali Asherf",
+    quote:
+      '"Supporting the candidates to elevate them personally and professionally."',
+    img: RizvanImg,
+    linkedin: "https://www.linkedin.com/in/rizvan293/",
   },
 ];
 
 export const HANDLERS = [
   {
-    role: 'ACE Community Manager',
-    name: 'Venkitesh NS',
-    quote: '"Connecting foundational learning with real-world engineering impact, one milestone at a time."',
+    role: "ACE Community Manager",
+    name: "Venkitesh NS",
+    quote:
+      '"Connecting foundational learning with real-world engineering impact, one milestone at a time."',
     img: venkiteshImg,
-    linkedin: 'https://www.linkedin.com/in/venkitesh-n-s-53195132b/',
+    linkedin: "https://www.linkedin.com/in/venkitesh-n-s-53195132b/",
   },
   {
-    role: 'Assistant Community Manager', name: 'Aswin Sreeraj',
-    quote: '"Safeguarding the integrity and philosophical rigor of community engagements."',
+    role: "Assistant Community Manager",
+    name: "Aswin Sreeraj",
+    quote:
+      '"Safeguarding the integrity and philosophical rigor of community engagements."',
     img: aswin,
-    linkedin: 'https://www.linkedin.com/in/aswinsreeraj/',
+    linkedin: "https://www.linkedin.com/in/aswinsreeraj/",
   },
   {
-    role: 'Program Coordinator',
-    name: 'Al Ameen S',
-    quote: '"Orchestrating high-impact technical programs that transform everyday learning into pivotal career moments."',
+    role: "Program Coordinator",
+    name: "Al Ameen S",
+    quote:
+      '"Orchestrating high-impact technical programs that transform everyday learning into pivotal career moments."',
     img: alAmeenImg,
-    linkedin: 'https://www.linkedin.com/in/alameens07/',
+    linkedin: "https://www.linkedin.com/in/alameens07/",
   },
 ];

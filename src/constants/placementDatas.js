@@ -1,37 +1,4 @@
-import { ALUMNI_MEMBERS, ALUMNI_STATS } from './alumniDatas';
-
-export const PARTNER_LOGOS = [
-  {
-    name: 'Skai Lama',
-    src: '/skai-lama.svg',
-    type: 'dark',
-  },
-  {
-    name: 'Golgix',
-    src: '/golgix.png',
-    type: 'white',
-  },
-  {
-    name: 'KubeNine',
-    src: '/kubenine.png',
-    type: 'white',
-  },
-  {
-    name: 'e& (Etisalat and)',
-    src: '/etisalat.svg',
-    type: 'white',
-  },
-  {
-    name: 'AccuMateAi',
-    src: '/accumate.svg',
-    type: 'dark',
-  },
-  {
-    name: 'Kalpas Innovations Pvt. Ltd.',
-    src: '/kalpas.svg',
-    type: 'dark',
-  },
-];
+import { ALUMNI_MEMBERS, ALUMNI_STATS } from "./alumniDatas";
 
 // Single source of truth: derived directly from ALUMNI_MEMBERS
 export const PLACEMENTS = ALUMNI_MEMBERS;

@@ -1,13 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { ALUMNI_MEMBERS, SPOTLIGHT_ALUMNI, ALUMNI_STORIES, ALUMNI_STATS } from '../constants/alumniDatas';
-import PartnerLogosMarquee from '../components/PartnerLogosMarquee';
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import {
+  ALUMNI_MEMBERS,
+  SPOTLIGHT_ALUMNI,
+  ALUMNI_STORIES,
+  ALUMNI_STATS,
+} from "../constants/alumniDatas";
 
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
 };
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
 
 const getCardOffset = (index, current, total) => {
   let diff = index - current;
@@ -54,7 +65,10 @@ export default function AlumniPage() {
         setCurrentIndex((prev) => (prev + 1) % SPOTLIGHT_ALUMNI.length);
       } else {
         // Swiped right -> prev card
-        setCurrentIndex((prev) => (prev - 1 + SPOTLIGHT_ALUMNI.length) % SPOTLIGHT_ALUMNI.length);
+        setCurrentIndex(
+          (prev) =>
+            (prev - 1 + SPOTLIGHT_ALUMNI.length) % SPOTLIGHT_ALUMNI.length,
+        );
       }
     }
 
@@ -83,15 +97,15 @@ export default function AlumniPage() {
     const interval = setInterval(() => {
       if (testimonialsRef.current) {
         const container = testimonialsRef.current;
-        const card = container.querySelector('.testimonial-card');
+        const card = container.querySelector(".testimonial-card");
         if (card) {
           const cardWidth = card.offsetWidth + 24; // width + gap
           const maxScroll = container.scrollWidth - container.clientWidth;
 
           if (container.scrollLeft + cardWidth >= maxScroll - 10) {
-            container.scrollTo({ left: 0, behavior: 'smooth' });
+            container.scrollTo({ left: 0, behavior: "smooth" });
           } else {
-            container.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            container.scrollBy({ left: cardWidth, behavior: "smooth" });
           }
         }
       }
@@ -101,21 +115,29 @@ export default function AlumniPage() {
 
   const scrollTestimonialsPrev = () => {
     if (testimonialsRef.current) {
-      const card = testimonialsRef.current.querySelector('.testimonial-card');
+      const card = testimonialsRef.current.querySelector(".testimonial-card");
       const cardWidth = card ? card.offsetWidth + 24 : 380;
-      testimonialsRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+      testimonialsRef.current.scrollBy({
+        left: -cardWidth,
+        behavior: "smooth",
+      });
     }
   };
 
   const scrollTestimonialsNext = () => {
     if (testimonialsRef.current) {
-      const card = testimonialsRef.current.querySelector('.testimonial-card');
+      const card = testimonialsRef.current.querySelector(".testimonial-card");
       const cardWidth = card ? card.offsetWidth + 24 : 380;
-      const maxScroll = testimonialsRef.current.scrollWidth - testimonialsRef.current.clientWidth;
+      const maxScroll =
+        testimonialsRef.current.scrollWidth -
+        testimonialsRef.current.clientWidth;
       if (testimonialsRef.current.scrollLeft + cardWidth >= maxScroll - 10) {
-        testimonialsRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        testimonialsRef.current.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        testimonialsRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        testimonialsRef.current.scrollBy({
+          left: cardWidth,
+          behavior: "smooth",
+        });
       }
     }
   };
@@ -123,7 +145,6 @@ export default function AlumniPage() {
   return (
     <div className="bg-surface text-on-surface antialiased font-body-md">
       <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
-
         {/* 1. Page Header */}
         <motion.header
           className="mb-20 pt-16"
@@ -147,13 +168,14 @@ export default function AlumniPage() {
             variants={revealVariant}
             className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed"
           >
-            Engineers who passed through ACE are now building the future at high-impact startups and technology companies.
+            Engineers who passed through ACE are now building the future at
+            high-impact startups and technology companies.
           </motion.p>
         </motion.header>
 
         {/* 2. Stats Strip */}
         <motion.section
-          className="grid grid-cols-2 md:grid-cols-4 border-y border-outline-variant"
+          className="grid grid-cols-2 md:grid-cols-3 border-y border-outline-variant"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -173,23 +195,6 @@ export default function AlumniPage() {
               </div>
             </motion.div>
           ))}
-        </motion.section>
-
-        {/* 3. Hiring Partners */}
-        <motion.section
-          className="py-24 border-b border-outline-variant"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={stagger}
-        >
-          <motion.h2
-            variants={revealVariant}
-            className="font-headline-lg text-headline-lg text-center mb-16 text-primary"
-          >
-            Where our engineers go.
-          </motion.h2>
-          <PartnerLogosMarquee />
         </motion.section>
 
         {/* 4. Automatic 3D Coverflow Spotlight Carousel */}
@@ -215,7 +220,8 @@ export default function AlumniPage() {
               Distinguished Alumni
             </h2>
             <p className="font-body-md text-sm text-on-surface-variant">
-              Discover how our alumni transformed their passion into industry-defining careers.
+              Discover how our alumni transformed their passion into
+              industry-defining careers.
             </p>
           </div>
 
@@ -230,39 +236,43 @@ export default function AlumniPage() {
             {/* 3D Coverflow Stage */}
             <div
               className="relative w-full h-[540px] sm:h-[600px] md:h-[640px] flex items-center justify-center overflow-hidden py-6"
-              style={{ perspective: '1200px' }}
+              style={{ perspective: "1200px" }}
             >
               {SPOTLIGHT_ALUMNI.map((alumnus, idx) => {
-                const offset = getCardOffset(idx, currentIndex, SPOTLIGHT_ALUMNI.length);
+                const offset = getCardOffset(
+                  idx,
+                  currentIndex,
+                  SPOTLIGHT_ALUMNI.length,
+                );
                 const isCenter = offset === 0;
 
                 // Compute carousel transforms (all cards at same flat angle, not tilted)
-                let xTransform = '0%';
+                let xTransform = "0%";
                 let scaleTransform = 1;
                 let rotateTransform = 0;
                 let zIndexVal = 30;
                 let opacityVal = 1;
 
                 if (offset === 0) {
-                  xTransform = '0%';
+                  xTransform = "0%";
                   scaleTransform = 1;
                   rotateTransform = 0;
                   zIndexVal = 30;
                   opacityVal = 1;
                 } else if (offset === -1) {
-                  xTransform = '-64%';
+                  xTransform = "-64%";
                   scaleTransform = 0.88;
                   rotateTransform = 0;
                   zIndexVal = 20;
                   opacityVal = 0.7;
                 } else if (offset === 1) {
-                  xTransform = '64%';
+                  xTransform = "64%";
                   scaleTransform = 0.88;
                   rotateTransform = 0;
                   zIndexVal = 20;
                   opacityVal = 0.7;
                 } else {
-                  xTransform = offset < 0 ? '-120%' : '120%';
+                  xTransform = offset < 0 ? "-120%" : "120%";
                   scaleTransform = 0.75;
                   rotateTransform = 0;
                   zIndexVal = 10;
@@ -288,12 +298,13 @@ export default function AlumniPage() {
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     style={{
-                      transformStyle: 'preserve-3d',
+                      transformStyle: "preserve-3d",
                     }}
-                    className={`absolute inset-0 m-auto w-[310px] sm:w-[390px] md:w-[460px] h-[450px] sm:h-[500px] md:h-[530px] flex flex-col bg-surface border transition-colors select-none ${isCenter
-                      ? 'border-accent shadow-[0_24px_60px_rgba(0,44,95,0.2),0_0_30px_rgba(252,172,4,0.25)] ring-1 ring-accent/30 cursor-default'
-                      : 'border-outline-variant shadow-md hover:border-primary/50 cursor-pointer'
-                      }`}
+                    className={`absolute inset-0 m-auto w-[310px] sm:w-[390px] md:w-[460px] h-[450px] sm:h-[500px] md:h-[530px] flex flex-col bg-surface border transition-colors select-none ${
+                      isCenter
+                        ? "border-accent shadow-[0_24px_60px_rgba(0,44,95,0.2),0_0_30px_rgba(252,172,4,0.25)] ring-1 ring-accent/30 cursor-default"
+                        : "border-outline-variant shadow-md hover:border-primary/50 cursor-pointer"
+                    }`}
                   >
                     {/* Card Image Header (Vertical) */}
                     <div className="relative h-[230px] sm:h-[260px] md:h-[280px] w-full overflow-hidden bg-surface-container-low shrink-0 border-b border-outline-variant">
@@ -357,8 +368,11 @@ export default function AlumniPage() {
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`h-1.5 transition-all duration-300 rounded-full ${currentIndex === i ? 'w-8 bg-accent' : 'w-2 bg-outline-variant hover:bg-primary/50'
-                    }`}
+                  className={`h-1.5 transition-all duration-300 rounded-full ${
+                    currentIndex === i
+                      ? "w-8 bg-accent"
+                      : "w-2 bg-outline-variant hover:bg-primary/50"
+                  }`}
                 />
               ))}
             </div>
@@ -373,7 +387,10 @@ export default function AlumniPage() {
           viewport={{ once: true }}
           variants={stagger}
         >
-          <motion.div variants={revealVariant} className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <motion.div
+            variants={revealVariant}
+            className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4"
+          >
             <div>
               <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block mb-2">
                 Testimonials
@@ -390,14 +407,18 @@ export default function AlumniPage() {
                 aria-label="Previous Testimonials"
                 className="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-surface-container-high transition-colors text-primary"
               >
-                <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+                <span className="material-symbols-outlined text-[18px]">
+                  arrow_back
+                </span>
               </button>
               <button
                 onClick={scrollTestimonialsNext}
                 aria-label="Next Testimonials"
                 className="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-surface-container-high transition-colors text-primary"
               >
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span className="material-symbols-outlined text-[18px]">
+                  arrow_forward
+                </span>
               </button>
             </div>
           </motion.div>
@@ -408,7 +429,7 @@ export default function AlumniPage() {
             onMouseEnter={() => setIsTestimonialsPaused(true)}
             onMouseLeave={() => setIsTestimonialsPaused(false)}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 pt-2 scroll-smooth no-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {ALUMNI_STORIES.map((a) => (
               <motion.article
@@ -440,8 +461,12 @@ export default function AlumniPage() {
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-outline-variant flex justify-between items-center text-xs">
-                  <span className="font-label-sm text-on-surface-variant">Placed: {a.placedOn}</span>
-                  <span className="font-mono text-primary font-medium">{a.pkg}</span>
+                  <span className="font-label-sm text-on-surface-variant">
+                    Placed: {a.placedOn}
+                  </span>
+                  <span className="font-mono text-primary font-medium">
+                    {a.pkg}
+                  </span>
                 </div>
               </motion.article>
             ))}
@@ -456,7 +481,10 @@ export default function AlumniPage() {
           viewport={{ once: true }}
           variants={stagger}
         >
-          <motion.div variants={revealVariant} className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <motion.div
+            variants={revealVariant}
+            className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4"
+          >
             <div>
               <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block mb-2">
                 Directory
@@ -466,7 +494,8 @@ export default function AlumniPage() {
               </h2>
             </div>
             <p className="font-body-sm text-on-surface-variant max-w-md">
-              A comprehensive directory of engineers launched from ACE into industry leadership, arranged chronologically by placement date.
+              A comprehensive directory of engineers launched from ACE into
+              industry leadership, arranged chronologically by placement date.
             </p>
           </motion.div>
 
@@ -514,17 +543,27 @@ export default function AlumniPage() {
                         </span>
                       </div> */}
                       <div className="flex items-center justify-between">
-                        <span className="font-label-sm uppercase text-[10px] text-on-surface-variant/70">Placed On</span>
-                        <span className="font-mono text-on-surface text-right">{alumnus.placedOn}</span>
+                        <span className="font-label-sm uppercase text-[10px] text-on-surface-variant/70">
+                          Placed On
+                        </span>
+                        <span className="font-mono text-on-surface text-right">
+                          {alumnus.placedOn}
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-5 pt-3 border-t border-outline-variant flex items-center justify-between">
-                    <span className="font-label-sm text-[10px] uppercase text-on-surface-variant">Package</span>
+                    <span className="font-label-sm text-[10px] uppercase text-on-surface-variant">
+                      Package
+                    </span>
                     <span className="font-mono text-xs font-semibold text-primary">
-                      {alumnus.pkg === 'ND' || alumnus.pkg === 'Non-Disclosable' || alumnus.pkg === 'Non Disclosable' ? (
-                        <span className="italic font-normal text-on-surface-variant">Non-Disclosable</span>
+                      {alumnus.pkg === "ND" ||
+                      alumnus.pkg === "Non-Disclosable" ||
+                      alumnus.pkg === "Non Disclosable" ? (
+                        <span className="italic font-normal text-on-surface-variant">
+                          Non-Disclosable
+                        </span>
                       ) : (
                         alumnus.pkg
                       )}
@@ -535,7 +574,6 @@ export default function AlumniPage() {
             ))}
           </div>
         </motion.section>
-
       </main>
     </div>
   );
