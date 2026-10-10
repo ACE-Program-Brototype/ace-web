@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { STUDENTS } from "../constants/studentsDatas";
 import { ALUMNI_MEMBERS, SPOTLIGHT_ALUMNI } from "../constants/alumniDatas";
 import { PROJECTS } from "../constants/projectDatas";
+import cultureImg from "../../assets/core/culture.jpeg";
 
 const spotlightAlumni = SPOTLIGHT_ALUMNI[0] || ALUMNI_MEMBERS[0];
 const otherAlumni = ALUMNI_MEMBERS.filter((a) => a.id !== spotlightAlumni.id).slice(0, 2);
@@ -80,7 +81,7 @@ export default function LandingPage() {
       >
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-16"
+          className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 sm:pt-16 md:pt-32 pb-12 md:pb-16"
           initial="hidden"
           animate="visible"
           variants={stagger}
@@ -120,12 +121,13 @@ export default function LandingPage() {
             {/* Image */}
             <motion.div
               variants={revealVariant}
-              className="lg:col-span-7 aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-2"
+              className="lg:col-span-7 w-full aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-1.5 sm:p-2"
             >
               <img
-                src="https://plus.unsplash.com/premium_photo-1683120730432-b5ea74bd9047?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="ACE Software Engineers Collaborating"
-                className="w-full h-full object-cover transition-all duration-700 ease-in-out"
+                src={cultureImg}
+                alt="ACE Community - A Culture of Rigor"
+                className="w-full h-full object-cover object-center transition-all duration-700 ease-in-out"
+                loading="lazy"
               />
             </motion.div>
 
@@ -453,10 +455,10 @@ export default function LandingPage() {
           >
             <Link
               onClick={handleScrollToTop}
-              to="/alumni"
+              to="/outcomes"
               className="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-12 py-4 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
             >
-              View All Alumni
+              View Outcomes
             </Link>
           </motion.div>
         </div>
@@ -551,11 +553,13 @@ export default function LandingPage() {
                 key={proj.title}
                 className="bg-surface-container-lowest border border-outline-variant p-6 hover:border-on-surface-variant transition-colors duration-300 flex flex-col h-full group"
               >
-                <div className="aspect-video bg-surface-container-low border border-outline-variant mb-6 overflow-hidden relative">
+                <div className={`aspect-video ${proj.imgBg || 'bg-surface-container-low'} border border-outline-variant mb-6 overflow-hidden relative flex items-center justify-center`}>
                   <img
                     src={proj.img}
                     alt={proj.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={`w-full h-full ${
+                      proj.imgFit === 'contain' ? 'object-contain' : 'object-cover'
+                    } transition-transform duration-500 group-hover:scale-105`}
                   />
 
                   <div className="absolute inset-0 flex items-center justify-center bg-black/45 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -598,15 +602,43 @@ export default function LandingPage() {
                   </p>
 
                   <div className="flex items-center gap-3 pt-4 border-t border-outline-variant mt-auto">
-                    <img
-                      src={proj.authorImg}
-                      alt={proj.author}
-                      className="w-8 h-8 rounded-full object-cover border border-outline-variant"
-                    />
-
-                    <span className="font-label-sm text-label-sm uppercase tracking-wider">
-                      {proj.author}
-                    </span>
+                    {proj.authors && proj.authors.length > 0 ? (
+                      <>
+                        <div className="flex -space-x-2 shrink-0 py-0.5">
+                          {proj.authors.map((member) => (
+                            <img
+                              key={member.name}
+                              src={member.img}
+                              alt={member.name}
+                              title={member.name}
+                              className="w-8 h-8 rounded-full object-cover border-2 border-surface-container-lowest shadow-sm shrink-0 hover:scale-110 hover:z-10 transition-transform"
+                            />
+                          ))}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <span
+                            className="font-label-sm text-[11px] leading-tight text-on-surface uppercase tracking-wider block line-clamp-2"
+                            title={proj.author}
+                          >
+                            {proj.author}
+                          </span>
+                          <span className="text-[10px] text-on-surface-variant font-mono block mt-0.5">
+                            Team Project ({proj.authors.length})
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          src={proj.authorImg}
+                          alt={proj.author}
+                          className="w-8 h-8 rounded-full object-cover border border-outline-variant shrink-0"
+                        />
+                        <span className="font-label-sm text-label-sm uppercase tracking-wider truncate">
+                          {proj.author}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

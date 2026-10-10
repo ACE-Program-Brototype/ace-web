@@ -21,14 +21,14 @@ export default function StudentsPage() {
 
   return (
     <div className="bg-surface-container-lowest text-primary antialiased font-body-md">
-      <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+      <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 sm:pt-16 md:pt-section-gap pb-section-gap">
 
         {/* Page Header */}
         <motion.header
-          className="mb-24 text-left pt-16 max-w-full"
+          className="mb-12 md:mb-24 text-left pt-0 md:pt-16 max-w-full"
           initial="hidden" animate="visible" variants={stagger}
         >
-          <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-8 tracking-tighter">
+          <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-4 md:mb-8 tracking-tighter">
             The Roster.
           </motion.h1>
           <motion.p variants={revealVariant} className="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">

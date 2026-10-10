@@ -113,7 +113,7 @@ export const ALUMNI_MEMBERS = [
     domain: "MERN",
     company: "Kalpas Innovations Pvt Ltd",
     placedOn: "May 2026",
-    pkg: "6 LPA",
+    pkg: "Non-Disclosable",
     quote:
       "The culture of building scalable web apps from ground up gave me the confidence to deliver production features effortlessly.",
     img: ijas,
@@ -139,7 +139,7 @@ export const ALUMNI_MEMBERS = [
     domain: "DevOps",
     company: "KubeNine",
     placedOn: "April 2026",
-    pkg: "6 LPA",
+    pkg: "Non-Disclosable",
     quote:
       "The deep focus on cloud systems, containers, and deployment reliability at ACE gave me the exact skillset required in modern DevOps.",
     img: amal,

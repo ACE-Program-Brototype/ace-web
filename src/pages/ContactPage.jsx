@@ -15,10 +15,10 @@ export default function ContactPage() {
 
         {/* Page Header */}
         <motion.header
-          className="pt-32 pb-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto"
+          className="pt-8 sm:pt-16 md:pt-32 pb-10 md:pb-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto"
           initial="hidden" animate="visible" variants={stagger}
         >
-          <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-8 leading-tight tracking-tighter">
+          <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-4 md:mb-8 leading-tight tracking-tighter">
             Inquiries & Answers.
           </motion.h1>
           <motion.p variants={revealVariant} className="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">

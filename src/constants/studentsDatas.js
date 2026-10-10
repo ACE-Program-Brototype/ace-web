@@ -93,14 +93,6 @@ export const STUDENTS = [
     linkedin: "https://www.linkedin.com/in/fayas-kp-ktr/",
   },
   {
-    name: "Adarsh M",
-    batch: "BCR313",
-    stack: "Java SpringBoot",
-    img: adarshImg,
-    linkedin: "https://www.linkedin.com/in/adarshmelath/",
-    github: "https://github.com/Adarsh-Melath/",
-  },
-  {
     name: "Bennet Sharwin",
     batch: "BCR63",
     stack: "Cybersecurity",

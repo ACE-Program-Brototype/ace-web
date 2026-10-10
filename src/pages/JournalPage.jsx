@@ -25,11 +25,11 @@ export default function JournalPage() {
 
   return (
     <div className="bg-surface antialiased font-body-md min-h-screen">
-      <main className="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+      <main className="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 sm:pt-16 md:pt-section-gap pb-section-gap">
 
         {/* Header */}
         <motion.section
-          className="mb-section-gap max-w-4xl pt-16"
+          className="mb-12 md:mb-section-gap max-w-4xl pt-0 md:pt-16"
           initial="hidden" animate="visible" variants={stagger}
         >
           <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-6 tracking-tighter">

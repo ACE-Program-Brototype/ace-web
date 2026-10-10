@@ -3,7 +3,8 @@ export const NAV_LINKS = [
   { to: '/directory', label: 'DIRECTORY' },
   { to: '/outcomes', label: 'OUTCOMES' },
   { to: '/handlers', label: 'HANDLERS' },
-  { to: '/alumni', label: 'ALUMNI' },
+  // { to: '/alumni', label: 'ALUMNI' },
   { to: '/events', label: 'EVENTS' },
+  { to: '/blogs', label: 'BLOGS' },
 ];
 

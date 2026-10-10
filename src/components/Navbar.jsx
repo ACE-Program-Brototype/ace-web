@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { NAV_LINKS } from '../constants/navLinks';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,13 +15,15 @@ export default function Navbar() {
   };
 
   const navLinks = [
+    { to: '/', label: 'HOME', isHash: false },
     // { href: '/#manifesto', label: 'STORY', isHash: true },
     { to: '/directory', label: 'DIRECTORY', isHash: false },
     { to: '/outcomes', label: 'OUTCOMES', isHash: false },
     // { to: '/journal', label: 'JOURNAL', isHash: false },
     { to: '/events', label: 'EVENTS', isHash: false },
     { to: '/handlers', label: 'HANDLERS', isHash: false },
-    { to: '/alumni', label: 'ALUMNI', isHash: false },
+    // { to: '/alumni', label: 'ALUMNI', isHash: false },
+    { to: '/blogs', label: 'BLOGS', isHash: false },
   ];
 
   return (
@@ -35,7 +36,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex gap-8 items-center font-label-sm text-label-sm uppercase tracking-wider">
+        <div className="hidden md:flex gap-6 lg:gap-8 items-center font-label-sm text-label-sm uppercase tracking-wider">
           {navLinks.map(link =>
             link.isHash ? (
               <a

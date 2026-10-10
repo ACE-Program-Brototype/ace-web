@@ -14,8 +14,8 @@ import StudentsPage from './pages/StudentsPage';
 import JournalPage from './pages/JournalPage';
 import TeamPage from './pages/TeamPage';
 import ContactPage from './pages/ContactPage';
-// import AdminDashboard from './pages/AdminDashboard';
 import EventsPage from './pages/EventsPage';
+import BlogsPage from './pages/BlogsPage';
 
 import { motion } from 'framer-motion';
 
@@ -54,6 +54,7 @@ export default function App() {
           <Route path="/directory" element={<PageWrapper><StudentsPage /></PageWrapper>} />
           <Route path="/outcomes" element={<PageWrapper><PlacementPage /></PageWrapper>} />
           <Route path="/events" element={<PageWrapper><EventsPage /></PageWrapper>} />
+          <Route path="/blogs" element={<PageWrapper><BlogsPage /></PageWrapper>} />
           <Route path="/alumni" element={<PageWrapper><AlumniPage /></PageWrapper>} />
           <Route path="/journal" element={<PageWrapper><JournalPage /></PageWrapper>} />
           <Route path="/handlers" element={<PageWrapper><TeamPage /></PageWrapper>} />

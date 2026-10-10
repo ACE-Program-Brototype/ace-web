@@ -38,16 +38,18 @@ export default function Footer() {
               <span className="font-label-sm text-label-sm uppercase tracking-widest text-white/40 mb-2">
                 {col.heading}
               </span>
-              {col.links.map(l => (
-                <Link
-                  key={l.label}
-                  to={l.to}
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="font-body-md text-body-md text-white/60 hover:text-white transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
+              <div className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-3.5">
+                {col.links.map(l => (
+                  <Link
+                    key={l.label}
+                    to={l.to}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="font-body-md text-body-md text-white/60 hover:text-white transition-colors"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           ))}
 

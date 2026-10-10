@@ -18,7 +18,7 @@ export default function TeamPage() {
 
         {/* Header */}
         <motion.header
-          className="pt-32 pb-section-gap w-full"
+          className="pt-8 sm:pt-16 md:pt-32 pb-12 md:pb-section-gap w-full"
           initial="hidden" animate="visible" variants={stagger}
         >
           <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-6 tracking-tighter">
