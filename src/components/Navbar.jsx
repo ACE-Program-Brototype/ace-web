@@ -31,8 +31,8 @@ export default function Navbar() {
       <div className="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 
         {/* Brand */}
-        <Link to="/" onClick={close} className="flex items-center">
-          <img src="/logo.png" alt="ACE" className="h-6 md:h-7 w-auto object-contain" />
+        <Link to="/" onClick={close} className="flex items-center" aria-label="ACE Homepage">
+          <img src="/logo.webp" alt="ACE" width="160" height="48" decoding="async" className="h-6 md:h-7 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav Links */}

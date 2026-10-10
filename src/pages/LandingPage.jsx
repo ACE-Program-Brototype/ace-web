@@ -1,14 +1,14 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Footer from "../components/Footer";
-import { STUDENTS } from "../constants/studentsDatas";
-import { ALUMNI_MEMBERS, SPOTLIGHT_ALUMNI } from "../constants/alumniDatas";
-import { PROJECTS } from "../constants/projectDatas";
-import cultureImg from "../../assets/core/culture.jpeg";
+import { LANDING_SPOTLIGHT_ALUMNI, LANDING_OTHER_ALUMNI } from "../constants/landingAlumniDatas";
 
-const spotlightAlumni = SPOTLIGHT_ALUMNI[0] || ALUMNI_MEMBERS[0];
-const otherAlumni = ALUMNI_MEMBERS.filter((a) => a.id !== spotlightAlumni.id).slice(0, 2);
+const RosterSection = lazy(() => import("../components/landing/RosterSection"));
+const SelectedWorksSection = lazy(() => import("../components/landing/SelectedWorksSection"));
+
+const spotlightAlumni = LANDING_SPOTLIGHT_ALUMNI;
+const otherAlumni = LANDING_OTHER_ALUMNI;
 
 /* ─── Reveal animation ─────────────────────────────────────────── */
 const revealVariant = {
@@ -33,45 +33,12 @@ export default function LandingPage() {
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
-  const rosterRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  useEffect(() => {
-    const scrollContainer = rosterRef.current;
-    if (!scrollContainer) return;
-
-    let intervalId;
-
-    if (!isHovered) {
-      intervalId = setInterval(() => {
-        const cardWidth = 320 + 24; // min-w-[320px] + gap-6 (24px)
-        const singleSetWidth = STUDENTS.length * cardWidth;
-
-        // Smoothly scroll to next card
-        scrollContainer.scrollBy({ left: cardWidth, behavior: "smooth" });
-
-        // Check if we've scrolled past the first set of items
-        setTimeout(() => {
-          if (scrollContainer.scrollLeft >= singleSetWidth) {
-            // Instantly reset scroll position to loop seamlessly
-            scrollContainer.scrollTo({
-              left: scrollContainer.scrollLeft - singleSetWidth,
-              behavior: "instant",
-            });
-          }
-        }, 600); // Wait for the smooth scroll animation to finish
-      }, 1800); // 3-second pause between each scroll
-    }
-
-    return () => clearInterval(intervalId);
-  }, [isHovered]);
-
   return (
-    <div className="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary font-body-md">
+    <main className="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary font-body-md">
       {/* ══════════════════════════════════════════════════════════
           2. HERO SECTION
       ══════════════════════════════════════════════════════════ */}
@@ -95,7 +62,7 @@ export default function LandingPage() {
             </motion.h1>
             <motion.p
               variants={revealVariant}
-              className="font-body-lg text-body-lg text-on-surface-variant md:w-3/5 leading-relaxed"
+              className="font-body-md text-sm sm:text-base text-on-surface-variant md:w-3/5 leading-relaxed"
             >
               ACE is a high-performance ecosystem within Brototype. We are a
               student-led collective bridging the gap between baseline learning
@@ -124,10 +91,15 @@ export default function LandingPage() {
               className="lg:col-span-7 w-full aspect-[4/3] bg-surface-container-low border border-outline-variant overflow-hidden p-1.5 sm:p-2"
             >
               <img
-                src={cultureImg}
+                src="/images/culture.webp"
+                srcSet="/images/culture-mobile.webp 640w, /images/culture.webp 1060w"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 58vw"
                 alt="ACE Community - A Culture of Rigor"
                 className="w-full h-full object-cover object-center transition-all duration-700 ease-in-out"
-                loading="lazy"
+                fetchPriority="high"
+                decoding="async"
+                width="1060"
+                height="795"
               />
             </motion.div>
 
@@ -155,14 +127,14 @@ export default function LandingPage() {
           4. PROVEN OUTCOMES — Stats Grid
       ══════════════════════════════════════════════════════════ */}
       <motion.section
-        className="py-section-gap border-b border-outline-variant bg-surface"
+        className="py-12 md:py-section-gap border-b border-outline-variant bg-surface"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <motion.div variants={revealVariant} className="mb-16">
+          <motion.div variants={revealVariant} className="mb-8 md:mb-16">
             <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
               Proven Outcomes.
             </h2>
@@ -176,48 +148,48 @@ export default function LandingPage() {
             variants={revealVariant}
             className="grid grid-cols-2 md:grid-cols-4 border-t border-outline-variant"
           >
-            <div className="py-12 pr-8 border-r border-outline-variant">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+            <div className="py-4 pr-4 pl-0 md:py-12 md:pr-8 border-r border-outline-variant">
+              <div className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-primary mb-1.5 md:mb-2">
                 11+
               </div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+              <div className="font-label-sm text-xs md:text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Total Placements
               </div>
             </div>
-            <div className="py-12 px-8 border-r border-outline-variant">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+            <div className="py-4 pl-4 pr-0 md:py-12 md:px-8 border-r-0 md:border-r border-outline-variant">
+              <div className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-primary mb-1.5 md:mb-2 whitespace-nowrap">
                 13.45 LPA
               </div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+              <div className="font-label-sm text-xs md:text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Average Package
               </div>
             </div>
-            <div className="py-12 px-8 border-r border-outline-variant">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+            <div className="py-4 pr-4 pl-0 md:py-12 md:px-8 border-r border-outline-variant">
+              <div className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-primary mb-1.5 md:mb-2 whitespace-nowrap">
                 30+ LPA
               </div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+              <div className="font-label-sm text-xs md:text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Highest Package
               </div>
             </div>
-            <div className="py-12 pl-8">
-              <div className="font-headline-lg text-headline-lg text-primary mb-2">
+            <div className="py-4 pl-4 pr-0 md:py-12 md:pl-8">
+              <div className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-primary mb-1.5 md:mb-2">
                 5+
               </div>
-              <div className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+              <div className="font-label-sm text-xs md:text-label-sm uppercase tracking-wider text-on-surface-variant">
                 Hiring Partners
               </div>
             </div>
           </motion.div>
 
-          <motion.div variants={revealVariant} className="mt-12">
+          <motion.div variants={revealVariant} className="mt-8 md:mt-12">
             <Link
               onClick={handleScrollToTop}
               to="/outcomes"
-              className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary hover:underline underline-offset-4"
+              className="inline-flex items-center gap-1.5 md:gap-2 font-label-sm text-xs md:text-label-sm uppercase tracking-wider text-primary hover:underline underline-offset-4"
             >
               View full placement report
-              <span className="material-symbols-outlined text-[16px]">
+              <span className="material-symbols-outlined text-[14px] md:text-[16px]">
                 arrow_forward
               </span>
             </Link>
@@ -226,86 +198,11 @@ export default function LandingPage() {
       </motion.section>
 
       {/* ══════════════════════════════════════════════════════════
-          5. THE ROSTER — Horizontal Scroll Carousel
+          5. THE ROSTER — Horizontal Scroll Carousel (Lazy)
       ══════════════════════════════════════════════════════════ */}
-      <motion.section
-        className="py-section-gap border-b border-outline-variant bg-surface-container-lowest"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={stagger}
-      >
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          {/* Header row */}
-          <motion.div
-            variants={revealVariant}
-            className="flex justify-between items-end mb-12"
-          >
-            <div>
-              <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
-                The Roster.
-              </h2>
-              <p className="font-body-md text-on-surface-variant">
-                A curated look at the current generation of ACE engineers.
-              </p>
-            </div>
-            <Link
-              onClick={handleScrollToTop}
-              to="/directory"
-              className="hidden md:block bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
-            >
-              EXPLORE THE DIRECTORY
-            </Link>
-          </motion.div>
-
-          {/* Scroll container */}
-          <motion.div
-            variants={revealVariant}
-            className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory"
-            ref={rosterRef}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onTouchStart={() => setIsHovered(true)}
-            onTouchEnd={() => setIsHovered(false)}
-          >
-            {[...STUDENTS, ...STUDENTS].map((s, idx) => (
-              <div
-                key={`${s.name}-${idx}`}
-                className="snap-start min-w-[320px] w-80 border border-outline-variant bg-surface flex flex-col overflow-hidden p-4 group hover:border-primary transition-colors duration-200"
-              >
-                <img
-                  src={s.img}
-                  alt={s.name}
-                  className="w-full h-64 object-cover mb-4 group-hover:scale-[1.02] transition-transform duration-300"
-                />
-                <div className="flex flex-col gap-1">
-                  <div className="font-bold text-primary font-headline-md text-headline-md">
-                    {s.name}
-                  </div>
-                  <div className="text-sm text-on-surface-variant font-mono text-mono">
-                    {s.batch}
-                  </div>
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    <span className="px-2 py-1 bg-surface-container-high font-mono text-[10px] uppercase text-on-surface">
-                      {s.stack}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
-          <div className="mt-8 md:hidden">
-            <Link
-              onClick={handleScrollToTop}
-              to="/directory"
-              className="block text-center bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200"
-            >
-              Explore the Directory
-            </Link>
-          </div>
-        </div>
-      </motion.section>
+      <Suspense fallback={<div className="py-section-gap border-b border-outline-variant bg-surface-container-lowest" />}>
+        <RosterSection />
+      </Suspense>
 
       {/* ══════════════════════════════════════════════════════════
           6. ALUMNI NETWORK — Bento Grid
@@ -340,6 +237,10 @@ export default function LandingPage() {
                   src={spotlightAlumni.img}
                   alt={`${spotlightAlumni.name} — ${spotlightAlumni.role}`}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="600"
                 />
                 <div className="absolute top-4 left-4">
                   <span className="bg-primary text-on-primary text-[10px] font-mono uppercase tracking-widest px-3 py-1">
@@ -402,6 +303,10 @@ export default function LandingPage() {
                   src={a.img}
                   alt={a.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  width="300"
+                  height="300"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
                   <div className="text-white font-bold text-sm mb-0.5">
@@ -525,140 +430,11 @@ export default function LandingPage() {
       </motion.section>
 
       {/* ══════════════════════════════════════════════════════════
-    8. THE PROJECT SHOWCASE
-══════════════════════════════════════════════════════════ */}
-      <motion.section
-        className="py-section-gap border-b border-outline-variant bg-surface"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={stagger}
-      >
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <motion.div
-            variants={revealVariant}
-            className="flex justify-between items-end mb-16"
-          >
-            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
-              The Project Showcase.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={revealVariant}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {PROJECTS.map((proj) => (
-              <div
-                key={proj.title}
-                className="bg-surface-container-lowest border border-outline-variant p-6 hover:border-on-surface-variant transition-colors duration-300 flex flex-col h-full group"
-              >
-                <div className={`aspect-video ${proj.imgBg || 'bg-surface-container-low'} border border-outline-variant mb-6 overflow-hidden relative flex items-center justify-center`}>
-                  <img
-                    src={proj.img}
-                    alt={proj.title}
-                    className={`w-full h-full ${
-                      proj.imgFit === 'contain' ? 'object-contain' : 'object-cover'
-                    } transition-transform duration-500 group-hover:scale-105`}
-                  />
-
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/45 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a
-                      href={proj.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${proj.title} on GitHub`}
-                      className="w-11 h-11 flex items-center justify-center rounded-full bg-white/95 text-black shadow-lg hover:bg-white hover:scale-105 transition-all duration-200"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="w-5 h-5"
-                        aria-hidden="true"
-                      >
-                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.604-3.369-1.341-3.369-1.341-.455-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.831.091-.646.349-1.087.636-1.338-2.221-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.6 9.6 0 0 1 2.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.841-2.338 4.687-4.566 4.935.359.309.678.919.678 1.852 0 .3-.012 2.415-.012 2.744 0 .267.18.578.688.48A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10Z" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex flex-col flex-grow">
-                  <div className="mb-4">
-                    <span className="inline-flex items-center px-2 py-1 mb-3 border border-outline-variant bg-surface-container-low font-mono text-[10px] uppercase tracking-wider text-on-surface-variant">
-                      {proj.tag}
-                    </span>
-
-                    <h4 className="font-headline-md text-[20px] text-primary leading-tight">
-                      {proj.title}
-                    </h4>
-
-                    <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">
-                      {proj.meta}
-                    </p>
-                  </div>
-
-                  <p className="font-body-md text-body-md text-on-surface-variant text-sm flex-grow mb-6">
-                    {proj.desc}
-                  </p>
-
-                  <div className="flex items-center gap-3 pt-4 border-t border-outline-variant mt-auto">
-                    {proj.authors && proj.authors.length > 0 ? (
-                      <>
-                        <div className="flex -space-x-2 shrink-0 py-0.5">
-                          {proj.authors.map((member) => (
-                            <img
-                              key={member.name}
-                              src={member.img}
-                              alt={member.name}
-                              title={member.name}
-                              className="w-8 h-8 rounded-full object-cover border-2 border-surface-container-lowest shadow-sm shrink-0 hover:scale-110 hover:z-10 transition-transform"
-                            />
-                          ))}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <span
-                            className="font-label-sm text-[11px] leading-tight text-on-surface uppercase tracking-wider block line-clamp-2"
-                            title={proj.author}
-                          >
-                            {proj.author}
-                          </span>
-                          <span className="text-[10px] text-on-surface-variant font-mono block mt-0.5">
-                            Team Project ({proj.authors.length})
-                          </span>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <img
-                          src={proj.authorImg}
-                          alt={proj.author}
-                          className="w-8 h-8 rounded-full object-cover border border-outline-variant shrink-0"
-                        />
-                        <span className="font-label-sm text-label-sm uppercase tracking-wider truncate">
-                          {proj.author}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
-          <div className="mt-8 text-center md:hidden">
-            <Link
-              onClick={handleScrollToTop}
-              to="/directory"
-              className="inline-flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-wider text-primary border border-outline-variant px-6 py-3 hover:bg-surface-container-low transition-colors"
-            >
-              View full directory
-              <span className="material-symbols-outlined text-[16px]">
-                arrow_forward
-              </span>
-            </Link>
-          </div>
-        </div>
-      </motion.section>
+          8. THE PROJECT SHOWCASE (Lazy)
+      ══════════════════════════════════════════════════════════ */}
+      <Suspense fallback={<div className="py-section-gap border-b border-outline-variant bg-surface" />}>
+        <SelectedWorksSection />
+      </Suspense>
 
       {/* ══════════════════════════════════════════════════════════
           9. THE JOURNAL — Article List
@@ -732,6 +508,6 @@ export default function LandingPage() {
           11. FOOTER
       ══════════════════════════════════════════════════════════ */}
       <Footer />
-    </div>
+    </main>
   );
 }

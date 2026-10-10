@@ -61,7 +61,7 @@ export default function ContactForm() {
         className="md:col-span-5 md:col-start-1 mb-16 md:mb-0 md:pr-12"
         initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
       >
-        <motion.h2 variants={revealVariant} className="font-headline-lg text-headline-lg text-primary mb-10 pb-4 border-b border-outline-variant">
+        <motion.h2 variants={revealVariant} className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-primary mb-6 md:mb-10 pb-3 md:pb-4 border-b border-outline-variant">
           Send a Message
         </motion.h2>
 
@@ -112,7 +112,7 @@ export default function ContactForm() {
                   pattern: { value: /^[a-zA-Z\s]+$/, message: 'Name cannot contain digits or special characters' },
                   validate: value => value.trim().length >= 2 || 'Name cannot be empty spaces'
                 })}
-                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none"
+                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none"
               />
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
             </div>
@@ -130,7 +130,7 @@ export default function ContactForm() {
                     message: 'Invalid email address'
                   }
                 })}
-                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none"
+                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none"
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
             </div>
@@ -150,7 +150,7 @@ export default function ContactForm() {
                     return true;
                   }
                 })}
-                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none"
+                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none"
               />
               {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
             </div>
@@ -205,7 +205,7 @@ export default function ContactForm() {
                           validBatch: value => /^BC[a-zA-Z0-9\s-]*$/i.test(value?.trim()) || 'Batch number should start with BC (e.g. BCE319, BC312)'
                         }
                       })}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none uppercase"
+                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none uppercase"
                     />
                     {errors.batchNumber && <p className="text-red-500 text-sm mt-1">{errors.batchNumber.message}</p>}
                   </div>
@@ -224,7 +224,7 @@ export default function ContactForm() {
                         pattern: { value: /^[a-zA-Z\s.]+$/, message: 'Counsellor name cannot contain digits or special characters' },
                         validate: value => (value && value.trim().length >= 2) || 'Counsellor name cannot be empty spaces'
                       })}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline outline-none"
+                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none"
                     />
                     {errors.counsellorName && <p className="text-red-500 text-sm mt-1">{errors.counsellorName.message}</p>}
                   </div>
@@ -248,7 +248,7 @@ export default function ContactForm() {
                     notOnlySpecialChars: value => /[a-zA-Z0-9]/.test(value) || 'Message cannot contain only special characters'
                   }
                 })}
-                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-on-surface transition-colors rounded-none placeholder:text-outline resize-none outline-none"
+                className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base resize-none outline-none"
               />
               {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
             </div>

@@ -1,15 +1,14 @@
-import adarshImg from "../../assets/candidates/adarsh.webp";
 import ajexImg from "../../assets/candidates/ajex.webp";
 import alAmeenImg from "../../assets/candidates/al ameen.webp";
 import aswinImg from "../../assets/candidates/aswin.webp";
-import athiraImg from "../../assets/candidates/athira.jpeg";
+import athiraImg from "../../assets/candidates/athira.webp";
 import navaneethImg from "../../assets/candidates/navaneeth.webp";
-import sreehariImg from "../../assets/candidates/sreehari.jpg";
-import farhanaImg from "../../assets/candidates/farhana.jpeg"
+import sreehariImg from "../../assets/candidates/sreehari.webp";
+import farhanaImg from "../../assets/candidates/farhana.webp";
 import shifanaImg from "../../assets/candidates/shifana.webp";
-import venkiteshImg from "../../assets/candidates/venkitesh.jpg";
-import bennetImg from "../../assets/candidates/bennet.jpeg";
-import fayasImg from "../../assets/candidates/fayaz.jpeg";
+import venkiteshImg from "../../assets/candidates/venkitesh.webp";
+import bennetImg from "../../assets/candidates/bennet.webp";
+import fayasImg from "../../assets/candidates/fayaz.webp";
 
 export const STUDENTS = [
   {

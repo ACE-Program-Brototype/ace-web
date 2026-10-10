@@ -1,16 +1,16 @@
 import aswin from '../../assets/candidates/aswin.webp';
 import ajex from '../../assets/candidates/ajex.webp';
 import navaneeth from '../../assets/candidates/navaneeth.webp';
-import fizan from '../../assets/alumnis/fizan.jpg';
-import abhiram from '../../assets/alumnis/abhiram.jpg';
-import kenneth from '../../assets/candidates/kenneth.jpeg';
-import anandhu from '../../assets/alumnis/anandhu.jpg';
-import venkitesh from '../../assets/candidates/venkitesh.jpg';
-import evntxProject from '../../assets/projects/Evntx.png';
-import elevenJerseryProject from '../../assets/projects/11Jersey.shop.jpeg';
-import grolanceProject from '../../assets/projects/grolance.png';
-import togatherProject from '../../assets/projects/togather.png';
-import nexaroProject from '../../assets/projects/nexaro.png';
+import fizan from '../../assets/alumnis/fizan.webp';
+import abhiram from '../../assets/alumnis/abhiram.webp';
+import kenneth from '../../assets/candidates/kenneth.webp';
+import anandhu from '../../assets/alumnis/anandhu.webp';
+import venkitesh from '../../assets/candidates/venkitesh.webp';
+import evntxProject from '../../assets/projects/Evntx.webp';
+import elevenJerseryProject from '../../assets/projects/11Jersey.shop.webp';
+import grolanceProject from '../../assets/projects/grolance.webp';
+import togatherProject from '../../assets/projects/togather.webp';
+import nexaroProject from '../../assets/projects/nexaro.webp';
 
 export const PROJECTS = [
   {

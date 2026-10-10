@@ -1,14 +1,14 @@
-import faheem from "../../assets/alumnis/faheem.jpeg";
-import faizalR from "../../assets/alumnis/faizalR.jpeg";
-import abhiram from "../../assets/alumnis/abhiram.jpg";
-import afzal from "../../assets/alumnis/afzal.jpg";
-import amal from "../../assets/alumnis/amal.jpg";
-import anandhu from "../../assets/alumnis/anandhu.jpg";
-import basith from "../../assets/alumnis/basith.jpg";
-import fizan from "../../assets/alumnis/fizan.jpg";
-import ijas from "../../assets/alumnis/ijas.jpg";
-import shahan from "../../assets/alumnis/shahan.jpg";
-import zameer from "../../assets/alumnis/zameer.jpg";
+import faheem from "../../assets/alumnis/faheem.webp";
+import faizalR from "../../assets/alumnis/faizalR.webp";
+import abhiram from "../../assets/alumnis/abhiram.webp";
+import afzal from "../../assets/alumnis/afzal.webp";
+import amal from "../../assets/alumnis/amal.webp";
+import anandhu from "../../assets/alumnis/anandhu.webp";
+import basith from "../../assets/alumnis/basith.webp";
+import fizan from "../../assets/alumnis/fizan.webp";
+import ijas from "../../assets/alumnis/ijas.webp";
+import shahan from "../../assets/alumnis/shahan.webp";
+import zameer from "../../assets/alumnis/zameer.webp";
 
 export const ALUMNI_MEMBERS = [
   // September 2026

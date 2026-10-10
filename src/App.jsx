@@ -1,21 +1,19 @@
-import { useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
-import LaunchLoader from './components/LaunchLoader/LaunchLoader';
-import { IS_LAUNCH_ENABLED } from './constants/launchConfig';
 
-import LandingPage from './pages/LandingPage';
-import AlumniPage from './pages/AlumniPage';
-import PlacementPage from './pages/PlacementPage';
-import StudentsPage from './pages/StudentsPage';
-import JournalPage from './pages/JournalPage';
-import TeamPage from './pages/TeamPage';
-import ContactPage from './pages/ContactPage';
-import EventsPage from './pages/EventsPage';
-import BlogsPage from './pages/BlogsPage';
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const AlumniPage = lazy(() => import('./pages/AlumniPage'));
+const PlacementPage = lazy(() => import('./pages/PlacementPage'));
+const StudentsPage = lazy(() => import('./pages/StudentsPage'));
+const JournalPage = lazy(() => import('./pages/JournalPage'));
+const TeamPage = lazy(() => import('./pages/TeamPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const EventsPage = lazy(() => import('./pages/EventsPage'));
+const BlogsPage = lazy(() => import('./pages/BlogsPage'));
 
 import { motion } from 'framer-motion';
 
@@ -34,21 +32,17 @@ function PageWrapper({ children }) {
 
 export default function App() {
   const location = useLocation();
-  const [isLaunchActive, setIsLaunchActive] = useState(IS_LAUNCH_ENABLED);
 
   const noFooterPaths = ['/', '/admin'];
   const showFooter = !noFooterPaths.includes(location.pathname);
 
   return (
     <>
-      {isLaunchActive && (
-        <LaunchLoader onEnded={() => setIsLaunchActive(false)} />
-      )}
-
       <ScrollProgress />
       <Navbar />
 
-      <AnimatePresence mode="wait" initial={false}>
+      <Suspense fallback={<div className="min-h-screen bg-surface" />}>
+        <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
           <Route path="/directory" element={<PageWrapper><StudentsPage /></PageWrapper>} />
@@ -61,7 +55,8 @@ export default function App() {
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
           {/* <Route path="/admin" element={<PageWrapper><AdminDashboard /></PageWrapper>} /> */}
         </Routes>
-      </AnimatePresence>
+        </AnimatePresence>
+      </Suspense>
 
       {showFooter && <Footer />}
     </>

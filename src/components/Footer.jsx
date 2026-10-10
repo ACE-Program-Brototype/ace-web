@@ -24,10 +24,10 @@ export default function Footer() {
 
           {/* Column 1: Brand + Tagline */}
           <div className="flex flex-col">
-            <Link to="/" className="flex items-center">
-              <img src="/logo.png" alt="ACE" className="h-8 md:h-9 w-auto object-contain brightness-0 invert" />
+            <Link to="/" className="flex items-center" aria-label="ACE Homepage">
+              <img src="/logo.webp" alt="ACE" width="180" height="54" loading="lazy" decoding="async" className="h-8 md:h-9 w-auto object-contain brightness-0 invert" />
             </Link>
-            <p className="font-body-md text-body-md text-white/50 mt-3 max-w-xs leading-relaxed">
+            <p className="font-body-md text-body-md text-white/75 mt-3 max-w-xs leading-relaxed">
               A high-performance ecosystem within Brototype, bridging baseline learning and elite, production-grade engineering.
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function Footer() {
           {/* Column 2: Navigation */}
           {FOOTER_COLS.map(col => (
             <div key={col.heading} className="flex flex-col gap-4">
-              <span className="font-label-sm text-label-sm uppercase tracking-widest text-white/40 mb-2">
+              <span className="font-label-sm text-label-sm uppercase tracking-widest text-white/70 mb-2">
                 {col.heading}
               </span>
               <div className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-3.5">
@@ -44,7 +44,7 @@ export default function Footer() {
                     key={l.label}
                     to={l.to}
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="font-body-md text-body-md text-white/60 hover:text-white transition-colors"
+                    className="font-body-md text-body-md text-white/80 hover:text-white transition-colors"
                   >
                     {l.label}
                   </Link>
@@ -55,16 +55,25 @@ export default function Footer() {
 
           {/* Column 3: Connect & Contact */}
           <div className="flex flex-col gap-4 items-start">
-            <span className="font-label-sm text-label-sm uppercase tracking-widest text-white/40 mb-2">Connect</span>
-            <a href={`mailto:${import.meta.env.VITE_ORGANIZATION_EMAIL}`} className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">
-              {import.meta.env.VITE_ORGANIZATION_EMAIL}
-            </a>
+            <span className="font-label-sm text-label-sm uppercase tracking-widest text-white/70 mb-2">Connect</span>
+            {(() => {
+              const email = import.meta.env.VITE_ORGANIZATION_EMAIL || 'contact@brototype.com';
+              return (
+                <a
+                  href={`mailto:${email}`}
+                  aria-label={`Email us at ${email}`}
+                  className="font-body-md text-body-md text-white/80 hover:text-white transition-colors"
+                >
+                  {email}
+                </a>
+              );
+            })()}
             {/* <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors">LinkedIn</a>
             <a href="#" className="font-body-md text-body-md text-white/60 hover:text-white transition-colors mb-4">Twitter / X</a> */}
             <Link
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               to="/contact"
-              className="border border-white/30 text-white font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-[#030914] transition-colors"
+              className="border border-white/40 text-white font-label-sm text-label-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-[#030914] transition-colors"
             >
               CONTACT
             </Link>
@@ -73,10 +82,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-16 border-t border-white/10 mt-16">
-          <p className="font-mono text-mono text-white/30">
+          <p className="font-mono text-mono text-white/70">
             © {new Date().getFullYear()} ACE Community · Advanced Curriculum for Excellence. All rights reserved.
           </p>
-          <p className="font-mono text-mono text-white/20 text-[11px] uppercase tracking-widest">
+          <p className="font-mono text-mono text-white/60 text-[11px] uppercase tracking-widest">
             Built at Brototype
           </p>
         </div>

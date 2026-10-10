@@ -21,7 +21,7 @@ export default function ContactPage() {
           <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-4 md:mb-8 leading-tight tracking-tighter">
             Inquiries & Answers.
           </motion.h1>
-          <motion.p variants={revealVariant} className="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
+          <motion.p variants={revealVariant} className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl leading-relaxed">
             Everything you need to know about joining the ACE ecosystem, all in one place. Have a specific question? Reach out to our Handlers directly.
           </motion.p>
         </motion.header>

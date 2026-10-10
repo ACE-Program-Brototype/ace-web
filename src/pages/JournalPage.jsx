@@ -35,7 +35,7 @@ export default function JournalPage() {
           <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-6 tracking-tighter">
             The Journal.
           </motion.h1>
-          <motion.p variants={revealVariant} className="font-body-lg text-body-lg text-on-surface-variant md:w-3/5 leading-relaxed">
+          <motion.p variants={revealVariant} className="font-body-md text-sm sm:text-base text-on-surface-variant md:w-3/5 leading-relaxed">
             Research, technical deep-dives, and insights from the engineers within the ACE ecosystem.
           </motion.p>
         </motion.section>

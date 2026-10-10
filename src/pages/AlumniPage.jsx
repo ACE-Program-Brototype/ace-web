@@ -43,7 +43,7 @@ export default function AlumniPage() {
           </motion.h1>
           <motion.p
             variants={revealVariant}
-            className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed"
+            className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed"
           >
             Engineers who passed through ACE are now building the future at
             high-impact startups and technology companies.
@@ -101,7 +101,7 @@ export default function AlumniPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {ALUMNI_MEMBERS.map((alumnus) => (
+            {ALUMNI_MEMBERS.map((alumnus, index) => (
               <motion.div
                 key={alumnus.id}
                 variants={revealVariant}
@@ -113,6 +113,10 @@ export default function AlumniPage() {
                     referrerPolicy="no-referrer"
                     src={alumnus.img}
                     alt={alumnus.name}
+                    width={400}
+                    height={300}
+                    loading={index < 2 ? "eager" : "lazy"}
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 right-3">

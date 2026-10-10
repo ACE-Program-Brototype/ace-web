@@ -153,7 +153,7 @@ export default function PlacementPage() {
 
   return (
     <div className="bg-surface-container-lowest text-on-surface antialiased font-body-md">
-      <main className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-section-gap">
+      <main className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-8 md:pb-section-gap">
         {/* 1. Header */}
         <motion.section
           className="pt-8 sm:pt-16 md:pt-24 pb-8 md:pb-12 border-b border-outline-variant"
@@ -170,7 +170,7 @@ export default function PlacementPage() {
             </motion.h1>
             <motion.p
               variants={revealVariant}
-              className="font-body-lg text-body-lg text-on-surface-variant max-w-lg text-left"
+              className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-lg text-left leading-relaxed"
             >
               A data-driven record of engineering excellence and career growth.
             </motion.p>
@@ -179,7 +179,7 @@ export default function PlacementPage() {
 
         {/* 2. Key Metrics */}
         <motion.section
-          className="py-24 border-b border-outline-variant"
+          className="py-0 md:py-24 border-b border-outline-variant"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -190,12 +190,12 @@ export default function PlacementPage() {
               <motion.div
                 key={m.label}
                 variants={revealVariant}
-                className="p-8 text-center flex flex-col items-center justify-center"
+                className="py-4 px-4 md:p-8 text-center flex flex-col items-center justify-center"
               >
-                <div className="font-display-lg text-headline-lg md:text-display-lg text-primary mb-4 tracking-tighter">
+                <div className="font-display-lg text-2xl sm:text-3xl md:text-display-lg text-primary mb-1.5 md:mb-4 tracking-tighter">
                   {m.value}
                 </div>
-                <div className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                <div className="font-label-sm text-xs md:text-label-sm text-on-surface-variant uppercase tracking-wider">
                   {m.label}
                 </div>
               </motion.div>
@@ -479,7 +479,7 @@ export default function PlacementPage() {
 
         {/* 5. Stories from the Community (Testimonials) */}
         <motion.section
-          className="mb-24 pt-16 border-t border-outline-variant"
+          className="mb-8 md:mb-24 pt-16 border-t border-outline-variant"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -569,17 +569,17 @@ export default function PlacementPage() {
         </motion.section>
 
         {/* 6. CTA */}
-        <section className="py-24 text-center flex flex-col items-center">
-          <h2 className="font-headline-lg text-headline-lg text-primary mb-8">
+        <section className="py-8 md:py-24 text-center flex flex-col items-center">
+          <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-primary mb-5 md:mb-8 max-w-sm md:max-w-xl mx-auto">
             Join the next generation of engineers.
           </h2>
           <Link
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             to="/contact"
-            className="inline-flex items-center gap-2 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-10 py-4 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200 group"
+            className="inline-flex items-center gap-2 bg-primary text-on-primary font-label-sm text-xs md:text-label-sm uppercase tracking-wider px-6 py-3 md:px-10 md:py-4 border border-transparent hover:border-accent hover:shadow-[0_4px_20px_rgba(252,172,4,0.25)] hover:bg-primary-dark transition-all duration-200 group"
           >
             Apply to Join ACE
-            <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
+            <span className="material-symbols-outlined text-[16px] md:text-[18px] group-hover:translate-x-1 transition-transform">
               arrow_forward
             </span>
           </Link>

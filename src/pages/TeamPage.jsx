@@ -24,7 +24,7 @@ export default function TeamPage() {
           <motion.h1 variants={revealVariant} className="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-6 tracking-tighter">
             The Handlers.
           </motion.h1>
-          <motion.p variants={revealVariant} className="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
+          <motion.p variants={revealVariant} className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl leading-relaxed">
             The stewards of the ACE Community. A dedicated group of professionals ensuring rigorous standards, fostering intellectual growth, and maintaining the highest echelon of academic discourse.
           </motion.p>
         </motion.header>
