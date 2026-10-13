@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
 import ErrorToast from './ErrorToast';
 
+import { logger } from '../utils/logger';
+
 const revealVariant = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
@@ -34,7 +36,13 @@ export default function ContactForm() {
   }, [isBrototypeStudent, unregister]);
 
   const onSubmit = async data => {
+    const endpointUrl = import.meta.env.VITE_CONTACT_FORM_WEB_APP_URL;
+
     try {
+      if (!endpointUrl) {
+        throw new Error('Contact form endpoint URL (VITE_CONTACT_FORM_WEB_APP_URL) is not configured.');
+      }
+
       const formData = new FormData();
       Object.keys(data).forEach(key => {
         if (data.isBrototypeStudent !== 'yes' && ['batchNumber', 'counsellorName'].includes(key)) {
@@ -42,14 +50,29 @@ export default function ContactForm() {
         }
         formData.append(key, data[key]);
       });
-      // throw new Error("Message sent failed!!!!");
-      await fetch(import.meta.env.VITE_CONTACT_FORM_WEB_APP_URL, {
+
+      const response = await fetch(endpointUrl, {
         method: 'POST',
         body: formData,
       });
+
+      if (!response.ok) {
+        throw new Error(`Submission failed with HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      logger.info('Contact Form submission succeeded', {
+        studentType: data?.isBrototypeStudent,
+        hasPhone: Boolean(data?.phone),
+      });
+
       setSent(true);
     } catch (error) {
-      console.error('Submission failed:', error);
+      logger.error('Contact Form submission failed', error, {
+        context: 'ContactForm.onSubmit',
+        endpointConfigured: Boolean(endpointUrl),
+        studentType: data?.isBrototypeStudent,
+        hasBatch: Boolean(data?.batchNumber),
+      });
       toast.custom((t) => <ErrorToast t={t} />, { duration: 3000 });
     }
   };
