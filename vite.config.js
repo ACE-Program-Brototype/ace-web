@@ -13,11 +13,45 @@ const compressionDevPlugin = () => ({
   },
 })
 
+const vercelLogDevPlugin = () => ({
+  name: 'vercel-log-dev-middleware',
+  configureServer(server) {
+    server.middlewares.use('/api/log', (req, res) => {
+      if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+          body += chunk;
+        });
+        req.on('end', () => {
+          try {
+            const data = JSON.parse(body);
+            const level = (data.level || 'error').toUpperCase();
+            const reason = data.reason || (data.error ? (typeof data.error === 'object' ? (data.error.message || JSON.stringify(data.error)) : data.error) : null);
+            const line = reason ? `${data.message} | Reason: ${reason}` : data.message;
+            console.log(`\x1b[36m[VERCEL LOG SIMULATOR]\x1b[0m \x1b[33m[${level}]\x1b[0m ${line}`);
+            if (data.context && Object.keys(data.context).length > 0) {
+              console.log('  \x1b[90m↳ Context:\x1b[0m', data.context);
+            }
+          } catch {
+            console.log('[VERCEL LOG SIMULATOR]', body);
+          }
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: true, timestamp: new Date().toISOString() }));
+        });
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ status: 'active', dev: true }));
+      }
+    });
+  },
+})
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     compressionDevPlugin(),
+    vercelLogDevPlugin(),
     viteCompression({ algorithm: 'gzip', ext: '.gz' }),
     viteCompression({ algorithm: 'brotliCompress', ext: '.br' }),
   ],
