@@ -25,36 +25,47 @@ export default function ContactForm() {
     },
   });
   const [sent, setSent] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
   const isBrototypeStudent = watch('isBrototypeStudent');
 
   useEffect(() => {
     if (isBrototypeStudent !== 'yes') {
       unregister('batchNumber');
-      unregister('counsellorName');
     }
   }, [isBrototypeStudent, unregister]);
 
   const onSubmit = async data => {
-    const endpointUrl = import.meta.env.VITE_CONTACT_FORM_WEB_APP_URL;
+    const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+    const payload = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      isBrototypeStudent: data.isBrototypeStudent,
+      ...(data.isBrototypeStudent === 'yes' && { batchNumber: data.batchNumber }),
+      ...(data.message && { message: data.message }),
+    };
 
     try {
-      if (!endpointUrl) {
-        throw new Error('Contact form endpoint URL (VITE_CONTACT_FORM_WEB_APP_URL) is not configured.');
-      }
-
-      const formData = new FormData();
-      Object.keys(data).forEach(key => {
-        if (data.isBrototypeStudent !== 'yes' && ['batchNumber', 'counsellorName'].includes(key)) {
-          return;
-        }
-        formData.append(key, data[key]);
-      });
-
-      const response = await fetch(endpointUrl, {
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      const result = await response.json();
+
+      if (response.status === 400) {
+        const firstError = result.errors
+          ? Object.values(result.errors)[0]
+          : result.message || 'Submission failed. Please check your details.';
+        toast.custom((t) => <ErrorToast t={t} message={firstError} />, { duration: 3000 });
+        logger.error('Contact Form validation error', null, {
+          context: 'ContactForm.onSubmit',
+          errors: result.errors,
+        });
+        return;
+      }
 
       if (!response.ok) {
         throw new Error(`Submission failed with HTTP ${response.status}: ${response.statusText}`);
@@ -63,13 +74,16 @@ export default function ContactForm() {
       logger.info('Contact Form submission succeeded', {
         studentType: data?.isBrototypeStudent,
         hasPhone: Boolean(data?.phone),
+        duplicate: Boolean(result.duplicate),
       });
 
+      if (result.duplicate) {
+        setIsDuplicate(true);
+      }
       setSent(true);
     } catch (error) {
       logger.error('Contact Form submission failed', error, {
         context: 'ContactForm.onSubmit',
-        endpointConfigured: Boolean(endpointUrl),
         studentType: data?.isBrototypeStudent,
         hasBatch: Boolean(data?.batchNumber),
       });
@@ -100,21 +114,30 @@ export default function ContactForm() {
               className="w-12 h-px bg-primary mb-10"
             />
             <motion.div variants={revealVariant} className="flex items-center gap-3 mb-6">
-              <span className="material-symbols-outlined text-primary text-3xl">check_circle</span>
-              <span className="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Enquiry Submitted</span>
+              <span className="material-symbols-outlined text-primary text-3xl">
+                {isDuplicate ? 'info' : 'check_circle'}
+              </span>
+              <span className="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">
+                {isDuplicate ? 'Already Received' : 'Enquiry Submitted'}
+              </span>
             </motion.div>
             <motion.h3
               variants={revealVariant}
               className="font-headline-lg text-headline-lg-mobile text-primary mb-4 leading-tight"
             >
-              Message received. <br />
-              <span className="text-on-surface-variant">We'll be in touch.</span>
+              {isDuplicate ? (
+                <>We already have you on file.</>
+              ) : (
+                <>Message received. <br /><span className="text-on-surface-variant">We'll be in touch.</span></>
+              )}
             </motion.h3>
             <motion.p
               variants={revealVariant}
               className="font-body-md text-body-md text-on-surface-variant max-w-xs leading-relaxed"
             >
-              Our team will review your enquiry and get back to you as soon as possible.
+              {isDuplicate
+                ? 'It looks like we already received an enquiry from you. Our team is actively reviewing it and will be in touch very soon.'
+                : 'Our team will review your enquiry and get back to you as soon as possible.'}
             </motion.p>
             <motion.div
               variants={revealVariant}
@@ -159,17 +182,17 @@ export default function ContactForm() {
             </div>
 
             <div>
-              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="phone">Phone Number (Optional)</label>
+              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="phone">Phone Number</label>
               <input
                 id="phone"
                 type="tel"
                 placeholder="+91 98765 43210"
                 {...register('phone', {
-                  setValueAs: v => (v ? v.trim() : v),
+                  required: 'Phone number is required',
+                  setValueAs: v => (v ? v.trim().replace(/\s+/g, '') : v),
                   validate: value => {
-                    if (!value) return true;
-                    if (/\s/.test(value)) return 'No spaces allowed';
-                    if (!/^[6-9]\d{9}$/.test(value)) return 'Must be 10 digits starting with 6, 7, 8, or 9';
+                    if (!value) return 'Phone number is required';
+                    if (!/^\d{10,15}$/.test(value)) return 'Must be 10–15 digits (no spaces or symbols)';
                     return true;
                   }
                 })}
@@ -232,44 +255,19 @@ export default function ContactForm() {
                     />
                     {errors.batchNumber && <p className="text-red-500 text-sm mt-1">{errors.batchNumber.message}</p>}
                   </div>
-
-                  <div>
-                    <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="counsellorName">
-                      Counsellor Name
-                    </label>
-                    <input
-                      id="counsellorName"
-                      type="text"
-                      placeholder="What is the name of your counsellor?"
-                      {...register('counsellorName', {
-                        required: 'Counsellor name is required',
-                        minLength: { value: 2, message: 'Must be at least 2 characters' },
-                        pattern: { value: /^[a-zA-Z\s.]+$/, message: 'Counsellor name cannot contain digits or special characters' },
-                        validate: value => (value && value.trim().length >= 2) || 'Counsellor name cannot be empty spaces'
-                      })}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none"
-                    />
-                    {errors.counsellorName && <p className="text-red-500 text-sm mt-1">{errors.counsellorName.message}</p>}
-                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
             <div>
-              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="message">Your Message</label>
+              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="message">Your Message (Optional)</label>
               <textarea
                 id="message"
                 rows={4}
                 placeholder="How can we assist you?"
                 {...register('message', {
                   setValueAs: v => (v ? v.trim() : v),
-                  required: 'Message is required',
-                  minLength: { value: 10, message: 'Message must be at least 10 characters' },
-                  validate: {
-                    notEmpty: value => value.length > 0 || 'Message cannot be empty',
-                    notOnlyNumbers: value => /[^\d\s]/.test(value) || 'Message cannot contain only numbers',
-                    notOnlySpecialChars: value => /[a-zA-Z0-9]/.test(value) || 'Message cannot contain only special characters'
-                  }
+                  maxLength: { value: 2000, message: 'Message cannot exceed 2000 characters' },
                 })}
                 className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base resize-none outline-none"
               />
