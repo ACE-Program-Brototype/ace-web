@@ -58,6 +58,13 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     allowedHosts: ['arm-rain-projection-involves.trycloudflare.com'],
+    port: '5175',
+    proxy: {
+      '/api/contact': {
+        target: 'http://localhost:5001',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     rollupOptions: {
