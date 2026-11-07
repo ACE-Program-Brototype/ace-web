@@ -88,7 +88,11 @@ export default function ContactForm() {
   };
 
   const onSubmit = async data => {
-    const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+    const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
+    const endpoint = rawBaseUrl
+      ? (rawBaseUrl.endsWith('/api') ? `${rawBaseUrl}/contact` : `${rawBaseUrl}/api/contact`)
+      : '/api/contact';
+
     const payload = {
       name: data.name,
       email: data.email,
@@ -102,7 +106,7 @@ export default function ContactForm() {
     };
 
     try {
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
