@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
@@ -12,49 +12,119 @@ const revealVariant = {
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
+const DOMAIN_OPTIONS = [
+  'MERN',
+  'MEAN',
+  'Python Django',
+  'Dot Net',
+  'Golang',
+  'Datascience',
+  'Machine Learning',
+  'Software Testing',
+  'Game Development',
+  'Java Spring Boot',
+  'Flutter',
+  'Android Kotlin',
+  'Devops',
+  'Cyber Security',
+  'Swift IOS',
+];
+
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
     watch,
     unregister,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
       isBrototypeStudent: 'no',
+      domain: '',
     },
   });
   const [sent, setSent] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const isBrototypeStudent = watch('isBrototypeStudent');
+  const selectedDomain = watch('domain');
 
   useEffect(() => {
     if (isBrototypeStudent !== 'yes') {
       unregister('batchNumber');
-      unregister('counsellorName');
+      unregister('domain');
+      setDropdownOpen(false);
     }
   }, [isBrototypeStudent, unregister]);
 
+  // Handle click outside and Escape key to close custom dropdown
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+      }
+    }
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [dropdownOpen]);
+
+  const handleSelectDomain = (domainValue) => {
+    setValue('domain', domainValue, { shouldValidate: true, shouldDirty: true });
+    setDropdownOpen(false);
+  };
+
   const onSubmit = async data => {
-    const endpointUrl = import.meta.env.VITE_CONTACT_FORM_WEB_APP_URL;
+    const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
+    const endpoint = rawBaseUrl
+      ? (rawBaseUrl.endsWith('/api') ? `${rawBaseUrl}/contact` : `${rawBaseUrl}/api/contact`)
+      : '/api/contact';
+
+    const payload = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      isBrototypeStudent: data.isBrototypeStudent,
+      ...(data.isBrototypeStudent === 'yes' && {
+        batchNumber: data.batchNumber,
+        domain: data.domain,
+      }),
+      ...(data.message && { message: data.message }),
+    };
 
     try {
-      if (!endpointUrl) {
-        throw new Error('Contact form endpoint URL (VITE_CONTACT_FORM_WEB_APP_URL) is not configured.');
-      }
-
-      const formData = new FormData();
-      Object.keys(data).forEach(key => {
-        if (data.isBrototypeStudent !== 'yes' && ['batchNumber', 'counsellorName'].includes(key)) {
-          return;
-        }
-        formData.append(key, data[key]);
-      });
-
-      const response = await fetch(endpointUrl, {
+      const response = await fetch(endpoint, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      const result = await response.json();
+
+      if (response.status === 400) {
+        const firstError = result.errors
+          ? Object.values(result.errors)[0]
+          : result.message || 'Submission failed. Please check your details.';
+        toast.custom((t) => <ErrorToast t={t} message={firstError} />, { duration: 3000 });
+        logger.error('Contact Form validation error', null, {
+          context: 'ContactForm.onSubmit',
+          errors: result.errors,
+        });
+        return;
+      }
 
       if (!response.ok) {
         throw new Error(`Submission failed with HTTP ${response.status}: ${response.statusText}`);
@@ -63,15 +133,20 @@ export default function ContactForm() {
       logger.info('Contact Form submission succeeded', {
         studentType: data?.isBrototypeStudent,
         hasPhone: Boolean(data?.phone),
+        duplicate: Boolean(result.duplicate),
+        domain: data?.domain,
       });
 
+      if (result.duplicate) {
+        setIsDuplicate(true);
+      }
       setSent(true);
     } catch (error) {
       logger.error('Contact Form submission failed', error, {
         context: 'ContactForm.onSubmit',
-        endpointConfigured: Boolean(endpointUrl),
         studentType: data?.isBrototypeStudent,
         hasBatch: Boolean(data?.batchNumber),
+        hasDomain: Boolean(data?.domain),
       });
       toast.custom((t) => <ErrorToast t={t} />, { duration: 3000 });
     }
@@ -100,21 +175,30 @@ export default function ContactForm() {
               className="w-12 h-px bg-primary mb-10"
             />
             <motion.div variants={revealVariant} className="flex items-center gap-3 mb-6">
-              <span className="material-symbols-outlined text-primary text-3xl">check_circle</span>
-              <span className="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Enquiry Submitted</span>
+              <span className="material-symbols-outlined text-primary text-3xl">
+                {isDuplicate ? 'info' : 'check_circle'}
+              </span>
+              <span className="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">
+                {isDuplicate ? 'Already Received' : 'Enquiry Submitted'}
+              </span>
             </motion.div>
             <motion.h3
               variants={revealVariant}
               className="font-headline-lg text-headline-lg-mobile text-primary mb-4 leading-tight"
             >
-              Message received. <br />
-              <span className="text-on-surface-variant">We'll be in touch.</span>
+              {isDuplicate ? (
+                <>We already have you on file.</>
+              ) : (
+                <>Message received. <br /><span className="text-on-surface-variant">We'll be in touch.</span></>
+              )}
             </motion.h3>
             <motion.p
               variants={revealVariant}
               className="font-body-md text-body-md text-on-surface-variant max-w-xs leading-relaxed"
             >
-              Our team will review your enquiry and get back to you as soon as possible.
+              {isDuplicate
+                ? 'It looks like we already received an enquiry from you. Our team is actively reviewing it and will be in touch very soon.'
+                : 'Our team will review your enquiry and get back to you as soon as possible.'}
             </motion.p>
             <motion.div
               variants={revealVariant}
@@ -159,17 +243,17 @@ export default function ContactForm() {
             </div>
 
             <div>
-              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="phone">Phone Number (Optional)</label>
+              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="phone">Phone Number</label>
               <input
                 id="phone"
                 type="tel"
                 placeholder="+91 98765 43210"
                 {...register('phone', {
-                  setValueAs: v => (v ? v.trim() : v),
+                  required: 'Phone number is required',
+                  setValueAs: v => (v ? v.trim().replace(/\s+/g, '') : v),
                   validate: value => {
-                    if (!value) return true;
-                    if (/\s/.test(value)) return 'No spaces allowed';
-                    if (!/^[6-9]\d{9}$/.test(value)) return 'Must be 10 digits starting with 6, 7, 8, or 9';
+                    if (!value) return 'Phone number is required';
+                    if (!/^\d{10,15}$/.test(value)) return 'Must be 10–15 digits (no spaces or symbols)';
                     return true;
                   }
                 })}
@@ -211,7 +295,7 @@ export default function ContactForm() {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-8 overflow-hidden"
+                  className={`space-y-8 ${dropdownOpen ? 'overflow-visible' : 'overflow-hidden'}`}
                 >
                   <div>
                     <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="batchNumber">
@@ -233,43 +317,110 @@ export default function ContactForm() {
                     {errors.batchNumber && <p className="text-red-500 text-sm mt-1">{errors.batchNumber.message}</p>}
                   </div>
 
-                  <div>
-                    <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="counsellorName">
-                      Counsellor Name
+                  <div className="relative group" ref={dropdownRef}>
+                    <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="domain-select">
+                      Domain
                     </label>
+
+                    {/* Hidden input to maintain react-hook-form registration and validation */}
                     <input
-                      id="counsellorName"
-                      type="text"
-                      placeholder="What is the name of your counsellor?"
-                      {...register('counsellorName', {
-                        required: 'Counsellor name is required',
-                        minLength: { value: 2, message: 'Must be at least 2 characters' },
-                        pattern: { value: /^[a-zA-Z\s.]+$/, message: 'Counsellor name cannot contain digits or special characters' },
-                        validate: value => (value && value.trim().length >= 2) || 'Counsellor name cannot be empty spaces'
+                      type="hidden"
+                      {...register('domain', {
+                        required: 'Domain is required',
                       })}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base outline-none"
                     />
-                    {errors.counsellorName && <p className="text-red-500 text-sm mt-1">{errors.counsellorName.message}</p>}
+
+                    <button
+                      id="domain-select"
+                      type="button"
+                      onClick={() => setDropdownOpen(prev => !prev)}
+                      aria-haspopup="listbox"
+                      aria-expanded={dropdownOpen}
+                      className={`w-full bg-transparent border-0 border-b py-3 font-body-md text-base transition-colors rounded-none outline-none flex items-center justify-between cursor-pointer select-none text-left ${
+                        dropdownOpen
+                          ? 'border-primary'
+                          : 'border-outline-variant hover:border-outline'
+                      } ${selectedDomain ? 'text-on-surface' : 'text-outline'}`}
+                    >
+                      <span className="truncate">
+                        {selectedDomain || 'Select your domain'}
+                      </span>
+                      <svg
+                        className={`w-4 h-4 text-on-surface-variant shrink-0 ml-2 transition-transform duration-200 ease-out ${
+                          dropdownOpen ? 'rotate-180 text-primary' : 'group-hover:text-primary'
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </button>
+
+                    <AnimatePresence>
+                      {dropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6, scale: 0.99 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -4, scale: 0.99 }}
+                          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute top-full left-0 right-0 mt-2 z-30 bg-surface-container-lowest border border-outline-variant shadow-[0_12px_32px_rgba(0,44,95,0.08)] max-h-60 overflow-y-auto"
+                          role="listbox"
+                        >
+                          {DOMAIN_OPTIONS.map(option => {
+                            const isSelected = selectedDomain === option;
+                            return (
+                              <button
+                                key={option}
+                                type="button"
+                                role="option"
+                                aria-selected={isSelected}
+                                onClick={() => handleSelectDomain(option)}
+                                className={`w-full text-left px-4 py-3 font-body-md text-sm sm:text-base flex items-center justify-between transition-colors border-b border-outline-variant/30 last:border-b-0 ${
+                                  isSelected
+                                    ? 'bg-primary-soft text-primary font-medium'
+                                    : 'text-on-surface hover:bg-surface-container-low hover:text-primary'
+                                }`}
+                              >
+                                <span>{option}</span>
+                                {isSelected && (
+                                  <svg
+                                    className="w-4 h-4 text-primary shrink-0 ml-2"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {errors.domain && <p className="text-red-500 text-sm mt-1">{errors.domain.message}</p>}
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
             <div>
-              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="message">Your Message</label>
+              <label className="block font-label-sm text-label-sm uppercase text-on-surface-variant mb-2" htmlFor="message">Your Message (Optional)</label>
               <textarea
                 id="message"
                 rows={4}
                 placeholder="How can we assist you?"
                 {...register('message', {
                   setValueAs: v => (v ? v.trim() : v),
-                  required: 'Message is required',
-                  minLength: { value: 10, message: 'Message must be at least 10 characters' },
-                  validate: {
-                    notEmpty: value => value.length > 0 || 'Message cannot be empty',
-                    notOnlyNumbers: value => /[^\d\s]/.test(value) || 'Message cannot contain only numbers',
-                    notOnlySpecialChars: value => /[a-zA-Z0-9]/.test(value) || 'Message cannot contain only special characters'
-                  }
+                  maxLength: { value: 2000, message: 'Message cannot exceed 2000 characters' },
                 })}
                 className="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-base text-on-surface transition-colors rounded-none placeholder:text-outline placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base resize-none outline-none"
               />
